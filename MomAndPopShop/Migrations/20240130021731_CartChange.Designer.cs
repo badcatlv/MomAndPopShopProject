@@ -12,8 +12,8 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240130012010_initial")]
-    partial class initial
+    [Migration("20240130021731_CartChange")]
+    partial class CartChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -367,7 +367,7 @@ namespace MomAndPopShop.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("MomAndPopShop.Models.CartDetail", b =>
+            modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -375,9 +375,15 @@ namespace MomAndPopShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("PopcornName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PopcornPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
-                    b.ToTable("CartDetail");
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

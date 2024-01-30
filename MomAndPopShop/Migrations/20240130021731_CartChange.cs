@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MomAndPopShop.Migrations
 {
-    public partial class initial : Migration
+    public partial class CartChange : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,15 +49,17 @@ namespace MomAndPopShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartDetail",
+                name: "CartItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PopcornName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PopcornPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartDetail", x => x.Id);
+                    table.PrimaryKey("PK_CartItem", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,7 +319,7 @@ namespace MomAndPopShop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CartDetail");
+                name: "CartItem");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");

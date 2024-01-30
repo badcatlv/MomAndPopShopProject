@@ -10,7 +10,7 @@ namespace MomAndPopShop.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public DbSet<CartDetail> CartDetail { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {
