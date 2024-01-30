@@ -21,8 +21,9 @@ namespace MomAndPopShop.Controllers
         {
             if (_context.CartItem == null)
             {
-                return NotFound("No data found");
+                return NotFound("No Items.");
             }
+
             return await _context.CartItem.ToListAsync();
         }
     }
