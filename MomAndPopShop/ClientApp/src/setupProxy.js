@@ -12,7 +12,15 @@ const context =  [
   "/connect",
   "/ApplyDatabaseMigrations",
     "/_framework",
-  "/cartitem"
+    "/cartitem",
+    "/packaging",
+    "/popcorn",
+    "/products",
+    "/seasoning",
+    "/sizes"
+
+
+
 ];
 
 module.exports = function(app) {
