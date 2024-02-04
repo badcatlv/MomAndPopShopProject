@@ -1,5 +1,7 @@
 ﻿// eslint-disable-next-line
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 const Packaging = () => {
@@ -52,6 +54,11 @@ const Packaging = () => {
                 {packaging.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
+
+                <p><Link to="/packaging/create">Create Packaging Item</Link></p>
+                <p><Link to="/packaging/delete">Delete Packaging Item</Link></p>
+                <p><Link to="/packaging/edit">Edit Packaging Item</Link></p>
+
             </div>
         </main>
     );

@@ -1,5 +1,6 @@
 ﻿// eslint-disable-next-line
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Seasoning = () => {
@@ -52,6 +53,11 @@ const Seasoning = () => {
                 {seasoning.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
+
+                <p><Link to="/seasoning/create">Create Seasoning Item</Link></p>
+                <p><Link to="/seasoning/delete">Delete Seasoning Item</Link></p>
+                <p><Link to="/seasoning/edit">Edit Seasoning Item</Link></p>
+
             </div>
         </main>
     );

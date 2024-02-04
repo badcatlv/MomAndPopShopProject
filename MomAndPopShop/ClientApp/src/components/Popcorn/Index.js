@@ -1,5 +1,7 @@
 ﻿// eslint-disable-next-line
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 const Popcorn = () => {
@@ -52,6 +54,11 @@ const Popcorn = () => {
                 {popcorn.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
+
+                <p><Link to="/popcorn/create">Create Popcorn Item</Link></p>
+                <p><Link to="/popcorn/delete">Delete Popcorn Item</Link></p>
+                <p><Link to="/popcorn/edit">Edit Popcorn Item</Link></p>
+
             </div>
         </main>
     );
