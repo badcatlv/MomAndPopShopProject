@@ -7,66 +7,66 @@ namespace MomAndPopShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PackagingController : Controller
+    public class PackagingController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+
         public PackagingController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var packagingList = _context.Packagings.ToList();
-            return View(packagingList);
+            var packagingList = await _context.Packagings.ToListAsync();
+            return Ok(packagingList);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Packaging packaging = new Packaging();
-            return View(packaging);
-        }
-
-        [HttpPost]
-        public IActionResult Create(Packaging packaging)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] Packaging packaging)
         {
             if (ModelState.IsValid)
             {
-
                 _context.Packagings.Add(packaging);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Redirect("Index");
+                return Ok(packaging);
             }
-            return View("Create", packaging);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Packaging packaging)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] Packaging packaging)
         {
+            if (id != packaging.Id)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Entry(packaging).State = EntityState.Modified;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(packaging);
             }
-            return View(packaging);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var thePackaging = _context.Packagings.Find(id);
+            var thePackaging = await _context.Packagings.FindAsync(id);
 
             if (thePackaging != null)
             {
                 _context.Packagings.Remove(thePackaging);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(thePackaging);
             }
             else
             {

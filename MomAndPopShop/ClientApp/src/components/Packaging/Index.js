@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
-
 const Packaging = () => {
 
     const [packaging, setPackaging] = useState([]);
@@ -11,12 +9,13 @@ const Packaging = () => {
 
     useEffect(() => {
         fetch('packaging')
-            .then((results) => {
-                return results.json();
-            })
+            .then((results) => results.json())
             .then(data => {
                 console.log(data);
                 setPackaging(data);
+            })
+            .catch(error => {
+                console.error('Error fetching packaging data:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -28,7 +27,9 @@ const Packaging = () => {
             <div className="text-center">
                 <h1 className="display-4">Packaging List</h1>
 
-                {packaging.length > 0 && (
+                {loading && <p>Loading...</p>}
+
+                {packaging && packaging.length > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -41,17 +42,17 @@ const Packaging = () => {
                         <tbody>
                             {packaging.map((packagingItem) => (
                                 <tr key={packagingItem.id}>
-                                    <td>{packagingItem.Name}</td>
-                                    <td>{packagingItem.Description}</td>
-                                    <td>{packagingItem.PopcornPrice}</td>
-                                    <td>{packagingItem.Quantity}</td>
+                                    <td>{packagingItem.name}</td>
+                                    <td>{packagingItem.description}</td>
+                                    <td>{packagingItem.packagingPrice}</td>
+                                    <td>{packagingItem.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 )}
 
-                {packaging.length === 0 && !loading && (
+                {packaging && packaging.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
 
@@ -65,4 +66,3 @@ const Packaging = () => {
 };
 
 export default Packaging;
-

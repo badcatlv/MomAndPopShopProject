@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const Seasoning = () => {
 
     const [seasoning, setSeasoning] = useState([]);
@@ -10,12 +9,13 @@ const Seasoning = () => {
 
     useEffect(() => {
         fetch('seasoning')
-            .then((results) => {
-                return results.json();
-            })
+            .then((results) => results.json())
             .then(data => {
                 console.log(data);
                 setSeasoning(data);
+            })
+            .catch(error => {
+                console.error('Error fetching seasoning data:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -27,7 +27,9 @@ const Seasoning = () => {
             <div className="text-center">
                 <h1 className="display-4">Seasoning List</h1>
 
-                {seasoning.length > 0 && (
+                {loading && <p>Loading...</p>}
+
+                {seasoning && seasoning.length > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -40,17 +42,17 @@ const Seasoning = () => {
                         <tbody>
                             {seasoning.map((seasoningItem) => (
                                 <tr key={seasoningItem.id}>
-                                    <td>{seasoningItem.Name}</td>
-                                    <td>{seasoningItem.Description}</td>
-                                    <td>{seasoningItem.PopcornPrice}</td>
-                                    <td>{seasoningItem.Quantity}</td>
+                                    <td>{seasoningItem.name}</td>
+                                    <td>{seasoningItem.description}</td>
+                                    <td>{seasoningItem.seasoningPrice}</td>
+                                    <td>{seasoningItem.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 )}
 
-                {seasoning.length === 0 && !loading && (
+                {seasoning && seasoning.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
 
@@ -64,4 +66,3 @@ const Seasoning = () => {
 };
 
 export default Seasoning;
-

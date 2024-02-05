@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const Sizes = () => {
 
     const [sizes, setSizes] = useState([]);
@@ -10,12 +9,13 @@ const Sizes = () => {
 
     useEffect(() => {
         fetch('sizes')
-            .then((results) => {
-                return results.json();
-            })
+            .then((results) => results.json())
             .then(data => {
                 console.log(data);
                 setSizes(data);
+            })
+            .catch(error => {
+                console.error('Error fetching sizes data:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -27,7 +27,9 @@ const Sizes = () => {
             <div className="text-center">
                 <h1 className="display-4">Size List</h1>
 
-                {sizes.length > 0 && (
+                {loading && <p>Loading...</p>}
+
+                {sizes && sizes.length > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -38,19 +40,19 @@ const Sizes = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {sizes.map((SizesItem) => (
-                                <tr key={SizesItem.id}>
-                                    <td>{SizesItem.Name}</td>
-                                    <td>{SizesItem.Description}</td>
-                                    <td>{SizesItem.PopcornPrice}</td>
-                                    <td>{SizesItem.Quantity}</td>
+                            {sizes.map((sizesItem) => (
+                                <tr key={sizesItem.id}>
+                                    <td>{sizesItem.name}</td>
+                                    <td>{sizesItem.description}</td>
+                                    <td>{sizesItem.sizePrice}</td>
+                                    <td>{sizesItem.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 )}
 
-                {sizes.length === 0 && !loading && (
+                {sizes && sizes.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
 
@@ -64,4 +66,3 @@ const Sizes = () => {
 };
 
 export default Sizes;
-
