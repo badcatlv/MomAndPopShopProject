@@ -41,10 +41,10 @@ const Popcorn = () => {
                         <tbody>
                             {popcorn.map((popcornItem) => (
                                 <tr key={popcornItem.id}>
-                                    <td>{popcornItem.Name}</td>
-                                    <td>{popcornItem.Description}</td>
-                                    <td>{popcornItem.PopcornPrice}</td>
-                                    <td>{popcornItem.Quantity}</td>
+                                    <td>{popcornItem.name}</td>
+                                    <td>{popcornItem.description}</td>
+                                    <td>{popcornItem.popcornPrice}</td>
+                                    <td>{popcornItem.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
