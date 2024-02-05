@@ -7,7 +7,7 @@ namespace MomAndPopShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PopcornController : Controller
+    public class PopcornController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,57 +17,55 @@ namespace MomAndPopShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var popcornList = _context.Popcorns.ToList();
-            return View(popcornList);
+            var popcornList = await _context.Popcorns.ToListAsync();
+            return Ok(popcornList);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Popcorn popcorn = new Popcorn();
-            return View(popcorn);
-        }
-
-        [HttpPost]
-        public IActionResult Create(Popcorn popcorn)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] Popcorn popcorn)
         {
             if (ModelState.IsValid)
             {
-
                 _context.Popcorns.Add(popcorn);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Redirect("Index");
+                return Ok(popcorn); 
             }
-            return View("Create", popcorn);
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Popcorn popcorn)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] Popcorn popcorn)
         {
+            if (id != popcorn.Id)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Entry(popcorn).State = EntityState.Modified;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(popcorn); 
             }
-            return View(popcorn);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var thePopcorn = _context.Popcorns.Find(id);
+            var thePopcorn = await _context.Popcorns.FindAsync(id);
 
             if (thePopcorn != null)
             {
                 _context.Popcorns.Remove(thePopcorn);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(thePopcorn); 
             }
             else
             {
