@@ -348,9 +348,15 @@ namespace MomAndPopShop.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserAdress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("UserPhone")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -381,7 +387,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Packaging", b =>

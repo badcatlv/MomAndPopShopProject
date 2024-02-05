@@ -12,8 +12,8 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240205010901_initial")]
-    partial class initial
+    [Migration("20240205231656_initialAgain")]
+    partial class initialAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -350,9 +350,15 @@ namespace MomAndPopShop.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserAdress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("UserPhone")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
