@@ -7,66 +7,66 @@ namespace MomAndPopShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SeasoningController : Controller
+    public class SeasoningController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+
         public SeasoningController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var seasoningList = _context.Seasonings.ToList();
-            return View(seasoningList);
+            var seasoningList = await _context.Seasonings.ToListAsync();
+            return Ok(seasoningList);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Seasoning seasoning = new Seasoning();
-            return View(seasoning);
-        }
-
-        [HttpPost]
-        public IActionResult Create(Seasoning seasoning)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] Seasoning seasoning)
         {
             if (ModelState.IsValid)
             {
-
                 _context.Seasonings.Add(seasoning);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Redirect("Index");
+                return Ok(seasoning);
             }
-            return View("Create", seasoning);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Seasoning seasoning)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] Seasoning seasoning)
         {
+            if (id != seasoning.Id)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Entry(seasoning).State = EntityState.Modified;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(seasoning);
             }
-            return View(seasoning);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var theSeasoning = _context.Seasonings.Find(id);
+            var theSeasoning = await _context.Seasonings.FindAsync(id);
 
             if (theSeasoning != null)
             {
                 _context.Seasonings.Remove(theSeasoning);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(theSeasoning);
             }
             else
             {

@@ -1,6 +1,6 @@
 ﻿// Create.js
-// eslint-disable-next-line
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
     const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ const Create = () => {
         PopcornPrice: 0,
         Quantity: 0
     });
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +24,7 @@ const Create = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/popcorn/create', {
+            const response = await fetch('/popcorn/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -32,6 +34,7 @@ const Create = () => {
 
             if (response.ok) {
                 console.log('Popcorn item created successfully');
+                navigate('/popcorn');
             } else {
                 console.error('Error creating popcorn item');
             }
@@ -39,6 +42,7 @@ const Create = () => {
             console.error('Error:', error);
         }
     };
+
 
     return (
         <div>

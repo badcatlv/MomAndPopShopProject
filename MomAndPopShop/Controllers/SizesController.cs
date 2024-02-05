@@ -2,72 +2,71 @@
 using Microsoft.EntityFrameworkCore;
 using MomAndPopShop.Data;
 using MomAndPopShop.Models;
-using System.Drawing;
 
 namespace MomAndPopShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SizesController : Controller
+    public class SizesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+
         public SizesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var sizeList = _context.Sizes.ToList();
-            return View(sizeList);
+            var sizesList = await _context.Sizes.ToListAsync();
+            return Ok(sizesList);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Sizes sizes = new Sizes();
-            return View(sizes);
-        }
-
-        [HttpPost]
-        public IActionResult Create(Sizes sizes)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] Sizes sizes)
         {
             if (ModelState.IsValid)
             {
-
                 _context.Sizes.Add(sizes);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Redirect("Index");
+                return Ok(sizes);
             }
-            return View("Create", sizes);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Sizes sizes)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] Sizes sizes)
         {
+            if (id != sizes.Id)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Entry(sizes).State = EntityState.Modified;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(sizes);
             }
-            return View(sizes);
+
+            return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var theSizes = _context.Sizes.Find(id);
+            var theSizes = await _context.Sizes.FindAsync(id);
 
             if (theSizes != null)
             {
                 _context.Sizes.Remove(theSizes);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return Ok(theSizes);
             }
             else
             {
