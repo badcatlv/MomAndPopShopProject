@@ -45,6 +45,11 @@ const Popcorn = () => {
                                     <td>{popcornItem.description}</td>
                                     <td>{popcornItem.popcornPrice}</td>
                                     <td>{popcornItem.quantity}</td>
+                                    <td>
+                                        <Link to={`/popcorn/edit/${popcornItem.id}`}>Edit</Link>
+                                        {' | '}
+                                        <Link to={`/popcorn/delete/${popcornItem.id}`}>Delete</Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -56,9 +61,6 @@ const Popcorn = () => {
                 )}
 
                 <p><Link to="/popcorn/create">Create Popcorn Item</Link></p>
-                <p><Link to="/popcorn/delete">Delete Popcorn Item</Link></p>
-                <p><Link to="/popcorn/edit">Edit Popcorn Item</Link></p>
-
             </div>
         </main>
     );

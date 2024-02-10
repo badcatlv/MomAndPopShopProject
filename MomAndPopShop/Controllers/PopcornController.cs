@@ -37,7 +37,8 @@ namespace MomAndPopShop.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody] Popcorn popcorn)
         {
             if (id != popcorn.Id)

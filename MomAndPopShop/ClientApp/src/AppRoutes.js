@@ -9,8 +9,8 @@ import CreatePackaging from './components/Packaging/Create';
 //import DeletePackaging from './components/Packaging/Delete';
 import Popcorn from './components/Popcorn/Index';
 import CreatePopcorn from './components/Popcorn/Create';
-//import EditPopcorn from './components/Popcorn/Edit';
-//import DeletePopcorn from './components/Popcorn/Delete';
+import EditPopcorn from './components/Popcorn/Edit';
+import DeletePopcorn from './components/Popcorn/Delete';
 import Products from './components/Products';
 import Seasoning from './components/Seasoning/Index';
 import CreateSeasoning from './components/Seasoning/Create';
@@ -64,14 +64,14 @@ const AppRoutes = [
         path: '/popcorn/create',
         element: <CreatePopcorn />
     },
-    /*{
-        path: '/popcorn/edit',
+    {
+        path: '/popcorn/edit/:id',
         element: <EditPopcorn />
     },
     {
-        path: '/popcorn/delete',
+        path: '/popcorn/delete/:id',
         element: <DeletePopcorn />
-    },*/
+    },
     {
         path: '/products',
         element: <Products />
