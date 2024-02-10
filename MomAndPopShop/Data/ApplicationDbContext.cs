@@ -11,12 +11,12 @@ namespace MomAndPopShop.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Popcorn> Popcorns { get; set; }
         public DbSet<Seasoning> Seasonings { get; set; }
         public DbSet<Sizes> Sizes { get; set; }
         public DbSet<Packaging> Packagings { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {
