@@ -11,6 +11,7 @@ namespace MomAndPopShop.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Popcorn> Popcorns { get; set; }
         public DbSet<Seasoning> Seasonings { get; set; }

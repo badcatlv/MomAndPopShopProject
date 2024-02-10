@@ -4,7 +4,7 @@
 
 namespace MomAndPopShop.Migrations
 {
-    public partial class InitialMigrationReact : Migration
+    public partial class addedfirstandlastname : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
