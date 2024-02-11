@@ -12,7 +12,7 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240210170235_initial-migration")]
+    [Migration("20240211231828_initial-migration")]
     partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
