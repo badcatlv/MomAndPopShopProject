@@ -4,6 +4,8 @@
 const CartItems = () => {
 
     const [cartItems, setCartItems] = useState([]);
+    const [isLoading, setIsLoading] = useEffect(true);
+    const [error, setError] = useEffect(null);
 
     useEffect(() => {
         fetchCartData();
@@ -12,23 +14,44 @@ const CartItems = () => {
     const fetchCartData = () => {
         fetch('cart')
             .then((results) => {
+                if (!results.ok) {
+                    throw new Error("Error fetching cart items.");
+                }
                 return results.json();
             })
             .then(data => {
                 console.log(data);
                 setCartItems(data);
+                setIsLoading(false);
             })
-    }
+            .catch(error => {
+                setError("Error fetching cart items, please try again later.")
+                setIsLoading(false);
+                console.error("Error fetching cart items: ", error);
+            });
+
+    };
 
     const handleDelete = (id) => {
         fetch(`cart/${id}`, { method: 'DELETE' })
-            .then(() => {
-
+            .then(results => {
+                if (!results) {
+                    throw new Error("Cannot delete item.");
+                }
                 fetchCartData();
-
             })
+            .catch(error => {
+                console.error("Error deleting item: ", error);
+            });
+    };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
 
+    if (error) {
+        return <div>Error: {error}</div>
+    }
     return (
         <div>
             <h2>Cart</h2>
@@ -48,7 +71,7 @@ const CartItems = () => {
                         </td>
                     </tr>
                 </table>
-            )) : <p>loading......</p>}
+            )) : <p>Cart is currently empty</p>}
         </div>
     );
 }

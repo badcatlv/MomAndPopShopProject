@@ -23,6 +23,13 @@ namespace MomAndPopShop.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<CartItem>()
+                .HasMany(e => e.Popcorns);
+
+            base.OnModelCreating(builder);
+        }
 
     }
 }

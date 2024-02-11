@@ -40,7 +40,19 @@ namespace MomAndPopShop.Controllers
             return Ok(cartItem);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<CartItem>> AddToCart(CartItem cartItem)
+        {
+            if (cartItem == null)
+            {
+                return NotFound("Item Not Found");
+            }
 
+            _context.CartItems.Add(cartItem);
+            await _context.SaveChangesAsync();
+
+            return Ok(cartItem);
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
