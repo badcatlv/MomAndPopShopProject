@@ -371,6 +371,19 @@ namespace MomAndPopShop.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MomAndPopShop.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
                 {
                     b.Property<int>("Id")
@@ -378,6 +391,9 @@ namespace MomAndPopShop.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PopcornDescription")
                         .HasColumnType("nvarchar(max)");
@@ -388,14 +404,16 @@ namespace MomAndPopShop.Migrations
                     b.Property<string>("PopcornName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("PopcornPrice")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("PopcornPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("PopcornQuantity")
-                        .HasPrecision(18, 2)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("PopcornId");
 
@@ -454,10 +472,10 @@ namespace MomAndPopShop.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<double?>("PopcornPrice")
+                    b.Property<decimal?>("PopcornPrice")
                         .IsRequired()
                         .HasPrecision(18, 2)
-                        .HasColumnType("float(18)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -584,9 +602,17 @@ namespace MomAndPopShop.Migrations
 
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
                 {
+                    b.HasOne("MomAndPopShop.Models.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MomAndPopShop.Models.Popcorn", "Popcorn")
                         .WithMany()
                         .HasForeignKey("PopcornId");
+
+                    b.Navigation("Cart");
 
                     b.Navigation("Popcorn");
                 });
@@ -596,6 +622,11 @@ namespace MomAndPopShop.Migrations
                     b.HasOne("MomAndPopShop.Models.CartItem", null)
                         .WithMany("Popcorns")
                         .HasForeignKey("CartItemId");
+                });
+
+            modelBuilder.Entity("MomAndPopShop.Models.Cart", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>

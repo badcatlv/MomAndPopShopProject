@@ -4,8 +4,8 @@
 const CartItems = () => {
 
     const [cartItems, setCartItems] = useState([]);
-    const [isLoading, setIsLoading] = useEffect(true);
-    const [error, setError] = useEffect(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchCartData();

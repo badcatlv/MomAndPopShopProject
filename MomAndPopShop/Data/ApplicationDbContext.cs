@@ -11,6 +11,7 @@ namespace MomAndPopShop.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Popcorn> Popcorns { get; set; }
         public DbSet<Seasoning> Seasonings { get; set; }
@@ -26,7 +27,8 @@ namespace MomAndPopShop.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CartItem>()
-                .HasMany(e => e.Popcorns);
+                .HasOne(e => e.Cart)
+                .WithMany(b => b.Items);
 
             base.OnModelCreating(builder);
         }

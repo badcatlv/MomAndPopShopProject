@@ -20,12 +20,12 @@ namespace MomAndPopShop.Models
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be 0.01 or greater.")]
         [Precision(18, 2)]
-        public double? PopcornPrice { get; set; }
+        public decimal? PopcornPrice { get; set; }
 
         [Range(0.01, int.MaxValue, ErrorMessage = "Quantity must be 1 or greater.")]
         public int? Quantity { get; set; }
 
-        public Popcorn(string name, string description, double? popcornPrice)
+        public Popcorn(string name, string description, decimal? popcornPrice)
         {
             Name = name;
             Description = description;
