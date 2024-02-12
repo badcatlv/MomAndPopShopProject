@@ -20,6 +20,7 @@ import Sizes from './components/Sizes/Index';
 import CreateSizes from './components/Sizes/Create';
 //import EditSizes from './components/Sizes/Edit';
 //import DeleteSizes from './components/Sizes/Delete';
+import ProductHome from './components/ProductHome';
 
 
 const AppRoutes = [
@@ -39,6 +40,10 @@ const AppRoutes = [
     {
         path: '/cart-items',
         element: <CartItems />
+    },
+    {
+        path: '/product-home',
+        element: <ProductHome />
     },
     {
         path: '/packaging',

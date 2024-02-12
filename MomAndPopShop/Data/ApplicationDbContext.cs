@@ -30,6 +30,10 @@ namespace MomAndPopShop.Data
                 .HasOne(e => e.Cart)
                 .WithMany(b => b.Items);
 
+            builder.Entity<Cart>()
+                .HasMany(b => b.Items)
+                .WithOne(e => e.Cart);
+
             base.OnModelCreating(builder);
         }
 
