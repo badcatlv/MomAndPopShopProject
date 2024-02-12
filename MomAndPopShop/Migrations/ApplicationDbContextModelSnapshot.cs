@@ -373,13 +373,13 @@ namespace MomAndPopShop.Migrations
 
             modelBuilder.Entity("MomAndPopShop.Models.Cart", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CartId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"), 1L, 1);
 
-                    b.HasKey("Id");
+                    b.HasKey("CartId");
 
                     b.ToTable("Carts");
                 });
@@ -395,27 +395,14 @@ namespace MomAndPopShop.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PopcornDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PopcornId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PopcornName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("PopcornPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("PopcornQuantity")
+                    b.Property<int?>("PopcornItemId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("PopcornId");
+                    b.HasIndex("PopcornItemId");
 
                     b.ToTable("CartItems");
                 });
@@ -459,9 +446,6 @@ namespace MomAndPopShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CartItemId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -481,8 +465,6 @@ namespace MomAndPopShop.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartItemId");
 
                     b.ToTable("Popcorns");
                 });
@@ -608,30 +590,18 @@ namespace MomAndPopShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MomAndPopShop.Models.Popcorn", "Popcorn")
+                    b.HasOne("MomAndPopShop.Models.Popcorn", "PopcornItem")
                         .WithMany()
-                        .HasForeignKey("PopcornId");
+                        .HasForeignKey("PopcornItemId");
 
                     b.Navigation("Cart");
 
-                    b.Navigation("Popcorn");
-                });
-
-            modelBuilder.Entity("MomAndPopShop.Models.Popcorn", b =>
-                {
-                    b.HasOne("MomAndPopShop.Models.CartItem", null)
-                        .WithMany("Popcorns")
-                        .HasForeignKey("CartItemId");
+                    b.Navigation("PopcornItem");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Cart", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
-                {
-                    b.Navigation("Popcorns");
                 });
 #pragma warning restore 612, 618
         }

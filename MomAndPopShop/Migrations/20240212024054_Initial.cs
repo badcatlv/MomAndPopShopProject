@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MomAndPopShop.Migrations
 {
-    public partial class InitiateColleenTableWithRelationships : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,12 +54,12 @@ namespace MomAndPopShop.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CartId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.PrimaryKey("PK_Carts", x => x.CartId);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,6 +133,22 @@ namespace MomAndPopShop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersistedGrants", x => x.Key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Popcorns",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    PopcornPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Popcorns", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,11 +296,7 @@ namespace MomAndPopShop.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
-                    PopcornId = table.Column<int>(type: "int", nullable: true),
-                    PopcornName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PopcornPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    PopcornDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PopcornQuantity = table.Column<int>(type: "int", nullable: true)
+                    PopcornItemId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -293,29 +305,12 @@ namespace MomAndPopShop.Migrations
                         name: "FK_CartItems_Carts_CartId",
                         column: x => x.CartId,
                         principalTable: "Carts",
-                        principalColumn: "Id",
+                        principalColumn: "CartId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Popcorns",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    PopcornPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: true),
-                    CartItemId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Popcorns", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Popcorns_CartItems_CartItemId",
-                        column: x => x.CartItemId,
-                        principalTable: "CartItems",
+                        name: "FK_CartItems_Popcorns_PopcornItemId",
+                        column: x => x.PopcornItemId,
+                        principalTable: "Popcorns",
                         principalColumn: "Id");
                 });
 
@@ -364,9 +359,9 @@ namespace MomAndPopShop.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_PopcornId",
+                name: "IX_CartItems_PopcornItemId",
                 table: "CartItems",
-                column: "PopcornId");
+                column: "PopcornItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
@@ -403,30 +398,10 @@ namespace MomAndPopShop.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Popcorns_CartItemId",
-                table: "Popcorns",
-                column: "CartItemId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CartItems_Popcorns_PopcornId",
-                table: "CartItems",
-                column: "PopcornId",
-                principalTable: "Popcorns",
-                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_CartItems_Carts_CartId",
-                table: "CartItems");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CartItems_Popcorns_PopcornId",
-                table: "CartItems");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -441,6 +416,9 @@ namespace MomAndPopShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CartItems");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");
@@ -471,9 +449,6 @@ namespace MomAndPopShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Popcorns");
-
-            migrationBuilder.DropTable(
-                name: "CartItems");
         }
     }
 }
