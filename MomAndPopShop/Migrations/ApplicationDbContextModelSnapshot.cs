@@ -373,13 +373,17 @@ namespace MomAndPopShop.Migrations
 
             modelBuilder.Entity("MomAndPopShop.Models.Cart", b =>
                 {
-                    b.Property<int>("CartId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.HasKey("CartId");
+                    b.Property<decimal?>("TotalCost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Carts");
                 });
@@ -392,10 +396,17 @@ namespace MomAndPopShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CartId")
+                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("Cost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int?>("PopcornItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -584,17 +595,13 @@ namespace MomAndPopShop.Migrations
 
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
                 {
-                    b.HasOne("MomAndPopShop.Models.Cart", "Cart")
+                    b.HasOne("MomAndPopShop.Models.Cart", null)
                         .WithMany("Items")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CartId");
 
                     b.HasOne("MomAndPopShop.Models.Popcorn", "PopcornItem")
                         .WithMany()
                         .HasForeignKey("PopcornItemId");
-
-                    b.Navigation("Cart");
 
                     b.Navigation("PopcornItem");
                 });

@@ -4,7 +4,7 @@
 
 namespace MomAndPopShop.Migrations
 {
-    public partial class Relationship : Migration
+    public partial class initialWithDecimal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
