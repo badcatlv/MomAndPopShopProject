@@ -29,6 +29,19 @@ const ProductHome = () => {
             });
     }
 
+    const handleDelete = (id) => {
+        fetch(`popcorn/${id}`, { method: 'DELETE' })
+            .then(results => {
+                if (!results) {
+                    throw new Error("Cannot delete item.");
+                }
+                fetchProductData();
+            })
+            .catch(error => {
+                console.error("Error deleting item: ", error);
+            });
+    };
+
     return (
         <main>
             <div className="text-center">
@@ -51,6 +64,7 @@ const ProductHome = () => {
                                     <td>{popcornItem.description}</td>
                                     <td>{popcornItem.popcornPrice}</td>
                                     <td>{popcornItem.quantity}</td>
+                                    <td><button onClick={() => handleDelete(popcornItem.id)}>Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>
