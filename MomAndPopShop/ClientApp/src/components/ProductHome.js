@@ -11,7 +11,7 @@ const [products, setProducts] = useState([]);
     }, []);
 
     const fetchProductData = () => {
-        fetch('popcorn')
+        fetch('producthome')
             .then((results) => {
                 if (!results.ok) {
                     throw new Error("Error fetching products.");
@@ -46,6 +46,7 @@ const [products, setProducts] = useState([]);
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <p>${product.popcornPrice}</p>
+                    <button>Add to Cart</button>
                 </div>
             )) : <div>No products found.</div>}
         </div>

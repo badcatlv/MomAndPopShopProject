@@ -1,6 +1,5 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import CartItems from './components/CartItems';
 import Packaging from './components/Packaging/Index';
@@ -22,7 +21,6 @@ import CreateSizes from './components/Sizes/Create';
 //import DeleteSizes from './components/Sizes/Delete';
 import ProductHome from './components/ProductHome';
 
-
 const AppRoutes = [
     {
         index: true,
@@ -31,11 +29,6 @@ const AppRoutes = [
     {
         path: '/counter',
         element: <Counter />
-    },
-    {
-        path: '/fetch-data',
-        requireAuth: true,
-        element: <FetchData />
     },
     {
         path: '/cart-items',
