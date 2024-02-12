@@ -12,7 +12,7 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240211231828_initial-migration")]
+    [Migration("20240212011304_initial-migration")]
     partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -470,6 +470,46 @@ namespace MomAndPopShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Popcorns");
+                });
+
+            modelBuilder.Entity("MomAndPopShop.Models.RentalEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EndTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RentalItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RentalEvents");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Seasoning", b =>

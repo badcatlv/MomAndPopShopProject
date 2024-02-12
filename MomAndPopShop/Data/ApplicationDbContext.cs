@@ -16,6 +16,7 @@ namespace MomAndPopShop.Data
         public DbSet<Seasoning> Seasonings { get; set; }
         public DbSet<Sizes> Sizes { get; set; }
         public DbSet<Packaging> Packagings { get; set; }
+        public DbSet<RentalEvent> RentalEvents { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)

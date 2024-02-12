@@ -160,6 +160,27 @@ namespace MomAndPopShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RentalEvents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EndTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RentalItem = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentalEvents", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Seasonings",
                 columns: table => new
                 {
@@ -407,6 +428,9 @@ namespace MomAndPopShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Popcorns");
+
+            migrationBuilder.DropTable(
+                name: "RentalEvents");
 
             migrationBuilder.DropTable(
                 name: "Seasonings");
