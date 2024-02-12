@@ -40,21 +40,80 @@ namespace MomAndPopShop.Controllers
             return Ok(cartItem);
         }
 
-        /*[HttpPost]
-        public async Task<ActionResult<CartItem>> AddToCart(int popId)
+        [HttpPost]
+        public async Task<ActionResult<Cart>> CreateCart(Cart cart)
         {
-            Popcorn? PopcornItem = await _context.Popcorns.FindAsync(popId);
-            if (PopcornItem == null)
+            if (cart == null)
             {
-                return NotFound("Item Not Found");
+                cart = new Cart();
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
             }
 
-            _context.CartItems.
+            return CreatedAtAction("GetCart", new { id = cart.CartId }, cart);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<ActionResult<CartItem>> AddItemToCart(int id, CartItem cartItem)
+        {
+            var cart = await _context.Carts.FindAsync(id);
+
+            if (cart == null)
+            {
+                return NotFound("Cart not found");
+            }
+
+            cartItem.CartId = id;
+            _context.CartItems.Add(cartItem);
             await _context.SaveChangesAsync();
 
-            return Ok(PopcornItem);
+            return CreatedAtAction("GetCartItem", new { id = cartItem.Id }, cartItem);
         }
-*/
+
+        [HttpPost]
+        public async Task<ActionResult<CartItem>> AddItemToCart(CartItem cartItem)
+        {
+
+            _context.CartItems.Add(cartItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCartItem", new { id = cartItem.Id }, cartItem);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCartItem(int id, CartItem cartItem)
+        {
+            if (id != cartItem.Id)
+            {
+                return BadRequest("Id does not match");
+            }
+
+            _context.Entry(cartItem).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CartItemExists(id))
+                {
+                    return NotFound("Item not found");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool CartItemExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

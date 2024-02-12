@@ -2,14 +2,14 @@
 import { useEffect, useState } from 'react';
 /*import { Link } from 'react-router-dom';
 */
-
-
+import { useNavigate } from 'react-router-dom';
 
 const ProductHome = () => {
 
 
     const [popcorn, setPopcorn] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProductData();
@@ -42,6 +42,26 @@ const ProductHome = () => {
             });
     };
 
+    const handleAddToCart = (popcornItem) => {
+        fetch('cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(popcornItem)
+        })
+            .then(results => {
+                if (!results.ok) {
+                    throw new Error("Error adding item to cart.");
+                }
+                navigate('/cart');
+            })
+            .catch(error => {
+                console.error("Error adding item to cart: ", error);
+            });
+    };
+
+
     return (
         <main>
             <div className="text-center">
@@ -64,16 +84,24 @@ const ProductHome = () => {
                                     <td>{popcornItem.description}</td>
                                     <td>{popcornItem.popcornPrice}</td>
                                     <td>{popcornItem.quantity}</td>
-                                    <td><button onClick={() => handleDelete(popcornItem.id)}>Delete</button></td>
+                                    <td>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() => handleAddToCart(popcornItem)}
+                                        >
+                                            Add to Cart
+                                        </button> </td>
                                 </tr>
+
                             ))}
                         </tbody>
+
                     </table>
                 )}
 
                 {popcorn.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
-                )}              
+                )}
             </div>
         </main>
     );
