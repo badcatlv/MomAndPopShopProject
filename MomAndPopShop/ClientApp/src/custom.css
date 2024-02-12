@@ -12,3 +12,323 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+/*below is copied from figma*/
+
+.product-page {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+    .product-page .div {
+        background-color: #ffffff;
+        height: 1024px;
+        position: relative;
+        width: 1440px;
+    }
+
+    .product-page .page-heading {
+        background-color: #ffffff;
+        height: 149px;
+        left: 0;
+        position: absolute;
+        top: 112px;
+        width: 1440px;
+    }
+
+    .product-page .default-chip {
+        background-color: #426b1f;
+        border-radius: 20px;
+        height: 40px;
+        left: 1077px;
+        overflow: hidden;
+        position: absolute;
+        top: 76px;
+        width: 88px;
+    }
+
+    .product-page .text-wrapper {
+        color: #ffffff;
+        font-family: "Inter-SemiBold", Helvetica;
+        font-size: 16px;
+        font-weight: 600;
+        height: 21px;
+        left: 16px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 8px;
+        white-space: nowrap;
+    }
+
+    .product-page .a-z-chip {
+        background-color: #ffffff;
+        border: 1px solid;
+        border-color: #c2c2c2;
+        border-radius: 20px;
+        height: 40px;
+        left: 1173px;
+        overflow: hidden;
+        position: absolute;
+        top: 76px;
+        width: 62px;
+    }
+
+    .product-page .text-wrapper-2 {
+        color: #000000;
+        font-family: "Inter-SemiBold", Helvetica;
+        font-size: 16px;
+        font-weight: 600;
+        height: 21px;
+        left: 16px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 8px;
+        white-space: nowrap;
+    }
+
+    .product-page .list-chip {
+        background-color: #ffffff;
+        border: 1px solid;
+        border-color: #c2c2c2;
+        border-radius: 20px;
+        height: 40px;
+        left: 1243px;
+        overflow: hidden;
+        position: absolute;
+        top: 76px;
+        width: 101px;
+    }
+
+    .product-page .fresh-august {
+        color: #000000;
+        font-family: "Inter-Medium", Helvetica;
+        font-size: 20px;
+        font-weight: 400;
+        height: 26px;
+        left: 347px;
+        letter-spacing: 0;
+        line-height: 26px;
+        position: absolute;
+        top: 89px;
+        white-space: nowrap;
+    }
+
+    .product-page .span {
+        font-weight: 500;
+    }
+
+    .product-page .text-wrapper-3 {
+        font-family: "Inter-Light", Helvetica;
+        font-weight: 300;
+    }
+
+    .product-page .text-wrapper-4 {
+        color: #000000;
+        font-family: "Newsreader-Regular", Helvetica;
+        font-size: 64px;
+        font-weight: 400;
+        height: 77px;
+        left: 96px;
+        letter-spacing: -1.28px;
+        line-height: 76.8px;
+        position: absolute;
+        top: 55px;
+        white-space: nowrap;
+    }
+
+    .product-page .divider {
+        height: 2px;
+        left: 92px;
+        object-fit: cover;
+        position: absolute;
+        top: 147px;
+        width: 1256px;
+    }
+
+    .product-page .navigation {
+        height: 112px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 1440px;
+    }
+
+    .product-page .text-wrapper-5 {
+        color: #426b1f;
+        font-family: "Newsreader-Medium", Helvetica;
+        font-size: 32px;
+        font-weight: 500;
+        left: 96px;
+        letter-spacing: -0.32px;
+        line-height: 32px;
+        position: absolute;
+        top: 40px;
+        white-space: nowrap;
+    }
+
+    .product-page .text-wrapper-6 {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        height: 21px;
+        left: 744px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 44px;
+        white-space: nowrap;
+    }
+
+    .product-page .text-wrapper-7 {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        height: 21px;
+        left: 831px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 44px;
+        white-space: nowrap;
+    }
+
+    .product-page .text-wrapper-8 {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        height: 21px;
+        left: 956px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 44px;
+        white-space: nowrap;
+    }
+
+    .product-page .text-wrapper-9 {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        height: 21px;
+        left: 1094px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 44px;
+        white-space: nowrap;
+    }
+
+    .product-page .cart-button {
+        background-color: #426b1f;
+        border-radius: 8px;
+        height: 48px;
+        left: 1218px;
+        overflow: hidden;
+        position: absolute;
+        top: 32px;
+        width: 126px;
+    }
+
+    .product-page .text-wrapper-10 {
+        color: #ffffff;
+        font-family: "Inter-SemiBold", Helvetica;
+        font-size: 16px;
+        font-weight: 600;
+        height: 21px;
+        left: 23px;
+        letter-spacing: 0;
+        line-height: 20.8px;
+        position: absolute;
+        text-align: center;
+        top: 12px;
+        white-space: nowrap;
+    }
+
+    .product-page .tomato {
+        background-color: #fafaf5;
+        border: 2px solid;
+        border-color: #e6e6e6;
+        border-radius: 24px;
+        height: 444px;
+        left: 96px;
+        overflow: hidden;
+        position: absolute;
+        top: 301px;
+        width: 395px;
+    }
+
+    .product-page .text-wrapper-11 {
+        color: #000000;
+        font-family: "Inter-SemiBold", Helvetica;
+        font-size: 20px;
+        font-weight: 600;
+        left: 24px;
+        letter-spacing: 0;
+        line-height: 26px;
+        position: absolute;
+        top: 318px;
+        white-space: nowrap;
+    }
+
+    .product-page .text-wrapper-12 {
+        color: #426b1f;
+        font-family: "Inter-SemiBold", Helvetica;
+        font-size: 20px;
+        font-weight: 600;
+        left: 24px;
+        letter-spacing: 0;
+        line-height: 26px;
+        position: absolute;
+        top: 348px;
+        white-space: nowrap;
+    }
+
+    .product-page .p {
+        color: #6d6d6d;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        left: 24px;
+        letter-spacing: 0;
+        line-height: 24px;
+        position: absolute;
+        top: 390px;
+        white-space: nowrap;
+    }
+
+    .product-page .img {
+        height: 296px;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 395px;
+    }
+
+    .product-page .ginger {
+        background-color: #fafaf5;
+        border: 2px solid;
+        border-color: #e6e6e6;
+        border-radius: 24px;
+        height: 444px;
+        left: 523px;
+        overflow: hidden;
+        position: absolute;
+        top: 301px;
+        width: 395px;
+    }

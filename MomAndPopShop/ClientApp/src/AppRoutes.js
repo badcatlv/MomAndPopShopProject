@@ -20,6 +20,7 @@ import Sizes from './components/Sizes/Index';
 import CreateSizes from './components/Sizes/Create';
 import ManageRentalEvent from './components/RentalEvent/Manage';
 import RequestRentalEvent from './components/RentalEvent/Request';
+import { Catalog } from './components/Catalog';
 //import EditSizes from './components/Sizes/Edit';
 //import DeleteSizes from './components/Sizes/Delete';
 
@@ -47,6 +48,11 @@ const AppRoutes = [
         path: '/rentalevent/request',
         requireAuth: true,
         element: <RequestRentalEvent />
+    },
+    {
+        path: '/catalog',
+        requireAuth: true,
+        element: <Catalog />
     },
     {
         path: '/cart-items',
