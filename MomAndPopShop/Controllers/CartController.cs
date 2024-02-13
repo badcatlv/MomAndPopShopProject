@@ -25,8 +25,9 @@ namespace MomAndPopShop.Controllers
             return Ok(cart);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult> AddToCart(int id)
+        //[HttpPost("{id}")]
+        [HttpPost("Cart/AddToCart")]
+        public async Task<ActionResult> Add(int id)
         {
             var popcorn = await _context.Popcorns.FindAsync(id);
             if (popcorn == null)
