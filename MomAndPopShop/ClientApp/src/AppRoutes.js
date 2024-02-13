@@ -20,6 +20,7 @@ import CreateSizes from './components/Sizes/Create';
 //import EditSizes from './components/Sizes/Edit';
 //import DeleteSizes from './components/Sizes/Delete';
 import ProductHome from './components/ProductHome';
+import Cart from './components/Cart';
 
 const AppRoutes = [
     {
@@ -29,6 +30,10 @@ const AppRoutes = [
     {
         path: '/counter',
         element: <Counter />
+    },
+    {
+        path: '/cart',
+        element: <Cart />
     },
     {
         path: '/cart-items',
