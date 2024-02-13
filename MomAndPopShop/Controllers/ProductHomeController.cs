@@ -27,7 +27,7 @@ namespace MomAndPopShop.Controllers
             {
                 return NotFound("No Items.");
             }
-            var cart = _cartService.GetCart();
+            /*var cart = _cartService.GetCart();
             foreach (var item in cart.Items)
             {
                 var popcorn = productHome.FirstOrDefault(p => p.Id == item.PopcornItem.Id);
@@ -35,7 +35,7 @@ namespace MomAndPopShop.Controllers
                 {
                     popcorn.Quantity = item.Quantity;
                 }
-            }
+            }*/
 
             return Ok(productHome);
         }

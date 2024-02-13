@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MomAndPopShop.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialWithoutCartTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,16 +51,16 @@ namespace MomAndPopShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
+                name: "Cart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.PrimaryKey("PK_Cart", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -291,26 +291,26 @@ namespace MomAndPopShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
+                name: "CartItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PopcornItemId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Cost = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     CartId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.PrimaryKey("PK_CartItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
+                        name: "FK_CartItem_Cart_CartId",
                         column: x => x.CartId,
-                        principalTable: "Carts",
+                        principalTable: "Cart",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CartItems_Popcorns_PopcornItemId",
+                        name: "FK_CartItem_Popcorns_PopcornItemId",
                         column: x => x.PopcornItemId,
                         principalTable: "Popcorns",
                         principalColumn: "Id");
@@ -356,13 +356,13 @@ namespace MomAndPopShop.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_CartId",
-                table: "CartItems",
+                name: "IX_CartItem_CartId",
+                table: "CartItem",
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_PopcornItemId",
-                table: "CartItems",
+                name: "IX_CartItem_PopcornItemId",
+                table: "CartItem",
                 column: "PopcornItemId");
 
             migrationBuilder.CreateIndex(
@@ -420,7 +420,7 @@ namespace MomAndPopShop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CartItems");
+                name: "CartItem");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");
@@ -447,7 +447,7 @@ namespace MomAndPopShop.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Popcorns");

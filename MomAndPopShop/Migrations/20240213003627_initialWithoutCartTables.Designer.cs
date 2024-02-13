@@ -12,8 +12,8 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240212194251_initialWithDecimal")]
-    partial class initialWithDecimal
+    [Migration("20240213003627_initialWithoutCartTables")]
+    partial class initialWithoutCartTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -387,7 +387,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
@@ -417,7 +417,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasIndex("PopcornItemId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Packaging", b =>

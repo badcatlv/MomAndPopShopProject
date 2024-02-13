@@ -385,7 +385,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.CartItem", b =>
@@ -415,7 +415,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasIndex("PopcornItemId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Packaging", b =>

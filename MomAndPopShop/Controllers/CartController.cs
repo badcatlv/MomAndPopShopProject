@@ -10,6 +10,7 @@ namespace MomAndPopShop.Controllers
     public class CartController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
 
         public CartController(ApplicationDbContext context)
         {
@@ -17,6 +18,52 @@ namespace MomAndPopShop.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetCart()
+        {
+            var cart = _cartService.GetCart();            
+
+            return Ok(cart);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> AddToCart(int id)
+        {
+            var popcorn = await _context.Popcorns.FindAsync(id);
+            if (popcorn == null)
+            {
+                return NotFound("Item not found");
+            }
+
+            _cartService.AddItem(popcorn, 1);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateItemQuantity(int itemId, int quantity)
+        {
+            _cartService.UpdateItemQuantity(itemId, quantity);
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _cartService.RemoveItem(id);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult ClearCart()
+        {
+            _cartService.ClearCart();
+
+            return Ok();
+        }
+
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
         {
             var cartItem = await _context.CartItems.ToListAsync();
@@ -26,9 +73,9 @@ namespace MomAndPopShop.Controllers
             }
 
             return Ok(cartItem);
-        }
+        }*/
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<CartItem>> GetCartItem(int id)
         {
             var cartItem = await _context.CartItems.FindAsync(id);
@@ -38,9 +85,9 @@ namespace MomAndPopShop.Controllers
                 return NotFound("Item not Found");
             }
             return Ok(cartItem);
-        }
+        }*/
 
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var cartItem = await _context.CartItems.FindAsync(id);
@@ -55,7 +102,7 @@ namespace MomAndPopShop.Controllers
 
             return NoContent();
 
-        }
+        }*/
     }
 }
 
