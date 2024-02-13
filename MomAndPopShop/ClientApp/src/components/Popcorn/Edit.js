@@ -4,18 +4,22 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Edit = () => {
     const { id } = useParams();
     const [formData, setFormData] = useState({
-        Name: '',
-        Description: '',
-        PopcornPrice: 0,
-        Quantity: 0
+        name: '',
+        description: '',
+        popcornPrice: 0,
+        quantity: 0,
+        id: 0
     });
+
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/popcorn/edit/${id}`);
+                const response = await fetch(`/popcorn/${id}`);
                 if (response.ok) {
                     const existingPopcorn = await response.json();
                     setFormData(existingPopcorn);
@@ -30,12 +34,25 @@ const Edit = () => {
         fetchData();
     }, [id]);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        const newData = {
+            ...formData
+        }
+        if (event.target.name === 'PopcornPrice') {
+            newData.popcornPrice = value;
+        }
+        if (event.target.name === 'Quantity') {
+            newData.quantity = value;
+        }
+        if (event.target.name === 'Name') {
+            newData.name = value;
+        }
+        if (event.target.name === 'Description') {
+            newData.description = value;
+        }
+
+        setFormData(newData);
     };
 
     const handleSubmit = async (e) => {
@@ -52,18 +69,28 @@ const Edit = () => {
 
             if (response.ok) {
                 console.log('Popcorn item updated successfully');
+                setIsError(false);
                 navigate('/popcorn');
             } else {
                 if (response.status === 400) {
                     console.error('Bad request - check your input data');
+                    setIsError(true);
+                    setErrorMessage('Bad request - check your input data');
                 } else if (response.status === 401) {
                     console.error('Unauthorized - check your authentication');
+                    setIsError(true);
+                    setErrorMessage('Unauthorized - check your authentication');
                 } else {
                     console.error('Error updating popcorn item');
+                    setIsError(true);
+                    setErrorMessage("Unhandled exception encountered while updating popcorn item.")
                 }
             }
+
         } catch (error) {
             console.error('Error:', error);
+            setIsError(true);
+            setErrorMessage(`Unhandled exception encountered while updating popcorn item. ${error.message}`)
         }
     };
 
@@ -78,7 +105,7 @@ const Edit = () => {
                         type="text"
                         id="Name"
                         name="Name"
-                        value={formData.Name}
+                        value={formData.name}
                         onChange={handleInputChange}
                         className="form-control"
                     />
@@ -90,7 +117,7 @@ const Edit = () => {
                         type="text"
                         id="Description"
                         name="Description"
-                        value={formData.Description}
+                        value={formData.description}
                         onChange={handleInputChange}
                         className="form-control"
                     />
@@ -102,7 +129,7 @@ const Edit = () => {
                         type="number"
                         id="PopcornPrice"
                         name="PopcornPrice"
-                        value={formData.PopcornPrice}
+                        value={formData.popcornPrice}
                         onChange={handleInputChange}
                         className="form-control"
                     />
@@ -114,7 +141,7 @@ const Edit = () => {
                         type="number"
                         id="Quantity"
                         name="Quantity"
-                        value={formData.Quantity}
+                        value={formData.quantity}
                         onChange={handleInputChange}
                         className="form-control"
                     />
@@ -122,7 +149,9 @@ const Edit = () => {
 
                 <input type="submit" value="Save Changes" />
             </form>
+            {isError && <p>{errorMessage}</p>}
         </div>
+
     );
 };
 
