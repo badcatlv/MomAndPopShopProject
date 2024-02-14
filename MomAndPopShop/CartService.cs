@@ -1,6 +1,5 @@
 ﻿using MomAndPopShop.Data;
 using MomAndPopShop.Models;
-using MomAndPopShop.Services;
 using Newtonsoft.Json;
 
 namespace MomAndPopShop
@@ -15,15 +14,11 @@ namespace MomAndPopShop
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _cart = GetCartFromSession();
         }
 
         public Cart GetCart()
         {
-            var cart = _httpContextAccessor.HttpContext.Session.GetString("Cart");
-            if (cart != null)
-            {
-                _cart = JsonConvert.DeserializeObject<Cart>(cart);
-            }
             return _cart;
         }
 
@@ -39,38 +34,59 @@ namespace MomAndPopShop
                     Quantity = quantity,
                     Cost = popItem.PopcornPrice * quantity
                 };
+                _cart.Items.Add(item);
             }
             else
             {
                 item.Quantity += quantity;
             }
-
-            /*var cart = GetCart();
-            var cartItem = new CartItem
-            {
-                PopcornItem = item,
-                Quantity = quantity,
-                Cost = item.PopcornPrice * quantity
-            };
-            cart.Items.Add(cartItem);
-            cart.TotalCost += cartItem.Cost;
-            _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));*/
+            UpdateCartInSession();
         }
 
-        public void UpdateItemQuantity(int itemId, int quantity)
+        public void AddToCart(int popId, int quantity)
         {
-            var item = _cart.Items.FirstOrDefault(x => x.PopcornItem.Id == itemId);
+            var item = _context.Popcorns.Find(popId);
             if (item != null)
             {
-                item.Quantity = quantity;
-                item.Cost = item.PopcornItem.PopcornPrice * quantity;
+                var newItem = new CartItem
+                {
+                    PopcornItem = item,
+                    Quantity = quantity,
+                    Cost = item.PopcornPrice * quantity
+                };
+                _cart.Items.Add(newItem);
             }
+        }
+
+        private void UpdateCartInSession()
+        {
+            var cartJson = JsonConvert.SerializeObject(_cart);
+            _httpContextAccessor.HttpContext.Session.SetString("Cart", cartJson);
         }
 
         public void UpdateCart(Cart cart)
         {
+            _cart = cart;
+            SaveCartToSession(_cart);
+        }
+
+        private void SaveCartToSession(Cart cart)
+        {
             var cartJson = JsonConvert.SerializeObject(cart);
             _httpContextAccessor.HttpContext.Session.SetString("Cart", cartJson);
+        }
+
+        private Cart GetCartFromSession()
+        {
+            var cartJson = _httpContextAccessor.HttpContext.Session.GetString("Cart");
+            if (cartJson != null)
+            {
+                return JsonConvert.DeserializeObject<Cart>(cartJson);
+            }
+
+            var cart = new Cart();
+            _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
+            return new Cart();
         }
 
         public void RemoveItem(int id)
@@ -80,14 +96,18 @@ namespace MomAndPopShop
             if (item != null)
             {
                 cart.Items.Remove(item);
-                cart.TotalCost -= item.Cost;
-                UpdateCart(cart);
+                UpdateCartInSession();
             }
         }
 
         public void ClearCart()
         {
             _httpContextAccessor.HttpContext.Session.Remove("Cart");
+        }
+
+        internal void AddItem(int popcornId, int quantity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

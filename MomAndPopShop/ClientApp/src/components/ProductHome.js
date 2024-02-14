@@ -1,10 +1,20 @@
 ﻿import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 const ProductHome = () => {
 
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { id } = useParams();
+    const [quantity, setQuantity] = useState(1);
+    const [form, setForm] = useState({
+        popcornId: id,
+        quantity: 1
+    });
+
 
     useEffect(() => {
         fetchProductData();
@@ -31,18 +41,25 @@ const ProductHome = () => {
 
     };
 
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            const productId = event.target.dataset.productId;
-            const quantityInput = document.getElementById(`quantity-${productId}`);
-            const quantity = quantityInput.value;
+    const handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        setForm({
+            ...form,
+            [name]: value
+        });
+    }
 
+    const handleAddToCart = async () => {
+
+        try {
             const response = await fetch(`/Cart/AddToCart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ productId, quantity })
+                body: JSON.stringify(form)
             });
 
             if (response.ok) {
@@ -55,25 +72,11 @@ const ProductHome = () => {
             } else {
                 alert('Failed to add product to cart');
             }
-        });
-    });
-
-    const addToCart = (product) => {
-        console.log("Add to cart: ", product);
-    }
-
-    const handleAddToCart = (id) => {
-        fetch(`cart/${id}`, { method: 'POST' })
-            .then(results => {
-                if (!results) {
-                    throw new Error("Cannot add item to cart.");
-                }
-                fetchProductData();
-            })
-            .catch(error => {
-                console.error("Error adding item to cart: ", error);
-            });
-    }
+        }
+        catch (error) {
+            console.error('Error adding product to cart: ', error);
+        }
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -91,9 +94,17 @@ const ProductHome = () => {
                     <p>{product.description}</p>
                     <p>${product.popcornPrice}</p>
                     <p>{product.quantity}</p>
-                    <button class="add-to-cart" data-product-id={product.id }>Add to Cart</button>
+                    <form onSubmit={() => handleAddToCart(id, quantity)}>
+                        <input type="number" name="quantity" value={form.quantity} onChange={handleInputChange} />
+                    <button type="submit">Add to Cart</button>
+                        
+                    </form>
                 </div>
             )) : <div>No products found.</div>}
+            <div>
+                <p><Link to="/cart">Show Cart</Link></p>
+            </div>
+
         </div>
     );
 };

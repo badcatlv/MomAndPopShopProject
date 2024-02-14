@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -34,7 +35,7 @@ const Cart = () => {
     };
 
     const handleDelete = (id) => {
-        fetch(`cart/${id}`, { method: 'DELETE' })
+        fetch(`cart/Remove/${id}`, { method: 'DELETE' })
             .then(results => {
                 if (!results) {
                     throw new Error("Cannot delete item.");
@@ -60,7 +61,7 @@ const Cart = () => {
 
         <div>
             <h2>Cart</h2>
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -71,7 +72,7 @@ const Cart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {(cartItems.length > 0) ? cartItems.map(item => (
+                {(cartItems.length > 0) ? cartItems.map(item => (
                         <tr key={item.id}>
                             <td>{item.popcornItem.name}</td>
                             <td>${item.popcornItem.price}</td>
@@ -83,9 +84,10 @@ const Cart = () => {
                                 </form>
                             </td>
                         </tr>
-                    )) : <div>No items in cart.</div>
+                        )) : <tr>There are no items in cart.</tr>
                     }
                 </tbody>
+                
                 <tfoot>
                     <tr>
                         <td colSpan="3">Total</td>
@@ -93,9 +95,9 @@ const Cart = () => {
                     </tr>
                 </tfoot>
             </table >
-            <form action={`popcorn`} method="get" >
-                <button type="submit">Continue Shopping</button>
-            </form>
+            
+            <p><Link to="/product-home">Create Popcorn Item</Link></p>
+
         </div>
     );
 };

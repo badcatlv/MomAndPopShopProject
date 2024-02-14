@@ -12,8 +12,9 @@ namespace MomAndPopShop.Controllers
         private readonly ApplicationDbContext _context;
         private readonly CartService _cartService;
 
-        public CartController(ApplicationDbContext context)
+        public CartController(CartService cartService, ApplicationDbContext context)
         {
+            _cartService = cartService;
             _context = context;
         }
 
@@ -25,30 +26,45 @@ namespace MomAndPopShop.Controllers
             return Ok(cart);
         }
 
-        //[HttpPost("{id}")]
-        [HttpPost("Cart/AddToCart")]
-        public async Task<ActionResult> Add(int id)
+        [HttpPost("AddToCart")]
+        public IActionResult AddToCart([FromBody] AddToCartViewModel model)
         {
-            var popcorn = await _context.Popcorns.FindAsync(id);
-            if (popcorn == null)
+            if (ModelState.IsValid)
             {
-                return NotFound("Item not found");
+                var cart = _cartService.GetCart();
+
+                var existingItem = cart.Items.FirstOrDefault(x => x.PopcornItem.Id == model.PopcornId);
+                if (existingItem != null)
+                {
+                    existingItem.Quantity = model.Quantity;
+                    _cartService.UpdateCart(cart);
+                    return Ok(new { updated = true });
+                }
+
+                _cartService.AddItem(model.PopcornId, model.Quantity);
+                _cartService.UpdateCart(cart);
+                return Ok(new { updated = false });
             }
 
-            _cartService.AddItem(popcorn, 1);
-
-            return Ok();
+            return BadRequest(ModelState);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> UpdateItemQuantity(int itemId, int quantity)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Buy(int id)
         {
-            _cartService.UpdateItemQuantity(itemId, quantity);
-
-            return Ok();
+            var product = await _context.Popcorns.FindAsync(id);    
+            if (product != null)
+            {
+                _cartService.AddItem(product.Id, 1);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             _cartService.RemoveItem(id);
@@ -56,8 +72,8 @@ namespace MomAndPopShop.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult ClearCart()
+        [HttpPost("Clear")]
+        public IActionResult Clear()
         {
             _cartService.ClearCart();
 
@@ -102,6 +118,14 @@ namespace MomAndPopShop.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateItemQuantity(int itemId, int quantity)
+        {
+            _cartService.UpdateItemQuantity(itemId, quantity);
+
+            return Ok();
+        }
 
         }*/
     }
