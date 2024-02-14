@@ -96,7 +96,7 @@ const Cart = () => {
                 </tfoot>
             </table >
             
-            <p><Link to="/product-home">Create Popcorn Item</Link></p>
+            <p><Link to="/product-home">Go back to Product Home</Link></p>
 
         </div>
     );

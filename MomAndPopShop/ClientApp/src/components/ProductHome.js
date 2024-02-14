@@ -51,10 +51,9 @@ const ProductHome = () => {
         });
     }
 
-    const handleAddToCart = async () => {
-
+    const handleAddToCart = () => {
         try {
-            const response = await fetch(`/cart/addtocart`, {
+            const response = fetch(`/cart/addtocart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,7 +62,7 @@ const ProductHome = () => {
             });
 
             if (response.ok) {
-                const cart = await response.json();
+                const cart = response.json();
                 if (cart.updated) {
                     alert('Product quantity updated in cart');
                 } else {
@@ -94,12 +93,13 @@ const ProductHome = () => {
                     <p>{product.description}</p>
                     <p>${product.popcornPrice}</p>
                     <p>{product.quantity}</p>
-                    <form onSubmit={() => handleAddToCart(id, quantity)}>
+                    <form onSubmit={handleAddToCart}>
                         <input type="number" name="quantity" value={form.quantity} onChange={handleInputChange} />
                         <input type="hidden" name="popcornId" value={product.id} />
-                    <button type="submit">Add to Cart</button>
-                        
+                        <button type="submit">Add to Cart</button>
                     </form>
+                        
+                    
                 </div>
             )) : <div>No products found.</div>}
             <div>

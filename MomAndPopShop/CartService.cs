@@ -104,10 +104,5 @@ namespace MomAndPopShop
         {
             _httpContextAccessor.HttpContext.Session.Remove("Cart");
         }
-
-        internal void AddItem(int popcornId, int quantity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -41,7 +41,7 @@ namespace MomAndPopShop.Controllers
                     return Ok(new { updated = true });
                 }
 
-                _cartService.AddItem(model.PopcornId, model.Quantity);
+                _cartService.AddToCart(model.PopcornId, model.Quantity);
                 _cartService.UpdateCart(cart);
                 return Ok(new { updated = false });
             }
@@ -54,7 +54,7 @@ namespace MomAndPopShop.Controllers
             var product = await _context.Popcorns.FindAsync(id);    
             if (product != null)
             {
-                _cartService.AddItem(product.Id, 1);
+                _cartService.AddToCart(product.Id, 1);
                 return Ok();
             }
             else
