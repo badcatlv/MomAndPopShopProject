@@ -54,7 +54,7 @@ const ProductHome = () => {
     const handleAddToCart = async () => {
 
         try {
-            const response = await fetch(`/Cart/AddToCart`, {
+            const response = await fetch(`/cart/addtocart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -96,6 +96,7 @@ const ProductHome = () => {
                     <p>{product.quantity}</p>
                     <form onSubmit={() => handleAddToCart(id, quantity)}>
                         <input type="number" name="quantity" value={form.quantity} onChange={handleInputChange} />
+                        <input type="hidden" name="popcornId" value={product.id} />
                     <button type="submit">Add to Cart</button>
                         
                     </form>
