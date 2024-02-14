@@ -1,4 +1,68 @@
-﻿import { useEffect, useState } from 'react';
+﻿import { useState } from "react";
+
+const CartDisplay = ({ product }) => {
+    const [qtyToAdd, setQtyToAdd] = useState(1);
+
+    const handleQtyChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        setQtyToAdd(value);
+    }
+
+    const handleAddToCart = async (event) => {
+        event.preventDefault();
+        const requestBody = {
+            popcornId: product.id,
+            quantity: qtyToAdd
+        }
+        try {
+            const response = await fetch("/cart/addtocart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (response.ok) {
+                const cart = await response.json();
+                if (cart.updated) {
+                    alert("Product quantity updated in cart");
+                } else {
+                    alert("Product added to cart");
+                }
+            } else {
+                alert("Failed to add product to cart");
+            }
+        }
+        catch (error) {
+            console.error("Error adding product to cart: ", error);
+        }
+    }
+
+
+
+    return (
+        <>
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p>${product.popcornPrice}</p>
+            <p>{product.quantity}</p>
+            <form onSubmit={handleAddToCart}>
+                <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
+                <button type="submit">Add to Cart</button>
+            </form>
+        </>
+    )
+}
+
+export default CartDisplay;
+
+
+
+
+
+/*import { useEffect, useState } from 'react';
 
 
 const CartItems = () => {
@@ -77,4 +141,4 @@ const CartItems = () => {
         </div>
     );
 }
-export default CartItems;
+export default CartItems;*/

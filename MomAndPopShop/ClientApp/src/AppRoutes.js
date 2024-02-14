@@ -1,7 +1,6 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { Counter } from "./components/Counter";
 import { Home } from "./components/Home";
-import CartItems from './components/CartItems';
 import Packaging from './components/Packaging/Index';
 import CreatePackaging from './components/Packaging/Create';
 //import EditPackaging from './components/Packaging/Edit';
@@ -21,6 +20,7 @@ import CreateSizes from './components/Sizes/Create';
 //import DeleteSizes from './components/Sizes/Delete';
 import ProductHome from './components/ProductHome';
 import Cart from './components/Cart';
+import CartDisplay from './components/CartDisplay';
 
 const AppRoutes = [
     {
@@ -36,8 +36,8 @@ const AppRoutes = [
         element: <Cart />
     },
     {
-        path: '/cart-items',
-        element: <CartItems />
+        path: '/cart-display',
+        element: <CartDisplay />
     },
     {
         path: '/product-home',

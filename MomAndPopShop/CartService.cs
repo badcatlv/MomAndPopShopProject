@@ -32,7 +32,6 @@ namespace MomAndPopShop
                 {
                     PopcornItem = popItem,
                     Quantity = quantity,
-                    Cost = popItem.PopcornPrice * quantity
                 };
                 _cart.Items.Add(item);
             }
@@ -52,7 +51,6 @@ namespace MomAndPopShop
                 {
                     PopcornItem = item,
                     Quantity = quantity,
-                    Cost = item.PopcornPrice * quantity
                 };
                 _cart.Items.Add(newItem);
             }

@@ -20,9 +20,8 @@ namespace MomAndPopShop.Controllers
 
         [HttpGet]
         public ActionResult GetCart()
-        {
-            var cart = _cartService.GetCart();            
-
+        { 
+            var cart = _cartService.GetCart();
             return Ok(cart);
         }
 

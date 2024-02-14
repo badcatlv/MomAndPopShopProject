@@ -11,7 +11,7 @@ const context = [
     "/connect",
     "/ApplyDatabaseMigrations",
     "/_framework",
-    "/cartitem",
+    "/cartdisplay",
     "/packaging",
     "/popcorn",
     "/products",
