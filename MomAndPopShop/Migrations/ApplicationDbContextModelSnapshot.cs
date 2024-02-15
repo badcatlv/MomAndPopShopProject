@@ -381,7 +381,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Packaging", b =>

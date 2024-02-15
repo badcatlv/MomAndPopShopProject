@@ -12,8 +12,8 @@ using MomAndPopShop.Data;
 namespace MomAndPopShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240203210407_InitialReactDBMigration")]
-    partial class InitialReactDBMigration
+    [Migration("20240215015541_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -383,7 +383,7 @@ namespace MomAndPopShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("MomAndPopShop.Models.Packaging", b =>
