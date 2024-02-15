@@ -10,6 +10,7 @@ const Cart = () => {
 
     useEffect(() => {
         fetchCartData();
+        setIsLoading(false);
     }, []);
 
     const fetchCartData = () => {
@@ -22,15 +23,13 @@ const Cart = () => {
             })
             .then(data => {
                 console.log(data);
-                setCartItems(data);
-                setIsLoading(false);
+                setCartItems(data.items);
             })
             .catch(error => {
                 setError("Error fetching cart items, please try again later.")
                 setIsLoading(false);
                 console.error("Error fetching cart items: ", error);
             });
-
     };
 
     const handleDelete = (id) => {
@@ -47,6 +46,22 @@ const Cart = () => {
     };
 
 
+    const cartItemDisplay = cartItems.map(collection => (
+        <table>
+            <th>
+                <td>Name</td>
+            </th>
+            <tr>
+                <td key={collection.id}>
+                    {collection.popcornName}    <br></br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+        </table>));
+
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -55,26 +70,14 @@ const Cart = () => {
     if (error) {
         return <div>Error: {error}</div>
     }
+
     return (
         <div>
             <h2>Cart</h2>
-            {(cartItems.length > 0) ? cartItems.map(item => (
-                <table>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                    <tr>
-                        <td key={item.id}>
-                            {item.popcornName}    <br></br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onClick={() => handleDelete(item.id)}>Delete</button>
-                        </td>
-                    </tr>
-                </table>
-            )) : <p>Cart is currently empty</p>}
+
+
+{/*            <p>cart items: {JSON.stringify(cartItems)}</p>
+*/}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
         </div>
     );
 } 
