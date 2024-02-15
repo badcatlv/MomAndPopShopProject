@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using MomAndPopShop.Data;
 using MomAndPopShop.Models;
+using MomAndPopShop.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
