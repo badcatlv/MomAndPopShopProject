@@ -1,8 +1,6 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import CartItems from './components/CartItems';
 import Packaging from './components/Packaging/Index';
 import CreatePackaging from './components/Packaging/Create';
 //import EditPackaging from './components/Packaging/Edit';
@@ -23,7 +21,9 @@ import RequestRentalEvent from './components/RentalEvent/Request';
 import { Catalog } from './components/Catalog';
 //import EditSizes from './components/Sizes/Edit';
 //import DeleteSizes from './components/Sizes/Delete';
-
+import ProductHome from './components/ProductHome';
+import Cart from './components/Cart';
+import CartDisplay from './components/CartDisplay';
 
 const AppRoutes = [
     {
@@ -35,9 +35,12 @@ const AppRoutes = [
         element: <Counter />
     },
     {
-        path: '/fetch-data',
-        requireAuth: true,
-        element: <FetchData />
+        path: '/cart',
+        element: <Cart />
+    },
+    {
+        path: '/cart-display',
+        element: <CartDisplay />
     },
     {
         path: '/rentalevent/manage',
@@ -55,8 +58,8 @@ const AppRoutes = [
         element: <Catalog />
     },
     {
-        path: '/cart-items',
-        element: <CartItems />
+        path: '/product-home',
+        element: <ProductHome />
     },
     {
         path: '/packaging',

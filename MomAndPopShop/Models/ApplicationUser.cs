@@ -13,5 +13,6 @@ namespace MomAndPopShop.Models
         public bool SubscribedToPromotionalEmail { get; set; } = false;
         public bool SubscribedToPromotionalText { get; set; } = false;
 
+        
     }
 }

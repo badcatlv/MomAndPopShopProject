@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace MomAndPopShop.Models
 {
@@ -6,8 +7,11 @@ namespace MomAndPopShop.Models
     {
         [Key]
         public int Id { get; set; }
-        public string? PopcornName { get; set; }
-        public double PopcornPrice { get; set; }
+        public Popcorn? PopcornItem { get; set; }
+        public int Quantity { get; set; }
+        [Precision(18, 2)]
 
+        public decimal? Cost { get { return PopcornItem.PopcornPrice * Quantity; } }
     }
+        
 }
