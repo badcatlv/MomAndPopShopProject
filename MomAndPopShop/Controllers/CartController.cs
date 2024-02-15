@@ -63,7 +63,7 @@ namespace MomAndPopShop.Controllers
             
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _cartService.RemoveItem(id);

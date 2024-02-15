@@ -11,7 +11,7 @@ namespace MomAndPopShop.Models
         public int Quantity { get; set; }
         [Precision(18, 2)]
 
-        public decimal? Cost { get { return PopcornItem.PopcornPrice * Quantity; } }
+        public decimal? Cost { get; set; }
     }
         
 }

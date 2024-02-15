@@ -47,20 +47,29 @@ const Cart = () => {
 
 
     const cartItemDisplay = cartItems.map(collection => (
-        <table>
-            <th>
-                <td>Name</td>
-            </th>
-            <tr>
-                <td key={collection.id}>
-                    {collection.popcornName}    <br></br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-            </tr>
-        </table>));
+        <div>
+
+            <ul>
+
+                <li key={collection.id}>
+                    <li>Popcorn: {collection.popcornItem.name}</li>
+                    <li>Popcorn Price: ${collection.popcornItem.popcornPrice}</li>
+                    <li>Quantity: {collection.quantity}</li>
+                    <li>Total Price: ${collection.cost}</li>
+                    <li>
+                        <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
+                            <button type="submit">Remove</button>
+                        </form>
+                    </li>
+                </li>
+
+
+            </ul>
+        </div>
+    ));
+
+    const totalCost = cartItems.reduce((total, item) => total + item.cost, 0);
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
 
     if (isLoading) {
@@ -76,11 +85,16 @@ const Cart = () => {
             <h2>Cart</h2>
 
 
-{/*            <p>cart items: {JSON.stringify(cartItems)}</p>
+            {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
 */}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
+            <p>Total Quantity: {totalQuantity}</p>
+            <p>Total Cost: ${totalCost}</p>
+            <p><Link to="/checkout">Checkout</Link></p>
+
+            <p><Link to="/product-home">Go back to Product Home</Link></p>
         </div>
     );
-} 
+}
 
 /*{
     const [cartItems, setCartItems] = useState([]);
@@ -164,45 +178,45 @@ const Cart = () => {
         </div>
             
            *//* </ul>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {(cartItems > 0) ? cartItems.map((item => (
-                        <tr key={item.id}>
-                            <td>{item.popcornItem.name}</td>
-                            <td>${item.popcornItem.price}</td>
-                            <td>{item.quantity}</td>
-                            <td>${item.cost}</td>
-                            <td>
-                                <form onSubmit={() => handleDelete(item.id)}>
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                        ))) : <td>There are no items in cart.</td>
-                    }
-                </tbody>
-                
-                <tfoot>
-                    <tr>
-                        <td colSpan="3">Total</td>
-                        <td>${cart.totalCost}</td>
-                    </tr>
-                </tfoot>
-            </table >
-            
-            <p><Link to="/product-home">Go back to Product Home</Link></p>
+<table className="table">
+<thead>
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{(cartItems > 0) ? cartItems.map((item => (
+<tr key={item.id}>
+<td>{item.popcornItem.name}</td>
+<td>${item.popcornItem.price}</td>
+<td>{item.quantity}</td>
+<td>${item.cost}</td>
+<td>
+<form onSubmit={() => handleDelete(item.id)}>
+<button type="submit">Remove</button>
+</form>
+</td>
+</tr>
+))) : <td>There are no items in cart.</td>
+}
+</tbody>
+ 
+<tfoot>
+<tr>
+<td colSpan="3">Total</td>
+<td>${cart.totalCost}</td>
+</tr>
+</tfoot>
+</table >
+ 
+<p><Link to="/product-home">Go back to Product Home</Link></p>
 
-        </div>*//*
-    );
+</div>*//*
+);
 };*/
 
 export default Cart;
