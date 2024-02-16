@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MomAndPopShop.Models
 {
-    public class Sizes
-    {
+    public class PopcornSize
+    { 
         [Key]
         public int Id { get; set; }
 
@@ -20,17 +20,18 @@ namespace MomAndPopShop.Models
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be 0.01 or greater.")]
         [Precision(18, 2)]
-        public decimal? SizePrice { get; set; }
+        public decimal? PopcornSizePrice { get; set; }
 
         [Range(0.01, int.MaxValue, ErrorMessage = "Quantity must be 1 or greater.")]
         public int? Quantity { get; set; }
 
-        public Sizes() { }
-        public Sizes(string name, string description, decimal? sizePrice)
+        public PopcornSize() { }
+
+        public PopcornSize(string name, string description, decimal? popcornSizePrice)
         {
             Name = name;
             Description = description;
-            SizePrice = sizePrice;
+            PopcornSizePrice = popcornSizePrice;
             Quantity = 0;
         }
     }

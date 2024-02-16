@@ -9,13 +9,12 @@ const Packaging = () => {
 
     useEffect(() => {
         fetch('packaging')
-            .then((results) => results.json())
+            .then((results) => {
+                return results.json();
+            })
             .then(data => {
                 console.log(data);
                 setPackaging(data);
-            })
-            .catch(error => {
-                console.error('Error fetching packaging data:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -27,9 +26,7 @@ const Packaging = () => {
             <div className="text-center">
                 <h1 className="display-4">Packaging List</h1>
 
-                {loading && <p>Loading...</p>}
-
-                {packaging && packaging.length > 0 && (
+                {packaging.length > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -46,20 +43,22 @@ const Packaging = () => {
                                     <td>{packagingItem.description}</td>
                                     <td>{packagingItem.packagingPrice}</td>
                                     <td>{packagingItem.quantity}</td>
+                                    <td>
+                                        <Link to={`/packaging/edit/${packagingItem.id}`}>Edit</Link>
+                                        {' | '}
+                                        <Link to={`/packaging/delete/${packagingItem.id}`}>Delete</Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 )}
 
-                {packaging && packaging.length === 0 && !loading && (
+                {packaging.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
 
                 <p><Link to="/packaging/create">Create Packaging Item</Link></p>
-                <p><Link to="/packaging/delete">Delete Packaging Item</Link></p>
-                <p><Link to="/packaging/edit">Edit Packaging Item</Link></p>
-
             </div>
         </main>
     );

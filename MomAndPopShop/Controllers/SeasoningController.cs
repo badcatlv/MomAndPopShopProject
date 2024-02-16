@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MomAndPopShop.Data;
 using MomAndPopShop.Models;
+using System.Threading.Tasks;
 
 namespace MomAndPopShop.Controllers
 {
@@ -17,10 +18,17 @@ namespace MomAndPopShop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Index(int id = 0)
         {
-            var seasoningList = await _context.Seasonings.ToListAsync();
-            return Ok(seasoningList);
+            if (id == 0)
+            {
+                return Ok(await _context.Seasonings.ToListAsync());
+            }
+            else
+            {
+                return Ok(await _context.Seasonings.FindAsync(id));
+            }
         }
 
         [HttpPost("create")]
@@ -37,7 +45,7 @@ namespace MomAndPopShop.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody] Seasoning seasoning)
         {
             if (id != seasoning.Id)
@@ -56,7 +64,7 @@ namespace MomAndPopShop.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var theSeasoning = await _context.Seasonings.FindAsync(id);
