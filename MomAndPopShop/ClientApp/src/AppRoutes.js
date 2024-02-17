@@ -39,14 +39,14 @@ const AppRoutes = [
         element: <Cart />
     },
     {
-<<<<<<< HEAD
         path: '/cart-display',
         element: <CartDisplay />
     },
     {
         path: '/product-home',
         element: <ProductHome />
-=======
+    },
+    {
         path: '/rentalevent/manage',
         requireAuth: true,
         element: <ManageRentalEvent />
@@ -61,11 +61,7 @@ const AppRoutes = [
         requireAuth: true,
         element: <Catalog />
     },
-    {
-        path: '/cart-items',
-        element: <CartItems />
->>>>>>> EmilyReactScaffoldIdentity
-    },
+
     {
         path: '/packaging',
         element: <Packaging />

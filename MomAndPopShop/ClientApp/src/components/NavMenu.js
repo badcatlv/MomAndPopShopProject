@@ -35,7 +35,7 @@ export class NavMenu extends Component {
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                            </NavItem>                           
+                            </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/cart">Cart</NavLink>
                             </NavItem>
@@ -43,14 +43,13 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/products">Products</NavLink>
                             </NavItem>
                             <NavItem>
-<<<<<<< HEAD
                                 <NavLink tag={Link} className="text-dark" to="/product-home">Products To Buy</NavLink>
-=======
+                            </NavItem>
+                            <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/rentalevent/request">Event Rentals</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/catalog">Catalog</NavLink>
->>>>>>> EmilyReactScaffoldIdentity
                             </NavItem>
                             <LoginMenu>
                             </LoginMenu>
