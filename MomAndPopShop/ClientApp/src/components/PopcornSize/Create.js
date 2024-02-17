@@ -10,7 +10,7 @@ export const validateField = (name, value) => {
         case 'description':
             errorMessage = value.length < 3 || value.length > 500 ? 'Description must be between 3 and 500 characters' : '';
             break;
-        case 'seasoningPrice':
+        case 'popcornSizePrice':
             errorMessage = value < 0.01 ? 'Price must be 0.01 or greater' : '';
             break;
         case 'quantity':
@@ -26,14 +26,14 @@ const Create = () => {
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        seasoningPrice: 0,
+        popcornSizePrice: 0,
         quantity: 0
     });
 
     const [validationErrors, setValidationErrors] = useState({
         name: '',
         description: '',
-        seasoningPrice: '',
+        popcornSizePrice: '',
         quantity: ''
     });
 
@@ -71,7 +71,7 @@ const Create = () => {
         }
 
         try {
-            const response = await fetch('/seasoning/create', {
+            const response = await fetch('/popcornSize/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -80,10 +80,10 @@ const Create = () => {
             });
 
             if (response.ok) {
-                console.log('Seasoning item created successfully');
-                navigate('/seasoning');
+                console.log('PopcornSize item created successfully');
+                navigate('/popcornSize');
             } else {
-                console.error('Error creating seasoning item');
+                console.error('Error creating popcornSize item');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -94,11 +94,11 @@ const Create = () => {
 
     return (
         <div>
-            <h2>Create Seasoning Item</h2>
+            <h2>Create Size Item</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="Name">Seasoning Name</label>
+                    <label htmlFor="Name">Size Name</label>
                     <input
                         type="text"
                         id="Name"
@@ -111,7 +111,7 @@ const Create = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Description">Seasoning Description</label>
+                    <label htmlFor="Description">Size Description</label>
                     <input
                         type="text"
                         id="Description"
@@ -124,20 +124,20 @@ const Create = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="SeasoningPrice">Seasoning Price</label>
+                    <label htmlFor="PopcornSizePrice">Size Price</label>
                     <input
                         type="number"
-                        id="SeasoningPrice"
-                        name="seasoningPrice"
-                        value={formData.seasoningPrice}
+                        id="PopcornSizePrice"
+                        name="popcornSizePrice"
+                        value={formData.popcornSizePrice}
                         onChange={handleInputChange}
                         className="form-control"
                     />
-                    <span className="error-message">{validationErrors.seasoningPrice}</span>
+                    <span className="error-message">{validationErrors.popcornSizePrice}</span>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Quantity">Seasoning InStock Quantity</label>
+                    <label htmlFor="Quantity">Size InStock Quantity</label>
                     <input
                         type="number"
                         id="Quantity"

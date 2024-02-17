@@ -2,19 +2,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Seasoning = () => {
-
-    const [seasoning, setSeasoning] = useState([]);
+const PopcornSize = () => {
+    const [popcornSize, setPopcornSize] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('seasoning')
+        fetch('popcornSize')
             .then((results) => {
                 return results.json();
             })
             .then(data => {
                 console.log(data);
-                setSeasoning(data);
+                setPopcornSize(data);
             })
             .finally(() => {
                 setLoading(false);
@@ -24,9 +23,9 @@ const Seasoning = () => {
     return (
         <main>
             <div className="text-center">
-                <h1 className="display-4">Seasoning List</h1>
+                <h1 className="display-4">Size List</h1>
 
-                {seasoning.length > 0 && (
+                {popcornSize.length > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -37,16 +36,16 @@ const Seasoning = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {seasoning.map((seasoningItem) => (
-                                <tr key={seasoningItem.id}>
-                                    <td>{seasoningItem.name}</td>
-                                    <td>{seasoningItem.description}</td>
-                                    <td>{seasoningItem.seasoningPrice}</td>
-                                    <td>{seasoningItem.quantity}</td>
+                            {popcornSize.map((popcornSizeItem) => (
+                                <tr key={popcornSizeItem.id}>
+                                    <td>{popcornSizeItem.name}</td>
+                                    <td>{popcornSizeItem.description}</td>
+                                    <td>{popcornSizeItem.popcornSizePrice}</td>
+                                    <td>{popcornSizeItem.quantity}</td>
                                     <td>
-                                        <Link to={`/seasoning/edit/${seasoningItem.id}`}>Edit</Link>
+                                        <Link to={`/popcornSize/edit/${popcornSizeItem.id}`}>Edit</Link>
                                         {' | '}
-                                        <Link to={`/seasoning/delete/${seasoningItem.id}`}>Delete</Link>
+                                        <Link to={`/popcornSize/delete/${popcornSizeItem.id}`}>Delete</Link>
                                     </td>
                                 </tr>
                             ))}
@@ -54,14 +53,14 @@ const Seasoning = () => {
                     </table>
                 )}
 
-                {seasoning.length === 0 && !loading && (
+                {popcornSize.length === 0 && !loading && (
                     <p>No items in inventory yet!</p>
                 )}
 
-                <p><Link to="/seasoning/create">Create Seasoning Item</Link></p>
+                <p><Link to="/popcornSize/create">Create Size Item</Link></p>
             </div>
         </main>
     );
 };
 
-export default Seasoning;
+export default PopcornSize;

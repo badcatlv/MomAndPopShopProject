@@ -10,7 +10,7 @@ namespace MomAndPopShop.Data
     {
         public DbSet<Popcorn> Popcorns { get; set; }
         public DbSet<Seasoning> Seasonings { get; set; }
-        public DbSet<Sizes> Sizes { get; set; }
+        public DbSet<PopcornSize> PopcornSizes { get; set; }
         public DbSet<Packaging> Packagings { get; set; }
         public DbSet<RentalEvent> RentalEvents { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }

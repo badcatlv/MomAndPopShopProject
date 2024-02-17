@@ -66,7 +66,7 @@ namespace MomAndPopShop.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var thePopcorn = await _context.Popcorns.FindAsync(id);

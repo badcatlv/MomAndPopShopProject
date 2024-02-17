@@ -2,17 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using MomAndPopShop.Data;
 using MomAndPopShop.Models;
-using System.Threading.Tasks;
 
 namespace MomAndPopShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PackagingController : ControllerBase
+    public class PopcornSizeController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public PackagingController(ApplicationDbContext context)
+        public PopcornSizeController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,42 +22,42 @@ namespace MomAndPopShop.Controllers
         {
             if (id == 0)
             {
-                return Ok(await _context.Packagings.ToListAsync());
+                return Ok(await _context.PopcornSizes.ToListAsync());
             }
             else
             {
-                return Ok(await _context.Packagings.FindAsync(id));
+                return Ok(await _context.PopcornSizes.FindAsync(id));
             }
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] Packaging packaging)
+        public async Task<IActionResult> Create([FromBody] PopcornSize popcornSize)
         {
             if (ModelState.IsValid)
             {
-                _context.Packagings.Add(packaging);
+                _context.PopcornSizes.Add(popcornSize);
                 await _context.SaveChangesAsync();
 
-                return Ok(packaging);
+                return Ok(popcornSize);
             }
 
             return BadRequest(ModelState);
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> Edit(int id, [FromBody] Packaging packaging)
+        public async Task<IActionResult> Edit(int id, [FromBody] PopcornSize popcornSize)
         {
-            if (id != packaging.Id)
+            if (id != popcornSize.Id)
             {
                 return BadRequest();
             }
 
             if (ModelState.IsValid)
             {
-                _context.Entry(packaging).State = EntityState.Modified;
+                _context.Entry(popcornSize).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                return Ok(packaging);
+                return Ok(popcornSize);
             }
 
             return BadRequest(ModelState);
@@ -67,14 +66,14 @@ namespace MomAndPopShop.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var thePackaging = await _context.Packagings.FindAsync(id);
+            var thePopcornSize = await _context.PopcornSizes.FindAsync(id);
 
-            if (thePackaging != null)
+            if (thePopcornSize != null)
             {
-                _context.Packagings.Remove(thePackaging);
+                _context.PopcornSizes.Remove(thePopcornSize);
                 await _context.SaveChangesAsync();
 
-                return Ok(thePackaging);
+                return Ok(thePopcornSize);
             }
             else
             {

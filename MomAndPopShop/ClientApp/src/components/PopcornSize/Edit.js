@@ -2,12 +2,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { validateField } from './Create.js';
 
-const EditPackaging = () => {
+const Edit = () => {
     const { id } = useParams();
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        packagingPrice: 0,
+        popcornSizePrice: 0,
         quantity: 0,
         id: 0
     });
@@ -15,7 +15,7 @@ const EditPackaging = () => {
     const [validationErrors, setValidationErrors] = useState({
         name: '',
         description: '',
-        packagingPrice: '',
+        popcornSizePrice: '',
         quantity: ''
     });
 
@@ -26,12 +26,12 @@ const EditPackaging = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/packaging/${id}`);
+                const response = await fetch(`/popcornSize/${id}`);
                 if (response.ok) {
-                    const existingPackaging = await response.json();
-                    setFormData(existingPackaging);
+                    const existingPopcornSize = await response.json();
+                    setFormData(existingPopcornSize);
                 } else {
-                    console.error('Error fetching packaging data for editing');
+                    console.error('Error fetching popcornSize data for editing');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -70,7 +70,7 @@ const EditPackaging = () => {
         }
 
         try {
-            const response = await fetch(`/packaging/edit/${id}`, {
+            const response = await fetch(`/popcornSize/edit/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -79,9 +79,9 @@ const EditPackaging = () => {
             });
 
             if (response.ok) {
-                console.log('Packaging item updated successfully');
+                console.log('PopcornSize item updated successfully');
                 setIsLoading(false);
-                navigate('/packaging');
+                navigate('/popcornSize');
             } else {
                 if (response.status === 400) {
                     console.error('Bad request - check your input data');
@@ -89,7 +89,7 @@ const EditPackaging = () => {
                     setValidationErrors({
                         name: 'Invalid input data',
                         description: 'Invalid input data',
-                        packagingPrice: 'Invalid input data',
+                        popcornSizePrice: 'Invalid input data',
                         quantity: 'Invalid input data'
                     });
                 } else if (response.status === 401) {
@@ -98,16 +98,16 @@ const EditPackaging = () => {
                     setValidationErrors({
                         name: 'Unauthorized',
                         description: 'Unauthorized',
-                        packagingPrice: 'Unauthorized',
+                        popcornSizePrice: 'Unauthorized',
                         quantity: 'Unauthorized'
                     });
                 } else {
-                    console.error('Error updating packaging item');
+                    console.error('Error updating popcornSize item');
                     setIsLoading(false);
                     setValidationErrors({
                         name: 'Unhandled exception',
                         description: 'Unhandled exception',
-                        packagingPrice: 'Unhandled exception',
+                        popcornSizePrice: 'Unhandled exception',
                         quantity: 'Unhandled exception'
                     });
                 }
@@ -118,7 +118,7 @@ const EditPackaging = () => {
             setValidationErrors({
                 name: `Unhandled exception: ${error.message}`,
                 description: `Unhandled exception: ${error.message}`,
-                packagingPrice: `Unhandled exception: ${error.message}`,
+                popcornSizePrice: `Unhandled exception: ${error.message}`,
                 quantity: `Unhandled exception: ${error.message}`
             });
         }
@@ -126,11 +126,11 @@ const EditPackaging = () => {
 
     return (
         <div>
-            <h2>Edit Packaging Item</h2>
+            <h2>Edit Size Item</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="Name">Packaging Name</label>
+                    <label htmlFor="Name">Size Name</label>
                     <input
                         type="text"
                         id="Name"
@@ -143,7 +143,7 @@ const EditPackaging = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Description">Packaging Description</label>
+                    <label htmlFor="Description">Size Description</label>
                     <input
                         type="text"
                         id="Description"
@@ -156,20 +156,20 @@ const EditPackaging = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="PackagingPrice">Packaging Price</label>
+                    <label htmlFor="PopcornSizePrice">Size Price</label>
                     <input
                         type="number"
-                        id="PackagingPrice"
-                        name="packagingPrice"
-                        value={formData.packagingPrice}
+                        id="PopcornSizePrice"
+                        name="popcornSizePrice"
+                        value={formData.popcornSizePrice}
                         onChange={handleInputChange}
                         className="form-control"
                     />
-                    <span className="error-message">{validationErrors.packagingPrice}</span>
+                    <span className="error-message">{validationErrors.popcornSizePrice}</span>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Quantity">Packaging InStock Quantity</label>
+                    <label htmlFor="Quantity">Size InStock Quantity</label>
                     <input
                         type="number"
                         id="Quantity"
@@ -191,4 +191,4 @@ const EditPackaging = () => {
     );
 };
 
-export default EditPackaging;
+export default Edit;

@@ -37,3 +37,7 @@ code {
         flex: 50%;
     }
 }
+
+.error-message {
+    color: red;
+}
