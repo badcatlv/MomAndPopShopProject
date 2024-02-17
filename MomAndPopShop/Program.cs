@@ -12,6 +12,32 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using Stripe;
+
+StripeConfiguration.ApiKey = "sk_test_51OiOb1A8iioFBT6WORuFIleOIpw8W3IJjPEhyoZDfjVq90Ro2HJ6NgKWwOvFwDPbKFc2EMl6JJvrWW7oZrWMl263002z9z0wre";
+
+var optionsProduct = new ProductCreateOptions
+{
+    Name = "Starter Subscription",
+    Description = "$12/Month subscription",
+};
+var serviceProduct = new ProductService();
+Product product = serviceProduct.Create(optionsProduct);
+Console.Write("Success! Here is your starter subscription product id: {0}\n", product.Id);
+
+var optionsPrice = new PriceCreateOptions
+{
+    UnitAmount = 1200,
+    Currency = "usd",
+    Recurring = new PriceRecurringOptions
+    {
+        Interval = "month",
+    },
+    Product = product.Id
+};
+var servicePrice = new PriceService();
+Price price = servicePrice.Create(optionsPrice);
+Console.Write("Success! Here is your starter subscription price id: {0}\n", price.Id);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +57,7 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFileService, MomAndPopShop.Services.FileService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
