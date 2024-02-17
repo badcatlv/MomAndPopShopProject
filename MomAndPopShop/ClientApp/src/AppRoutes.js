@@ -18,6 +18,13 @@ import PopcornSize from './components/PopcornSize/Index';
 import CreatePopcornSize from './components/PopcornSize/Create';
 import EditPopcornSize from './components/PopcornSize/Edit';
 import DeletePopcornSize from './components/PopcornSize/Delete';
+import Cart from './components/Cart';
+import CartDisplay from './components/CartDisplay';
+import ProductHome from './components/ProductHome';
+import ManageRentalEvent from './components/RentalEvent/Manage';
+import RequestRentalEvent from './components/RentalEvent/Request';
+import Catalog from './components/Catalog';
+
 
 const AppRoutes = [
     {

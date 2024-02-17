@@ -1,6 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import CartDisplay from './CartDisplay';
 
 
@@ -9,12 +8,7 @@ const ProductHome = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { id } = useParams();
-    const [quantity, setQuantity] = useState(1);
-    const [form, setForm] = useState({
-        popcornId: id,
-        quantity: 1
-    });
+   
 
 
     useEffect(() => {
