@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MomAndPopShop;
 using MomAndPopShop.Data;
 using MomAndPopShop.Models;
+using MomAndPopShop.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

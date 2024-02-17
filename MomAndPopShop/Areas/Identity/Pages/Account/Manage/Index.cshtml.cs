@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MomAndPopShop.Models;
+using MomAndPopShop.Services;
 
 namespace MomAndPopShop.Areas.Identity.Pages.Account.Manage
 {
@@ -17,13 +18,17 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IFileService _fileService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+             IFileService fileService
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this._fileService = fileService;
         }
 
         /// <summary>
@@ -61,6 +66,8 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
+            public string ProfilePicture { get; set; }
+            public IFormFile ProfilePictureImageFile { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -74,6 +81,7 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                ProfilePicture = user.ProfilePicture,
                 PhoneNumber = phoneNumber
             };
         }
@@ -125,6 +133,18 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account.Manage
             { 
                 user.LastName = Input.LastName;
                 await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.ProfilePictureImageFile != null)
+            {
+                var result = _fileService.SaveImage(Input.ProfilePictureImageFile);
+                if (result.Item1 == 1)
+                {
+                    var oldImage = user.ProfilePicture;
+                    user.ProfilePicture = result.Item2;
+                    await _userManager.UpdateAsync(user);
+                    var deleteResult = _fileService.DeleteImage(oldImage);
+                }
             }
 
             await _signInManager.RefreshSignInAsync(user);
