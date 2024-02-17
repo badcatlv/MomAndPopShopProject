@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from "react";
-import "./StripeApp.css";
+//import "./StripeApp.css";
 
 const ProductDisplay = () => (
     <section>
