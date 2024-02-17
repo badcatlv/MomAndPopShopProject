@@ -12,8 +12,8 @@ namespace MomAndPopShop.Data
         public DbSet<Seasoning> Seasonings { get; set; }
         public DbSet<Sizes> Sizes { get; set; }
         public DbSet<Packaging> Packagings { get; set; }
-        public DbSet<ApplicationUser> User { get; set; }
-
+        public DbSet<RentalEvent> RentalEvents { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {
@@ -22,11 +22,11 @@ namespace MomAndPopShop.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<CartItem>()
+            /*builder.Entity<CartItem>()
                 .HasOne(e => e.PopcornItem);
 
             builder.Entity<Cart>()
-                .HasMany(b => b.Items);
+                .HasMany(b => b.Items);*/
 
             base.OnModelCreating(builder);
         }

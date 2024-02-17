@@ -16,6 +16,9 @@ import CreateSeasoning from './components/Seasoning/Create';
 //import DeleteSeasoning from './components/Seasoning/Delete';
 import Sizes from './components/Sizes/Index';
 import CreateSizes from './components/Sizes/Create';
+import ManageRentalEvent from './components/RentalEvent/Manage';
+import RequestRentalEvent from './components/RentalEvent/Request';
+import { Catalog } from './components/Catalog';
 //import EditSizes from './components/Sizes/Edit';
 //import DeleteSizes from './components/Sizes/Delete';
 import ProductHome from './components/ProductHome';
@@ -36,12 +39,32 @@ const AppRoutes = [
         element: <Cart />
     },
     {
+<<<<<<< HEAD
         path: '/cart-display',
         element: <CartDisplay />
     },
     {
         path: '/product-home',
         element: <ProductHome />
+=======
+        path: '/rentalevent/manage',
+        requireAuth: true,
+        element: <ManageRentalEvent />
+    },
+    {
+        path: '/rentalevent/request',
+        requireAuth: true,
+        element: <RequestRentalEvent />
+    },
+    {
+        path: '/catalog',
+        requireAuth: true,
+        element: <Catalog />
+    },
+    {
+        path: '/cart-items',
+        element: <CartItems />
+>>>>>>> EmilyReactScaffoldIdentity
     },
     {
         path: '/packaging',
