@@ -18,8 +18,8 @@ const context = [
     "/seasoning",
     "/sizes",
     "/producthome",
-    "/cart"
-
+    "/cart",
+    "/stripeapp"
 
 
 ];

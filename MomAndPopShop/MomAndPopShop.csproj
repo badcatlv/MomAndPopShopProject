@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\ProductImages\" />
+    <Folder Include="Microsoft\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
