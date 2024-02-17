@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\ProductImages\" />
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

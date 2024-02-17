@@ -14,11 +14,7 @@ namespace MomAndPopShop.Data
         public DbSet<Packaging> Packagings { get; set; }
         public DbSet<RentalEvent> RentalEvents { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> EmilyReactScaffoldIdentity
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {
