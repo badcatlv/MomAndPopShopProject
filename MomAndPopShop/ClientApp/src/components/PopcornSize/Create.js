@@ -94,11 +94,11 @@ const Create = () => {
 
     return (
         <div>
-            <h2>Create PopcornSize Item</h2>
+            <h2>Create Size Item</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="Name">PopcornSize Name</label>
+                    <label htmlFor="Name">Size Name</label>
                     <input
                         type="text"
                         id="Name"
@@ -111,7 +111,7 @@ const Create = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Description">PopcornSize Description</label>
+                    <label htmlFor="Description">Size Description</label>
                     <input
                         type="text"
                         id="Description"
@@ -124,7 +124,7 @@ const Create = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="PopcornSizePrice">PopcornSize Price</label>
+                    <label htmlFor="PopcornSizePrice">Size Price</label>
                     <input
                         type="number"
                         id="PopcornSizePrice"
@@ -133,11 +133,11 @@ const Create = () => {
                         onChange={handleInputChange}
                         className="form-control"
                     />
-                    <span className="error-message">{validationErrors.popcornsizePrice}</span>
+                    <span className="error-message">{validationErrors.popcornSizePrice}</span>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Quantity">PopcornSize InStock Quantity</label>
+                    <label htmlFor="Quantity">Size InStock Quantity</label>
                     <input
                         type="number"
                         id="Quantity"

@@ -126,11 +126,11 @@ const Edit = () => {
 
     return (
         <div>
-            <h2>Edit PopcornSize Item</h2>
+            <h2>Edit Size Item</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="Name">PopcornSize Name</label>
+                    <label htmlFor="Name">Size Name</label>
                     <input
                         type="text"
                         id="Name"
@@ -143,7 +143,7 @@ const Edit = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Description">PopcornSize Description</label>
+                    <label htmlFor="Description">Size Description</label>
                     <input
                         type="text"
                         id="Description"
@@ -156,7 +156,7 @@ const Edit = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="PopcornSizePrice">PopcornSize Price</label>
+                    <label htmlFor="PopcornSizePrice">Size Price</label>
                     <input
                         type="number"
                         id="PopcornSizePrice"
@@ -169,7 +169,7 @@ const Edit = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="Quantity">PopcornSize InStock Quantity</label>
+                    <label htmlFor="Quantity">Size InStock Quantity</label>
                     <input
                         type="number"
                         id="Quantity"

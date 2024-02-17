@@ -50,14 +50,14 @@ const DeletePopcorn = () => {
 
     return (
         <div>
-            <h2>Delete PopcornSize Item</h2>
+            <h2>Delete Size Item</h2>
             {loading && <p>Loading...</p>}
             {popcornSize && !loading && (
                 <div>
-                    <p>Are you sure you want to delete the popcornSize item with ID: {id}?</p>
+                    <p>Are you sure you want to delete the Size item with ID: {id}?</p>
                     <p>Name: {popcornSize.name}</p>
                     <p>Description: {popcornSize.description}</p>
-                    <p>PopcornSizePrice: {popcornSize.popcornSizePrice}</p>
+                    <p>Size Price: {popcornSize.popcornSizePrice}</p>
                     <p>Quantity: {popcornSize.quantity}</p>
 
                     <button onClick={handleDelete}>Delete</button>

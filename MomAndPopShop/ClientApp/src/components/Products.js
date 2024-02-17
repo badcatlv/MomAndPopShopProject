@@ -24,7 +24,7 @@ export class Products extends Component {
                 <br />
 
                 <div>
-                    <h3>PopcornSize</h3>
+                    <h3>Size</h3>
                     <Link to="/popcornSize">View Size Inventory</Link>
                 </div>
                 <br />

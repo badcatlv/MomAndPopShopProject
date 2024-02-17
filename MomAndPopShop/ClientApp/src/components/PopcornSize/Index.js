@@ -23,7 +23,7 @@ const PopcornSize = () => {
     return (
         <main>
             <div className="text-center">
-                <h1 className="display-4">PopcornSize List</h1>
+                <h1 className="display-4">Size List</h1>
 
                 {popcornSize.length > 0 && (
                     <table className="table">
@@ -57,7 +57,7 @@ const PopcornSize = () => {
                     <p>No items in inventory yet!</p>
                 )}
 
-                <p><Link to="/popcornSize/create">Create PopcornSize Item</Link></p>
+                <p><Link to="/popcornSize/create">Create Size Item</Link></p>
             </div>
         </main>
     );
