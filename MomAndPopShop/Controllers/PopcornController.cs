@@ -15,13 +15,22 @@ namespace MomAndPopShop.Controllers
         {
             _context = context;
         }
-
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Index(int id = 0)
         {
-            var popcornList = await _context.Popcorns.ToListAsync();
-            return Ok(popcornList);
+            if (id == 0)
+            {
+                return Ok(await _context.Popcorns.ToListAsync());
+            }
+            else
+            {
+                return Ok(await _context.Popcorns.FindAsync(id));
+            }
+
         }
+
+
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Popcorn popcorn)
@@ -37,7 +46,8 @@ namespace MomAndPopShop.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody] Popcorn popcorn)
         {
             if (id != popcorn.Id)
