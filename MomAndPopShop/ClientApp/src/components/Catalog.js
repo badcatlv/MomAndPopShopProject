@@ -8,6 +8,7 @@ export const Catalog = () => {
 
     const [popcorn, setPopcorn] = useState([]);
     const [loading, setLoading] = useState(true);
+    const defaultImageSrc = '/img/defaultPopcorn.png'
 
     useEffect(() => {
         fetch('popcorn')
@@ -29,12 +30,13 @@ export const Catalog = () => {
 
             {popcorn.length > 0 && (
                 popcorn.map((popcornItem) => (
-                    <div class="product">
-                        <div class="product-image"></div>
+                    <div class="card">
+                        <img class="product-image" src={defaultImageSrc} alt={popcornItem.name} />
                         <div class="product-info">
                             <h2 class="product-title">{popcornItem.name}</h2>
                             <p class="product-description">{popcornItem.description}</p>
-                            <p class="product-price">{popcornItem.popcornPrice}</p>
+                            <p class="price">${popcornItem.popcornPrice}</p>
+                            <p><button>Add to Cart</button></p>
                         </div>
                     </div>
                 ))
