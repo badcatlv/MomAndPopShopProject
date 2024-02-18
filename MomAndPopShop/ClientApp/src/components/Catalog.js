@@ -27,7 +27,6 @@ export const Catalog = () => {
     return (
 
         <main>
-
             {popcorn.length > 0 && (
                 popcorn.map((popcornItem) => (
                     <div class="card">
