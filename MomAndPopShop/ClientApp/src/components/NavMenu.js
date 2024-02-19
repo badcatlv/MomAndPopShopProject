@@ -3,6 +3,7 @@ import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from '
 import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
+import authService from './api-authorization/AuthorizeService';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -12,8 +13,26 @@ export class NavMenu extends Component {
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            collapsed: true
+            collapsed: true,
+            isAuthenticated: false,
+            role: null
         };
+    }
+
+    componentDidMount() {
+        this._subscription = authService.subscribe(() => this.populateState());
+        this.populateState();
+    }
+
+    componentWillUnmount() {
+        authService.unsubscribe(this._subscription);
+    }
+    async populateState() {
+        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+        this.setState({
+            isAuthenticated,
+            role: user && user.role
+        });
     }
 
     toggleNavbar() {
@@ -23,6 +42,7 @@ export class NavMenu extends Component {
     }
 
     render() {
+        const role = this.state.role;
         return (
             <header>
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
@@ -33,12 +53,16 @@ export class NavMenu extends Component {
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/cart">Cart</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/products">Products</NavLink>
-                            </NavItem>
+                            {role && role.includes("Admin") ?
+                                <span>
+                                        <NavItem>
+                                            <NavLink tag={Link} className="text-dark" to="/products">Products</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink tag={Link} className="text-dark" to="/catalog">Catalog</NavLink>
+                                        </NavItem>
+                                </span>
+                                : null}
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/product-home">Products To Buy</NavLink>
                             </NavItem>
@@ -46,7 +70,7 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/rentalevent/request">Event Rentals</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/catalog">Catalog</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/cart">Cart</NavLink>
                             </NavItem>
                             <LoginMenu>
                             </LoginMenu>
