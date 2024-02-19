@@ -14,7 +14,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using SendGrid.Extensions.DependencyInjection;
+
 using Duende.IdentityServer.Services;
+
+
+StripeConfiguration.ApiKey = "sk_test_51OiOb1A8iioFBT6WORuFIleOIpw8W3IJjPEhyoZDfjVq90Ro2HJ6NgKWwOvFwDPbKFc2EMl6JJvrWW7oZrWMl263002z9z0wre";
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +43,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddTransient<IProfileService, ProfileService>();
 
 builder.Services.AddScoped<IFileService, FileService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

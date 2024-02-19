@@ -16,10 +16,13 @@ const context = [
     "/popcorn",
     "/products",
     "/seasoning",
-    "/sizes",
+    "/popcornSize",
     "/producthome",
-    "/cart"
-
+    "/cart",
+    "/customerReview",
+    "/contactForm",
+    "/stripeapp",
+    "/create-checkout-session",
 
 
 ];

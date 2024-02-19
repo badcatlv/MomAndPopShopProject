@@ -24,7 +24,11 @@ import ProductHome from './components/ProductHome';
 import ManageRentalEvent from './components/RentalEvent/Manage';
 import RequestRentalEvent from './components/RentalEvent/Request';
 import Catalog from './components/Catalog';
-
+import CustomerReview from './components/CustomerReview/Index';
+import CreateCustomerReview from './components/CustomerReview/Create';
+import ContactForm from './components/ContactForm/Index';
+import CreateContactForm from './components/ContactForm/Create';
+import StripeApp from './components/StripeApp';
 
 const AppRoutes = [
     {
@@ -46,6 +50,10 @@ const AppRoutes = [
     {
         path: '/product-home',
         element: <ProductHome />
+    },
+    {
+        path: '/stripe-app',
+        element: <StripeApp />
     },
     {
         path: '/rentalevent/manage',
@@ -129,6 +137,22 @@ const AppRoutes = [
     {
         path: '/popcornSize/delete/:id',
         element: <DeletePopcornSize />
+    },
+    {
+        path: '/customerReview',
+        element: <CustomerReview />
+    },
+    {
+        path: '/customerReview/create',
+        element: <CreateCustomerReview />
+    },
+    {
+        path: '/contactForm',
+        element: <ContactForm />
+    },
+    {
+        path: '/contactForm/create',
+        element: <CreateContactForm />
     },
     ...ApiAuthorzationRoutes
 ];
