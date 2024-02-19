@@ -22,7 +22,7 @@ export default class App extends Component {
             </Routes>
               </Layout>
           <footer>
-                  <p>&copy 2024 - Mom and Pop's Popcorn Shop</p>
+                  <p>&copy; 2024 - Mom and Pop's Popcorn Shop</p>
               </footer>
         </>
     );

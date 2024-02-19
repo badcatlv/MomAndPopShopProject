@@ -28,7 +28,7 @@ import CustomerReview from './components/CustomerReview/Index';
 import CreateCustomerReview from './components/CustomerReview/Create';
 import ContactForm from './components/ContactForm/Index';
 import CreateContactForm from './components/ContactForm/Create';
-import StripeApp from './components/StripeApp';
+import StripeApp from './components/Stripe/StripeApp';
 
 const AppRoutes = [
     {
