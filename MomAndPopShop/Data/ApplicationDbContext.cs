@@ -15,6 +15,8 @@ namespace MomAndPopShop.Data
         public DbSet<RentalEvent> RentalEvents { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<CustomerReview> CustomerReviews { get; set; }
+
+        public DbSet<ContactForm> ContactForms { get; set; }
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {

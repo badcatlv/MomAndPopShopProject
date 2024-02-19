@@ -19,7 +19,8 @@ const context = [
     "/popcornSize",
     "/producthome",
     "/cart",
-    "/customerReview"
+    "/customerReview",
+    "/contactForm"
 
 
 

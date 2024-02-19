@@ -26,6 +26,8 @@ import RequestRentalEvent from './components/RentalEvent/Request';
 import Catalog from './components/Catalog';
 import CustomerReview from './components/CustomerReview/Index';
 import CreateCustomerReview from './components/CustomerReview/Create';
+import ContactForm from './components/ContactForm/Index';
+import CreateContactForm from './components/ContactForm/Create';
 
 
 const AppRoutes = [
@@ -140,6 +142,14 @@ const AppRoutes = [
     {
         path: '/customerReview/create',
         element: <CreateCustomerReview />
+    },
+    {
+        path: '/contactForm',
+        element: <ContactForm />
+    },
+    {
+        path: '/contactForm/create',
+        element: <CreateContactForm />
     },
     ...ApiAuthorzationRoutes
 ];
