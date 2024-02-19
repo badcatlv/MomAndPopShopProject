@@ -24,7 +24,7 @@ import ProductHome from './components/ProductHome';
 import ManageRentalEvent from './components/RentalEvent/Manage';
 import RequestRentalEvent from './components/RentalEvent/Request';
 import Catalog from './components/Catalog';
-
+import StripeApp from './components/StripeApp';
 
 const AppRoutes = [
     {
@@ -46,6 +46,10 @@ const AppRoutes = [
     {
         path: '/product-home',
         element: <ProductHome />
+    },
+    {
+        path: '/stripe-app',
+        element: <StripeApp />
     },
     {
         path: '/rentalevent/manage',

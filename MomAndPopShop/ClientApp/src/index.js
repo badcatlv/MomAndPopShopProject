@@ -10,9 +10,11 @@ const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
+
 root.render(
-  <BrowserRouter basename={baseUrl}>
+    <BrowserRouter basename={baseUrl}>
     <App />
+    
   </BrowserRouter>);
 
 // If you want your app to work offline and load faster, you can change

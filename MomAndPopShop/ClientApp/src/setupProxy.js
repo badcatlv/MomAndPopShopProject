@@ -18,8 +18,9 @@ const context = [
     "/seasoning",
     "/sizes",
     "/producthome",
-    "/cart"
-
+    "/cart",
+    "/stripeapp",
+    "/create-checkout-session"
 
 
 ];
