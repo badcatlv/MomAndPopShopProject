@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "option4mvc", "option4mvc\option4mvc.csproj", "{ECF23826-25FE-4936-9B95-5DE1766D455D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomAndPopShop", "MomAndPopShop\MomAndPopShop.csproj", "{4E609BF3-C3B1-47EE-B343-12755D1745B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ECF23826-25FE-4936-9B95-5DE1766D455D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECF23826-25FE-4936-9B95-5DE1766D455D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECF23826-25FE-4936-9B95-5DE1766D455D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECF23826-25FE-4936-9B95-5DE1766D455D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E609BF3-C3B1-47EE-B343-12755D1745B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E609BF3-C3B1-47EE-B343-12755D1745B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E609BF3-C3B1-47EE-B343-12755D1745B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E609BF3-C3B1-47EE-B343-12755D1745B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

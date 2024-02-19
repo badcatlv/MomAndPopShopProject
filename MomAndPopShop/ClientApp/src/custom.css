@@ -1,0 +1,43 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Below is copied from https://reintech.io/blog/creating-responsive-product-page-css */
+.product {
+    display: flex;
+    color: red;
+    flex-wrap: wrap;
+}
+
+.product-image {
+    flex: 100%;
+}
+
+.product-info {
+    flex: 100%;
+}
+
+@media(min-width: 600px) {
+    .product-image {
+        flex: 50%;
+    }
+
+    .product-info {
+        flex: 50%;
+    }
+}
+
+.error-message {
+    color: red;
+}
