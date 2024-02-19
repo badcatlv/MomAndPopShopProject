@@ -1,19 +1,21 @@
 ﻿import React, { useState, useEffect } from "react";
 import "./StripeApp.css";
+import Cart from "./Cart";
 
 const ProductDisplay = () => (
-    
+
     <section className="stripeSection">
         <div className="stripeProduct">
-            <img
-            className="stripeImage"
+        <Cart/>
+            {/*<img
+                className="stripeImage"
                 src="https://i.imgur.com/EHyR2nP.png"
                 alt="The cover of Stubborn Attachments"
             />
             <div className="stripeDescription">
                 <h3 className="stripeHeaders">PopCorn</h3>
                 <h5 className="stripeHeaders">$20.00</h5>
-            </div>
+            </div>*/}
         </div>
         <form action="/create-checkout-session" method="POST">
             <button className="stripeButton" type="submit">
@@ -50,6 +52,10 @@ export default function StripeApp() {
     return message ? (
         <Message message={message} />
     ) : (
-        <ProductDisplay />
+        <>
+            <ProductDisplay />
+            <br />
+            
+        </>
     );
 }

@@ -63,7 +63,7 @@ const AppRoutes = [
     },
     {
         path: '/catalog',
-        //requireAuth: true,
+        requireAuth: true,
         element: <Catalog />
     },
 

@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MomAndPopShop.Data;
 using Stripe;
 using Stripe.Checkout;
 
@@ -49,9 +45,20 @@ namespace MomAndPopShop.Controllers
     [ApiController]
     public class CheckoutApiController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
+
+        public CheckoutApiController(CartService cartService, ApplicationDbContext context)
+        {
+            _cartService = cartService;
+            _context = context;
+        }
+
         [HttpPost]
         public ActionResult Create()
         {
+            var cart = _cartService.GetCart();
+
             var domain = "https://localhost:44416";
             var options = new SessionCreateOptions
             {
@@ -60,8 +67,8 @@ namespace MomAndPopShop.Controllers
                   new SessionLineItemOptions
                   {
                     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    Price = "price_1OkFx4A8iioFBT6Wp1DRaMaK",
-                    Quantity = 1,
+                      Price = "price_1OkFx4A8iioFBT6Wp1DRaMaK",
+                      Quantity = 1,
                   },
                 },
                 Mode = "payment",

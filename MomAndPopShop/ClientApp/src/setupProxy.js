@@ -19,7 +19,6 @@ const context = [
     "/sizes",
     "/producthome",
     "/cart",
-    "/stripeapp",
     "/create-checkout-session"
 
 
