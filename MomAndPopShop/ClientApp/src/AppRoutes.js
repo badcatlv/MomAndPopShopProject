@@ -54,7 +54,6 @@ const AppRoutes = [
     },
     {
         path: '/rentalevent/request',
-        requireAuth: true,
         element: <RequestRentalEvent />
     },
     {
