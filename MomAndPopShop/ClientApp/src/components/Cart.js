@@ -7,6 +7,8 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const defaultImageSrc = '/img/defaultPopcorn.png'
+
 
     useEffect(() => {
         fetchCartData();
@@ -49,22 +51,25 @@ const Cart = () => {
     const cartItemDisplay = cartItems.map(collection => (
         <div>
 
-            <ul>
+            <div>
 
-                <li key={collection.id}>
-                    <li>Popcorn: {collection.popcornItem.name}</li>
-                    <li>Popcorn Price: ${collection.popcornItem.popcornPrice}</li>
-                    <li>Quantity: {collection.quantity}</li>
-                    <li>Total Price: ${collection.cost}</li>
-                    <li>
+                <div class="card" key={collection.id}>
+                    <img class="product-image" src={defaultImageSrc} alt={collection.popcornItem.name} />
+                    <div class="product-info">
+                        <h2 class="product-title">{collection.popcornItem.name}</h2>
+                        <p class="product-description">{collection.popcornItem.description}</p>
+                        <p class="price">${collection.cost}</p>
+                       
+                    
                         <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
                             <button type="submit">Remove</button>
                         </form>
-                    </li>
-                </li>
+                        </div>
+                </div>
+                <br/>
 
 
-            </ul>
+            </div>
         </div>
     ));
 

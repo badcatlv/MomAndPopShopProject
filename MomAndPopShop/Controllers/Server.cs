@@ -52,7 +52,7 @@ namespace MomAndPopShop.Controllers
         [HttpPost]
         public ActionResult Create()
         {
-            var domain = "http://localhost:4242";
+            var domain = "https://localhost:44416";
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -65,7 +65,7 @@ namespace MomAndPopShop.Controllers
                   },
                 },
                 Mode = "payment",
-                SuccessUrl = domain + "?success=true",
+                SuccessUrl = "https://localhost:44416",
                 CancelUrl = domain + "?canceled=true",
             };
             var service = new SessionService();

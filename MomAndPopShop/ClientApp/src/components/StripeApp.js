@@ -1,20 +1,22 @@
 ﻿import React, { useState, useEffect } from "react";
-//import "./StripeApp.css";
+import "./StripeApp.css";
 
 const ProductDisplay = () => (
-    <section>
-        <div className="product">
+    
+    <section className="stripeSection">
+        <div className="stripeProduct">
             <img
+            className="stripeImage"
                 src="https://i.imgur.com/EHyR2nP.png"
                 alt="The cover of Stubborn Attachments"
             />
-            <div className="description">
-                <h3>Stubborn Attachments</h3>
-                <h5>$20.00</h5>
+            <div className="stripeDescription">
+                <h3 className="stripeHeaders">PopCorn</h3>
+                <h5 className="stripeHeaders">$20.00</h5>
             </div>
         </div>
         <form action="/create-checkout-session" method="POST">
-            <button type="submit">
+            <button className="stripeButton" type="submit">
                 Checkout
             </button>
         </form>
@@ -23,7 +25,7 @@ const ProductDisplay = () => (
 
 const Message = ({ message }) => (
     <section>
-        <p>{message}</p>
+        <p className="stripeP">{message}</p>
     </section>
 );
 
