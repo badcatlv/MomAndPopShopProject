@@ -13,7 +13,7 @@ public class StripeOptions
     public string option { get; set; }
 }
 
-namespace server.Controllers
+namespace MomAndPopShop.Controllers
 {
     public class Program
     {
