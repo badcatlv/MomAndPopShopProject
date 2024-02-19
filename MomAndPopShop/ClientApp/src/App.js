@@ -11,6 +11,7 @@ export default class App extends Component {
   render() {
       return (
           <>
+
       <Layout>
         <Routes>
 
@@ -21,7 +22,7 @@ export default class App extends Component {
             </Routes>
               </Layout>
           <footer>
-                  <p>© 2024 - Mom and Pop's Popcorn Shop</p>
+                  <p>&copy 2024 - Mom and Pop's Popcorn Shop</p>
               </footer>
         </>
     );

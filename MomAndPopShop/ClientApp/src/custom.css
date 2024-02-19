@@ -1,4 +1,8 @@
 /* Provide sufficient contrast against white background */
+.adminNav {
+    background-color: #1b6ec2;
+}
+
 a {
   color: #0366d6;
 }
