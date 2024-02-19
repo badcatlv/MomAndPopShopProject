@@ -46,6 +46,9 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/product-home">Products To Buy</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/customerReview">Customer Reviews</NavLink>
+                             </NavItem>
+                            <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/stripe-app">Stripe</NavLink>
                             </NavItem>
                             <NavItem>
@@ -53,6 +56,9 @@ export class NavMenu extends Component {
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/catalog">Catalog</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/contactForm">Contact Us</NavLink>
                             </NavItem>
                             <LoginMenu>
                             </LoginMenu>
