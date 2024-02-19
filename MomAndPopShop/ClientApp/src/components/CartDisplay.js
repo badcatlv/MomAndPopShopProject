@@ -2,6 +2,7 @@
 
 const CartDisplay = ({ product }) => {
     const [qtyToAdd, setQtyToAdd] = useState(1);
+    const defaultImageSrc = '/img/defaultPopcorn.png';
 
     const handleQtyChange = (event) => {
         const target = event.target;
@@ -44,6 +45,20 @@ const CartDisplay = ({ product }) => {
 
     return (
         <>
+            <div class="card">
+                <img class="product-image" src={defaultImageSrc} alt={product.name} />
+                <div class="product-info">
+                    <h2 class="product-title">{product.name}</h2>
+                    <p class="product-description">{product.description}</p>
+                    <p class="price">${product.popcornPrice}</p>
+                    <p>Quantity available: {product.quantity}</p>
+                    <form onSubmit={handleAddToCart}>
+                        <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>${product.popcornPrice}</p>
