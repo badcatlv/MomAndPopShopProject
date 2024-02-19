@@ -20,8 +20,9 @@ const context = [
     "/producthome",
     "/cart",
     "/customerReview",
-    "/contactForm"
-
+    "/contactForm",
+    "/stripeapp",
+    "/create-checkout-session",
 
 
 ];

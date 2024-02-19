@@ -26,7 +26,7 @@ export class NavMenu extends Component {
         return (
             <header>
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-                    <NavbarBrand tag={Link} to="/">MomAndPopShop</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/"><img src='/img/nobackground.png' width='200px'/></NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                         <ul className="navbar-nav flex-grow">
@@ -47,6 +47,9 @@ export class NavMenu extends Component {
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/customerReview">Customer Reviews</NavLink>
+                             </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Stripe</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/rentalevent/request">Event Rentals</NavLink>

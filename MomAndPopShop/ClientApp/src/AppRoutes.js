@@ -28,7 +28,7 @@ import CustomerReview from './components/CustomerReview/Index';
 import CreateCustomerReview from './components/CustomerReview/Create';
 import ContactForm from './components/ContactForm/Index';
 import CreateContactForm from './components/ContactForm/Create';
-
+import StripeApp from './components/StripeApp';
 
 const AppRoutes = [
     {
@@ -50,6 +50,10 @@ const AppRoutes = [
     {
         path: '/product-home',
         element: <ProductHome />
+    },
+    {
+        path: '/stripe-app',
+        element: <StripeApp />
     },
     {
         path: '/rentalevent/manage',
