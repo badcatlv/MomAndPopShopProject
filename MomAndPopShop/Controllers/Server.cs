@@ -86,6 +86,7 @@ namespace MomAndPopShop.Controllers
             var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
+                CustomerEmail = _context.Users.FirstOrDefault().Email,
                 LineItems = lineItems,
                 Mode = "payment",
                 SuccessUrl = "https://localhost:44416",
