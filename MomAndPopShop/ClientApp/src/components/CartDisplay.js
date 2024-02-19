@@ -57,16 +57,7 @@ const CartDisplay = ({ product }) => {
                         <button type="submit">Add to Cart</button>
                     </form>
                 </div>
-            </div>
-
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>${product.popcornPrice}</p>
-            <p>{product.quantity}</p>
-            <form onSubmit={handleAddToCart}>
-                <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
-                <button type="submit">Add to Cart</button>
-            </form>
+            </div> <br/>
         </>
     )
 }

@@ -53,6 +53,7 @@ export class NavMenu extends Component {
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                             </NavItem>
+
                             {role && role.includes("Admin") ?
                                 <span>
                                         <NavItem>
@@ -70,7 +71,8 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/customerReview">Customer Reviews</NavLink>
                              </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Stripe</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Checkout</NavLink>
+
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/rentalevent/request">Event Rentals</NavLink>

@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MomAndPopShop.Data;
 using Stripe;
 using Stripe.Checkout;
 
@@ -49,23 +45,44 @@ namespace MomAndPopShop.Controllers
     [ApiController]
     public class CheckoutApiController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
+
+        public CheckoutApiController(CartService cartService, ApplicationDbContext context)
+        {
+            _cartService = cartService;
+            _context = context;
+        }
+
         [HttpPost]
         public ActionResult Create()
         {
+            var cart = _cartService.GetCart();
+            string priceSku = "";
+
+            for (int i = 0; i < cart.Items.Count; i++)
+            {
+                var product = _context.Popcorns.Find(cart.Items[i].PopcornItem.Id);
+                if (product != null)
+                {
+                    priceSku = product.StripeSku;
+                }
+            }
+
             var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
-                {
+                {   
                   new SessionLineItemOptions
                   {
                     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    Price = "price_1OkFx4A8iioFBT6Wp1DRaMaK",
-                    Quantity = 1,
+                      Price = priceSku,
+                      Quantity = 1,
                   },
                 },
                 Mode = "payment",
-                SuccessUrl = domain + "?success=true",
+                SuccessUrl = "https://localhost:44416",
                 CancelUrl = domain + "?canceled=true",
             };
             var service = new SessionService();
@@ -73,6 +90,14 @@ namespace MomAndPopShop.Controllers
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
+
         }
     }
 }
+/*foreach (var item in options.LineItems)
+{
+    if (item.Price != priceSku)
+    {
+
+    }
+} else { }*/
