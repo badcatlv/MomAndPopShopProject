@@ -8,7 +8,7 @@ export default class App extends Component {
   static displayName = App.name;
 
   render() {
-    return (
+      return (
       <Layout>
         <Routes>
           {AppRoutes.map((route, index) => {
