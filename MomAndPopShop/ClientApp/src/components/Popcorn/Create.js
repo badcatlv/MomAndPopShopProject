@@ -150,7 +150,7 @@ const Create = () => {
                     />
                     <span className="error-message">{validationErrors.quantity}</span>
                 </div>
-
+{/*This is the SKU addition for stripe product connection*/}
                 <div className="form-group">
                     <label htmlFor="StripeSki">Stripe Identifier</label>
                     <input
