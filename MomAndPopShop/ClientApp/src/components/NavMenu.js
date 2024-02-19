@@ -53,38 +53,36 @@ export class NavMenu extends Component {
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                             </NavItem>
-
-                            {role && role.includes("Admin") ?
-                                <span>
-                                        <NavItem>
-                                            <NavLink tag={Link} className="text-dark" to="/products">Products</NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink tag={Link} className="text-dark" to="/catalog">Catalog</NavLink>
-                                        </NavItem>
-                                </span>
-                                : null}
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/product-home">Products To Buy</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/product-home">Products</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/customerReview">Customer Reviews</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/customerReview/create">Leave a review</NavLink>
                              </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Checkout</NavLink>
-
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/rentalevent/request">Event Rentals</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/cart">Cart</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/contactForm">Contact Us</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/contactForm/create">Contact Us</NavLink>
                             </NavItem>
                             <LoginMenu>
                             </LoginMenu>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Cart</NavLink>
+                            </NavItem>
+                            {role && role.includes("Admin") ?
+                                <span>
+                                    <NavItem>
+                                        <NavLink tag={Link} className="text-dark" to="/products">ManageProducts</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} className="text-dark" to="/catalog">MCatalog</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} className="text-dark" to="/customerReview">Customer Reviews</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} className="text-dark" to="/contactForm">Customer Messages</NavLink>
+                                    </NavItem>
+                                </span>
+                                : null}
                         </ul>
                     </Collapse>
                 </Navbar>
