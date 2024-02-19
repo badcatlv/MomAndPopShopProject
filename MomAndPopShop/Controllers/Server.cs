@@ -58,33 +58,40 @@ namespace MomAndPopShop.Controllers
         public ActionResult Create()
         {
             var cart = _cartService.GetCart();
-            string priceSku = "";
-
-            for (int i = 0; i < cart.Items.Count; i++)
+            if (cart.Items.Count == 0)
             {
-                var product = _context.Popcorns.Find(cart.Items[i].PopcornItem.Id);
-                if (product != null)
+                return BadRequest(new StripeOptions { option = "Cart is empty" });
+            }
+            var lineItems = new List<SessionLineItemOptions>();
+
+            foreach (var popcorn in cart.Items)
+            {
+                if (popcorn.PopcornItem.StripeSku == null)
                 {
-                    priceSku = product.StripeSku;
+                    return BadRequest(new StripeOptions { option = "Stripe SKU is required. Please log in to Stripe and view the Product Catalog" });
                 }
+                string priceSku = popcorn.PopcornItem.StripeSku;
+                int popQuantity = popcorn.Quantity;
+
+                lineItems.Add(new SessionLineItemOptions
+                {
+                    Price = priceSku,
+                    Quantity = popQuantity,
+                });
+
             }
 
+
+            //var lineItems = new List<SessionLineItemOptions>();
             var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
-                LineItems = new List<SessionLineItemOptions>
-                {   
-                  new SessionLineItemOptions
-                  {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                      Price = priceSku,
-                      Quantity = 1,
-                  },
-                },
+                LineItems = lineItems,
                 Mode = "payment",
                 SuccessUrl = "https://localhost:44416",
                 CancelUrl = domain + "?canceled=true",
             };
+
             var service = new SessionService();
             Session session = service.Create(options);
 
@@ -101,3 +108,25 @@ namespace MomAndPopShop.Controllers
 
     }
 } else { }*/
+
+/*var domain = "http://localhost:4242";
+var options = new SessionCreateOptions
+{
+    LineItems = new List<SessionLineItemOptions>
+                {
+                  new SessionLineItemOptions
+                  {
+                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                      Price = priceSku,
+                      Quantity = 1,
+                  },
+                },
+    Mode = "payment",
+    SuccessUrl = "https://localhost:44416",
+    CancelUrl = domain + "?canceled=true",
+};
+var service = new SessionService();
+Session session = service.Create(options);
+
+Response.Headers.Add("Location", session.Url);
+return new StatusCodeResult(303);*/
