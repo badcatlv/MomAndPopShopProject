@@ -62,16 +62,17 @@ h5 {
 }
 .stripeButton {
     height: 36px;
-    background: #556cd6;
+    background-color:hotpink;
+    margin: auto;
     color: white;
-    width: 100%;
+    width: 300px;
     font-size: 14px;
     border: 0;
     font-weight: 500;
     cursor: pointer;
     letter-spacing: 0.6;
-    border-radius: 0 0 6px 6px;
-    transition: all 0.2s ease;
+/*    border-radius: 0 0 6px 6px;
+*/    transition: all 0.2s ease;
     box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
 }
 button:hover {

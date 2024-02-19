@@ -1,13 +1,12 @@
 ﻿import React, { useState, useEffect } from "react";
 import "./StripeApp.css";
-import Cart from "./Cart";
+import Cart from "../Cart";
+import { Link } from "react-router-dom";
 
 const ProductDisplay = () => (
-
-    <section className="stripeSection">
-        <div className="stripeProduct">
-        <Cart/>
-            {/*<img
+    <div className="center">
+        <Cart />
+        {/*<img
                 className="stripeImage"
                 src="https://i.imgur.com/EHyR2nP.png"
                 alt="The cover of Stubborn Attachments"
@@ -16,13 +15,16 @@ const ProductDisplay = () => (
                 <h3 className="stripeHeaders">PopCorn</h3>
                 <h5 className="stripeHeaders">$20.00</h5>
             </div>*/}
+        <div className="center">
+            <form action="/create-checkout-session" method="POST">
+                <button className="stripeButton" type="submit">
+                    Checkout
+                </button>
+            </form>
+            <br />
+            <p><Link to="/product-home">Go back to Product Home</Link></p>
         </div>
-        <form action="/create-checkout-session" method="POST">
-            <button className="stripeButton" type="submit">
-                Checkout
-            </button>
-        </form>
-    </section>
+    </div>
 );
 
 const Message = ({ message }) => (
@@ -55,7 +57,7 @@ export default function StripeApp() {
         <>
             <ProductDisplay />
             <br />
-            
+
         </>
     );
 }

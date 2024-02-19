@@ -25,7 +25,7 @@ namespace MomAndPopShop.Models
         [Range(0.01, int.MaxValue, ErrorMessage = "Quantity must be 1 or greater.")]
         public int? Quantity { get; set; }
 
-        [Required(ErrorMessage = "Stripe Sku is required")]
+        [Required(ErrorMessage = "Stripe Sku is required. Please log in to Stripe and view the Product Catalog")]
         public string? StripeSku { get; set; }
 
         public Popcorn(string name, string description, decimal? popcornPrice, string? stripeSku)

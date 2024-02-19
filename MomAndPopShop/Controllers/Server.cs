@@ -68,16 +68,14 @@ namespace MomAndPopShop.Controllers
                     priceSku = product.StripeSku;
                 }
             }
-            
-            var domain = "https://localhost:44416";
+
+            var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
-                {
+                {   
                   new SessionLineItemOptions
                   {
-
-
                     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
                       Price = priceSku,
                       Quantity = 1,
@@ -92,6 +90,14 @@ namespace MomAndPopShop.Controllers
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
+
         }
     }
 }
+/*foreach (var item in options.LineItems)
+{
+    if (item.Price != priceSku)
+    {
+
+    }
+} else { }*/

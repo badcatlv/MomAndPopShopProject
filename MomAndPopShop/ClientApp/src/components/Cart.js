@@ -59,14 +59,14 @@ const Cart = () => {
                         <h2 class="product-title">{collection.popcornItem.name}</h2>
                         <p class="product-description">{collection.popcornItem.description}</p>
                         <p class="price">${collection.cost}</p>
-                       
-                    
+
+
                         <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
                             <button type="submit">Remove</button>
                         </form>
-                        </div>
+                    </div>
                 </div>
-                <br/>
+                <br />
 
 
             </div>
@@ -86,17 +86,18 @@ const Cart = () => {
     }
 
     return (
-        <div>
+        <div >
             <h2>Cart</h2>
 
 
-            {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
+            <div className="center">
+                {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
 */}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
-            <p>Total Quantity: {totalQuantity}</p>
-            <p>Total Cost: ${totalCost}</p>
-            <p><Link to="/checkout">Checkout</Link></p>
+                <p>Total Quantity: {totalQuantity}</p>
+                <p>Total Cost: ${totalCost}</p>
+                <p><Link to="/product-home">Go back to Product Home</Link></p>
+            </div>
 
-            <p><Link to="/product-home">Go back to Product Home</Link></p>
         </div>
     );
 }

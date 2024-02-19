@@ -78,3 +78,31 @@ code {
     padding: 12px;
     font-size: 18px;
 }
+
+/* Below is copied and then edited for an example of links*/
+
+a:link {
+    color: hotpink;
+}
+
+/* visited link */
+a:visited {
+    color: deeppink;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color:hotpink;
+}
+
+/* Below is to center <div> in Cart.js*/
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
