@@ -14,7 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using SendGrid.Extensions.DependencyInjection;
-
+using Stripe;
 using Duende.IdentityServer.Services;
 
 
@@ -42,7 +42,7 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddTransient<IProfileService, ProfileService>();
 
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFileService, MomAndPopShop.Services.FileService>();
 
 
 builder.Services.AddControllersWithViews();
