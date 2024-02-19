@@ -58,7 +58,17 @@ namespace MomAndPopShop.Controllers
         public ActionResult Create()
         {
             var cart = _cartService.GetCart();
+            string priceSku = "";
 
+            for (int i = 0; i < cart.Items.Count; i++)
+            {
+                var product = _context.Popcorns.Find(cart.Items[i].PopcornItem.Id);
+                if (product != null)
+                {
+                    priceSku = product.StripeSku;
+                }
+            }
+            
             var domain = "https://localhost:44416";
             var options = new SessionCreateOptions
             {
@@ -66,8 +76,10 @@ namespace MomAndPopShop.Controllers
                 {
                   new SessionLineItemOptions
                   {
+
+
                     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                      Price = "price_1OkFx4A8iioFBT6Wp1DRaMaK",
+                      Price = priceSku,
                       Quantity = 1,
                   },
                 },
