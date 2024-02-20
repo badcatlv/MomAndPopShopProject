@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using MomAndPopShop.Data;
+using MomAndPopShop.Models;
 using Stripe;
 using Stripe.Checkout;
 
@@ -70,64 +71,55 @@ namespace MomAndPopShop.Controllers
                 {
                     return BadRequest(new StripeOptions { option = "Stripe SKU is required. Please log in to Stripe and view the Product Catalog" });
                 }
-                string priceSku = popcorn.PopcornItem.StripeSku;
+               // string priceSku = popcorn.PopcornItem.StripeSku;
                 int popQuantity = popcorn.Quantity;
+                //long popPrice = (long)popcorn.PopcornItem.PopcornPrice * 100;
+                var decPrice = popcorn.PopcornItem.PopcornPrice * 100;
+
 
                 lineItems.Add(new SessionLineItemOptions
                 {
-                    Price = priceSku,
+                    //Price = priceSku,
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = popcorn.PopcornItem.Name,
+                            Description = popcorn.PopcornItem.Description,
+                        },
+                        UnitAmountDecimal= decPrice,               
+                        //UnitAmount = popPrice,
+                    },
+                    
+                    //Price = popPrice,
                     Quantity = popQuantity,
-                });
+                });;
 
             }
 
 
-            //var lineItems = new List<SessionLineItemOptions>();
-            var domain = "http://localhost:4242";
+            var domain = "https://localhost:44416";
             var options = new SessionCreateOptions
             {
-                CustomerEmail = _context.Users.FirstOrDefault().Email,
+                //CustomerEmail = _context.Users.FirstOrDefault().Email,
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:44416",
-                CancelUrl = domain + "?canceled=true",
+                SuccessUrl = "https://localhost:44416/producthome",
+                CancelUrl = "https://localhost:44416",
             };
 
             var service = new SessionService();
             Session session = service.Create(options);
 
+           /* string userId = _context.Users.FirstOrDefault().Id;
+            Order order = new Order { UserId = userId , Items = cart.Items };
+            _context.Orders.Add(order);*/
+
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
+
 
         }
     }
 }
-/*foreach (var item in options.LineItems)
-{
-    if (item.Price != priceSku)
-    {
-
-    }
-} else { }*/
-
-/*var domain = "http://localhost:4242";
-var options = new SessionCreateOptions
-{
-    LineItems = new List<SessionLineItemOptions>
-                {
-                  new SessionLineItemOptions
-                  {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                      Price = priceSku,
-                      Quantity = 1,
-                  },
-                },
-    Mode = "payment",
-    SuccessUrl = "https://localhost:44416",
-    CancelUrl = domain + "?canceled=true",
-};
-var service = new SessionService();
-Session session = service.Create(options);
-
-Response.Headers.Add("Location", session.Url);
-return new StatusCodeResult(303);*/
