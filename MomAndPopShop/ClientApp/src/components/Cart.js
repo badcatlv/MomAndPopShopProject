@@ -7,6 +7,7 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [qtyToAdd, setQtyToAdd] = useState(1);
     const defaultImageSrc = '/img/defaultPopcorn.png'
 
 
@@ -34,6 +35,8 @@ const Cart = () => {
             });
     };
 
+    
+
     const handleDelete = (id) => {
         fetch(`cart/${id}`, { method: 'DELETE' })
             .then(results => {
@@ -58,7 +61,9 @@ const Cart = () => {
                     <div class="product-info">
                         <h2 class="product-title">{collection.popcornItem.name}</h2>
                         <p class="product-description">{collection.popcornItem.description}</p>
-                        <p class="price">${collection.cost}</p>
+                        <p class="quantity">Qty buy: {collection.quantity}</p>
+                        <p class="price">Items total: ${collection.popcornItem.popcornPrice * collection.quantity}</p>
+                       
 
 
                         <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
@@ -72,10 +77,13 @@ const Cart = () => {
             </div>
         </div>
     ));
+    
+    /*const totalCost = cartItems.map(collection => (
+        (collection.popcornItem.popcornPrice * collection.quantity).reduce((total, item) => total + item, 0))
+        );*/
 
-    const totalCost = cartItems.reduce((total, item) => total + item.cost, 0);
-    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-
+/*    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+*/
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -92,14 +100,65 @@ const Cart = () => {
 
             <div className="center">
                 {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
-*/}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
-                <p>Total Quantity: {totalQuantity}</p>
-                <p>Total Cost: ${totalCost}</p>
-                <p><Link to="/product-home">Go back to Product Home</Link></p>
+*/}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}                
             </div>
+            
 
         </div>
     );
 }
 
 export default Cart;
+
+/*
+/*const handleQtyChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    setQtyToAdd(value);
+}
+
+const handleAddToCart = async (event) => {
+    event.preventDefault();
+    fetchCartData();
+    const collection = cartItems;
+    const requestBody = {
+        popcornId: null,
+        quantity: 0
+    }
+    if (cartItems.popcornItem.id === collection.popcornItem.id) {
+
+        const requestBody = {
+            popcornId: collection.popcornItem.id,
+            quantity: qtyToAdd
+        }
+        return requestBody;
+    }
+    try {
+        const response = await fetch("/cart/addtocart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (response.ok) {
+            const cart = await response.json();
+            if (cart.updated) {
+                alert("Product quantity updated in cart");
+            } else {
+                alert("Product added to cart");
+            }
+        } else {
+            alert("Failed to add product to cart");
+        }
+    }
+    catch (error) {
+        console.error("Error adding product to cart: ", error);
+    }
+}
+
+<form onSubmit={handleAddToCart}>
+                            <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
+                            <button type="submit">Change Quantity</button>
+                        </form>*/

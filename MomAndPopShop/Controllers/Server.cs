@@ -106,7 +106,7 @@ namespace MomAndPopShop.Controllers
                 LineItems = lineItems,
                 Mode = "payment",
                 SuccessUrl = "https://localhost:44416/",
-                CancelUrl = "https://localhost:44416",
+                CancelUrl = "https://localhost:44416/stripe-app",
             };
 
             var service = new SessionService();
