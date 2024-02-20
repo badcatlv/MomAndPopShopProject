@@ -105,7 +105,7 @@ namespace MomAndPopShop.Controllers
                 //CustomerEmail = _context.Users.FirstOrDefault().Email,
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:44416/producthome",
+                SuccessUrl = "https://localhost:44416/",
                 CancelUrl = "https://localhost:44416",
             };
 
