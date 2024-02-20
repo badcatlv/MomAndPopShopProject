@@ -39,9 +39,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\src\components\ContactForm\ThankYou.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Assets\ProductImages\" />
     <Folder Include="Microsoft\" />
     <Folder Include="ClientApp\public\img\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

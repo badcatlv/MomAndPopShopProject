@@ -17,6 +17,24 @@ code {
   border-color: #1861ac;
 }
 
+.footer {
+    text-align: center;
+}
+
+/* Below is copied from https://www.w3schools.com/howto/howto_css_two_columns.asp */
+
+.column {
+    float: left;
+}
+
+.left {
+    width: 40%;
+}
+
+.right {
+    width: 60%;
+}
+
 /* Below is copied from https://reintech.io/blog/creating-responsive-product-page-css */
 .product {
     display: flex;

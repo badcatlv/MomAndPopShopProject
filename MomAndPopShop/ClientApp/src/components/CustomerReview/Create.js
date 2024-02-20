@@ -68,6 +68,7 @@ const Create = () => {
     };
 
     return (
+        <main>
         <div>
             <h2>Create a Customer Review</h2>
 
@@ -89,7 +90,8 @@ const Create = () => {
                     <input type="submit" value="Add Review" />
                 )}
             </form>
-        </div>
+            </div>
+        </main>
     );
 };
 
