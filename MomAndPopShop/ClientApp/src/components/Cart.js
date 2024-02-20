@@ -1,5 +1,4 @@
 ﻿import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -7,7 +6,6 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [qtyToAdd, setQtyToAdd] = useState(1);
     const defaultImageSrc = '/img/defaultPopcorn.png'
 
 
