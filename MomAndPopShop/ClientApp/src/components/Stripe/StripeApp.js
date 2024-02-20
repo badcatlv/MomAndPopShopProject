@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
 import "./StripeApp.css";
 import Cart from "../Cart";
-import { Link } from "react-router-dom";
 
 const ProductDisplay = () => (
     <div className="center">
