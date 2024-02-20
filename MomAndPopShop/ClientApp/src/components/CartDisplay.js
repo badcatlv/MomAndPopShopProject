@@ -51,7 +51,6 @@ const CartDisplay = ({ product }) => {
                     <h2 class="product-title">{product.name}</h2>
                     <p class="product-description">{product.description}</p>
                     <p class="price">${product.popcornPrice}</p>
-                    <p>Quantity available: {product.quantity}</p>
                     <form onSubmit={handleAddToCart}>
                         <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
                         <button type="submit">Add to Cart</button>
