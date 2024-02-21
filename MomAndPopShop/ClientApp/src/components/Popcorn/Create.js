@@ -27,14 +27,16 @@ const Create = () => {
         name: '',
         description: '',
         popcornPrice: 0,
-        quantity: 0
+        quantity: 0,
+        stripeSku: ''
     });
 
     const [validationErrors, setValidationErrors] = useState({
         name: '',
         description: '',
         popcornPrice: '',
-        quantity: ''
+        quantity: '',
+        stripeSku: ''
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -147,6 +149,19 @@ const Create = () => {
                         className="form-control"
                     />
                     <span className="error-message">{validationErrors.quantity}</span>
+                </div>
+{/*This is the SKU addition for stripe product connection*/}
+                <div className="form-group">
+                    <label htmlFor="StripeSki">Stripe Identifier</label>
+                    <input
+                        type="text"
+                        id="StripeSku"
+                        name="stripeSku"
+                        value={formData.stripeSku}
+                        onChange={handleInputChange}
+                        className="form-control"
+                    />
+                    <span className="error-message">{validationErrors.name}</span>
                 </div>
 
                 {isLoading ? (

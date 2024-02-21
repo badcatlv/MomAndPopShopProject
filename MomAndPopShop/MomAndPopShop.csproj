@@ -27,6 +27,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.21" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="Stripe.net" Version="43.15.0" />
+    <PackageReference Include="SendGrid" Version="9.29.2" />
+    <PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,8 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\src\components\ContactForm\ThankYou.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Assets\ProductImages\" />
     <Folder Include="Microsoft\" />
+    <Folder Include="ClientApp\public\img\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

@@ -12,6 +12,7 @@ namespace MomAndPopShop.Models
         public string? Birthday { get; set; }
         public bool SubscribedToPromotionalEmail { get; set; } = false;
         public bool SubscribedToPromotionalText { get; set; } = false;
+        public List<Order>? Orders { get; set; }
 
         
     }

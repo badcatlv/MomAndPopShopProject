@@ -25,12 +25,16 @@ namespace MomAndPopShop.Models
         [Range(0.01, int.MaxValue, ErrorMessage = "Quantity must be 1 or greater.")]
         public int? Quantity { get; set; }
 
-        public Popcorn(string name, string description, decimal? popcornPrice)
+        /*This is the SKU addition for stripe product connection*/
+        public string? StripeSku { get; set; } = "";
+
+        public Popcorn(string name, string description, decimal? popcornPrice, string? stripeSku)
         {
             Name = name;
             Description = description;
             PopcornPrice = popcornPrice;
             Quantity = 0;
+            StripeSku = stripeSku;
         }
         public Popcorn() { }
 

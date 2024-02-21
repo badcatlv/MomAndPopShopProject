@@ -1,12 +1,14 @@
 ﻿import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import EditQuantity from './EditQuantity';
 
 const Cart = () => {
 
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
     const [error, setError] = useState(null);
+    const defaultImageSrc = '/img/defaultPopcorn.png'
+
 
     useEffect(() => {
         fetchCartData();
@@ -32,6 +34,8 @@ const Cart = () => {
             });
     };
 
+    
+
     const handleDelete = (id) => {
         fetch(`cart/${id}`, { method: 'DELETE' })
             .then(results => {
@@ -49,28 +53,38 @@ const Cart = () => {
     const cartItemDisplay = cartItems.map(collection => (
         <div>
 
-            <ul>
+            <div>
 
-                <li key={collection.id}>
-                    <li>Popcorn: {collection.popcornItem.name}</li>
-                    <li>Popcorn Price: ${collection.popcornItem.popcornPrice}</li>
-                    <li>Quantity: {collection.quantity}</li>
-                    <li>Total Price: ${collection.cost}</li>
-                    <li>
+                <div class="card" key={collection.id}>
+                    <img class="product-image" src={defaultImageSrc} alt={collection.popcornItem.name} />
+                    <div class="product-info">
+                        <h2 class="product-title">{collection.popcornItem.name}</h2>
+                        <p class="product-description">{collection.popcornItem.description}</p>
+                        <p class="quantity">Qty buy: {collection.quantity}</p>
+                        <p class="price">Items total: ${collection.popcornItem.popcornPrice * collection.quantity}</p>
+                        <br/>
+                        <EditQuantity product={collection.popcornItem} />
+                        <br />                     
+
+
                         <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
                             <button type="submit">Remove</button>
                         </form>
-                    </li>
-                </li>
+                    </div>
+                </div>
+                <br />
 
 
-            </ul>
+            </div>
         </div>
     ));
+    
+    /*const totalCost = cartItems.map(collection => (
+        (collection.popcornItem.popcornPrice * collection.quantity).reduce((total, item) => total + item, 0))
+        );*/
 
-    const totalCost = cartItems.reduce((total, item) => total + item.cost, 0);
-    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-
+/*    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+*/
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -81,142 +95,71 @@ const Cart = () => {
     }
 
     return (
-        <div>
+        <div >
             <h2>Cart</h2>
 
 
-            {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
-*/}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
-            <p>Total Quantity: {totalQuantity}</p>
-            <p>Total Cost: ${totalCost}</p>
-            <p><Link to="/checkout">Checkout</Link></p>
+            <div className="center">
+                {/*            <p>cart items: {JSON.stringify(cartItems)}</p>
+*/}            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}                
+            </div>
+            
 
-            <p><Link to="/product-home">Go back to Product Home</Link></p>
         </div>
     );
 }
 
-/*{
-    const [cartItems, setCartItems] = useState([]);
-    const [cart, setCart] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetchCartData();
-    }, []);
-
-    const fetchCartData = () => {
-        fetch('cart')
-            .then((results) => {
-                if (!results.ok) {
-                    throw new Error("Error fetching cart items.");
-                }
-                return results.json();
-            })
-            .then(data => {
-                console.log(data);
-                setCartItems(data);
-                setCart(data);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                setError("Error fetching cart items, please try again later.")
-                setIsLoading(false);
-                console.error("Error fetching cart items: ", error);
-            });
-
-    };
-
-    const handleDelete = (id) => {
-        fetch(`cart/Delete/${id}`, { method: 'DELETE' })
-            .then(results => {
-                if (!results) {
-                    throw new Error("Cannot delete item.");
-                }
-                fetchCartData();
-            })
-            .catch(error => {
-                console.error("Error deleting item: ", error);
-            });
-    };
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>
-    }
-
-
-
-    return (
-
-        <div>
-            <h2>Cart</h2>
-            <ul>
-                <li><Link to="/cart-display">Show Cart</Link></li>,
-                {(cartItems > 0) ? cartItems.map((item => (
-                    <li key={item.id}>
-                        <li>{item.popcornItem.name}</li>
-                        <li>${item.popcornItem.price}</li>
-                        <li>{item.quantity}</li>
-                        <li>${item.cost}</li>
-                        <li>
-                            <form onSubmit={() => handleDelete(item.id)}>
-                                <button type="submit">Remove</button>
-                            </form>
-                        </li>
-                    </li>
-                ))) : <li>There are no items in cart.</li>
-                }
-                <div colSpan="3">Total</div>
-                <div>${cart.totalCost}</div>
-                <p><Link to="/product-home">Go back to Product Home</Link></p>
-                </ul>
-        </div>
-            
-           *//* </ul>
-<table className="table">
-<thead>
-<tr>
-<th>Product</th>
-<th>Price</th>
-<th>Quantity</th>
-<th>Total</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-{(cartItems > 0) ? cartItems.map((item => (
-<tr key={item.id}>
-<td>{item.popcornItem.name}</td>
-<td>${item.popcornItem.price}</td>
-<td>{item.quantity}</td>
-<td>${item.cost}</td>
-<td>
-<form onSubmit={() => handleDelete(item.id)}>
-<button type="submit">Remove</button>
-</form>
-</td>
-</tr>
-))) : <td>There are no items in cart.</td>
-}
-</tbody>
- 
-<tfoot>
-<tr>
-<td colSpan="3">Total</td>
-<td>${cart.totalCost}</td>
-</tr>
-</tfoot>
-</table >
- 
-<p><Link to="/product-home">Go back to Product Home</Link></p>
-
-</div>*//*
-);
-};*/
-
 export default Cart;
+
+/*
+/*const handleQtyChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    setQtyToAdd(value);
+}
+
+const handleAddToCart = async (event) => {
+    event.preventDefault();
+    fetchCartData();
+    const collection = cartItems;
+    const requestBody = {
+        popcornId: null,
+        quantity: 0
+    }
+    if (cartItems.popcornItem.id === collection.popcornItem.id) {
+
+        const requestBody = {
+            popcornId: collection.popcornItem.id,
+            quantity: qtyToAdd
+        }
+        return requestBody;
+    }
+    try {
+        const response = await fetch("/cart/addtocart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (response.ok) {
+            const cart = await response.json();
+            if (cart.updated) {
+                alert("Product quantity updated in cart");
+            } else {
+                alert("Product added to cart");
+            }
+        } else {
+            alert("Failed to add product to cart");
+        }
+    }
+    catch (error) {
+        console.error("Error adding product to cart: ", error);
+    }
+}
+
+<form onSubmit={handleAddToCart}>
+                            <input type="number" name="quantity" value={qtyToAdd} onChange={handleQtyChange} />
+                            <button type="submit">Change Quantity</button>
+                        </form>*/

@@ -1,29 +1,36 @@
 ﻿import React, { useState, useEffect } from "react";
-//import "./StripeApp.css";
+import "./StripeApp.css";
+import Cart from "../Cart";
 
 const ProductDisplay = () => (
-    <section>
-        <div className="product">
-            <img
+    <div className="center">
+        <Cart />
+        {/*<img
+                className="stripeImage"
                 src="https://i.imgur.com/EHyR2nP.png"
                 alt="The cover of Stubborn Attachments"
             />
-            <div className="description">
-                <h3>Stubborn Attachments</h3>
-                <h5>$20.00</h5>
-            </div>
+            <div className="stripeDescription">
+                <h3 className="stripeHeaders">PopCorn</h3>
+                <h5 className="stripeHeaders">$20.00</h5>
+            </div>*/}
+        <div className="center">
+            <form action="/create-checkout-session" method="POST">
+                <button className="stripeButton" type="submit">
+                    Checkout
+                </button>
+            </form>
+            <br />
+            <a href="/product-home">
+                <button className="stripeButton">Keep Shopping</button>
+            </a>
         </div>
-        <form action="/create-checkout-session" method="POST">
-            <button type="submit">
-                Checkout
-            </button>
-        </form>
-    </section>
+    </div>
 );
 
 const Message = ({ message }) => (
     <section>
-        <p>{message}</p>
+        <p className="stripeP">{message}</p>
     </section>
 );
 
@@ -48,6 +55,10 @@ export default function StripeApp() {
     return message ? (
         <Message message={message} />
     ) : (
-        <ProductDisplay />
+        <>
+            <ProductDisplay />
+            <br />
+
+        </>
     );
 }

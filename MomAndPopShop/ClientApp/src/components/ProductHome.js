@@ -1,5 +1,4 @@
 ﻿import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import CartDisplay from './CartDisplay';
 
 
@@ -50,10 +49,7 @@ const ProductHome = () => {
             <hr />
             {(products.length > 0) ? products.map(product => (
                 <CartDisplay product={product} key={ product.id } />
-            )) : <div>No products found.</div>}
-            <div>
-                <p><Link to="/cart">Show Cart</Link></p>
-            </div>
+            )) : <div className="center">No products found.</div>}
 
         </div>
     );

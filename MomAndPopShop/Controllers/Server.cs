@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MomAndPopShop.Data;
+using MomAndPopShop.Models;
 using Stripe;
 using Stripe.Checkout;
 
@@ -49,30 +46,80 @@ namespace MomAndPopShop.Controllers
     [ApiController]
     public class CheckoutApiController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
+
+        public CheckoutApiController(CartService cartService, ApplicationDbContext context)
+        {
+            _cartService = cartService;
+            _context = context;
+        }
+
         [HttpPost]
         public ActionResult Create()
         {
-            var domain = "http://localhost:4242";
+            var cart = _cartService.GetCart();
+            if (cart.Items.Count == 0)
+            {
+                return BadRequest(new StripeOptions { option = "Cart is empty" });
+            }
+            var lineItems = new List<SessionLineItemOptions>();
+
+            foreach (var popcorn in cart.Items)
+            {
+                if (popcorn.PopcornItem.StripeSku == null)
+                {
+                    return BadRequest(new StripeOptions { option = "Stripe SKU is required. Please log in to Stripe and view the Product Catalog" });
+                }
+               // string priceSku = popcorn.PopcornItem.StripeSku;
+                int popQuantity = popcorn.Quantity;
+                //long popPrice = (long)popcorn.PopcornItem.PopcornPrice * 100;
+                var decPrice = popcorn.PopcornItem.PopcornPrice * 100;
+
+
+                lineItems.Add(new SessionLineItemOptions
+                {
+                    //Price = priceSku,
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = popcorn.PopcornItem.Name,
+                            Description = popcorn.PopcornItem.Description,
+                        },
+                        UnitAmountDecimal= decPrice,               
+                        //UnitAmount = popPrice,
+                    },
+                    
+                    //Price = popPrice,
+                    Quantity = popQuantity,
+                });;
+
+            }
+
+
+            var domain = "https://localhost:44416";
             var options = new SessionCreateOptions
             {
-                LineItems = new List<SessionLineItemOptions>
-                {
-                  new SessionLineItemOptions
-                  {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    Price = "price_1OkFx4A8iioFBT6Wp1DRaMaK",
-                    Quantity = 1,
-                  },
-                },
+                //CustomerEmail = _context.Users.FirstOrDefault().Email,
+                LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = domain + "?success=true",
-                CancelUrl = domain + "?canceled=true",
+                SuccessUrl = "https://localhost:44416/successful",
+                CancelUrl = "https://localhost:44416/stripe-app",
             };
+
             var service = new SessionService();
             Session session = service.Create(options);
 
+           /* string userId = _context.Users.FirstOrDefault().Id;
+            Order order = new Order { UserId = userId , Items = cart.Items };
+            _context.Orders.Add(order);*/
+
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
+
+
         }
     }
 }

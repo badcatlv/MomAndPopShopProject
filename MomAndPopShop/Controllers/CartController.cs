@@ -32,10 +32,38 @@ namespace MomAndPopShop.Controllers
             {
                 var cart = _cartService.GetCart();
 
+
+                _cartService.AddToCart(model.PopcornId, model.Quantity);
+                _cartService.UpdateCart(cart);
+                return Ok(new { updated = false });
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update([FromBody] AddToCartViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var cart = _cartService.GetCart();
+
+
+                _cartService.AddItem(model.PopcornId, model.Quantity);
+                _cartService.UpdateCart(cart);
+                return Ok(new { updated = false });
+            }
+
+            return BadRequest(ModelState);
+            /*if (ModelState.IsValid)
+            {
+                var cart = _cartService.GetCart();
+
                 var existingItem = cart.Items.FirstOrDefault(x => x.PopcornItem.Id == model.PopcornId);
                 if (existingItem != null)
                 {
                     existingItem.Quantity = model.Quantity;
+                    _cartService.AddToCart(model.PopcornId, model.Quantity);
                     _cartService.UpdateCart(cart);
                     return Ok(new { updated = true });
                 }
@@ -45,8 +73,10 @@ namespace MomAndPopShop.Controllers
                 return Ok(new { updated = false });
             }
 
-            return BadRequest(ModelState);
+            return BadRequest(ModelState);*/
         }
+
+
         [HttpPost("{id}")]
         public async Task<IActionResult> Buy(int id)
         {

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using MomAndPopShop;
 using MomAndPopShop.Data;
@@ -12,9 +13,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using SendGrid.Extensions.DependencyInjection;
 using Stripe;
+using Duende.IdentityServer.Services;
+
 
 StripeConfiguration.ApiKey = "sk_test_51OiOb1A8iioFBT6WORuFIleOIpw8W3IJjPEhyoZDfjVq90Ro2HJ6NgKWwOvFwDPbKFc2EMl6JJvrWW7oZrWMl263002z9z0wre";
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +40,10 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
+builder.Services.AddTransient<IProfileService, ProfileService>();
+
 builder.Services.AddScoped<IFileService, MomAndPopShop.Services.FileService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -48,6 +57,13 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+builder.Services.AddSendGrid(options => {
+    options.ApiKey = builder.Configuration.GetValue<string>("SendGridKey");
+});
+
+builder.Services.AddScoped<IEmailSender, EmailSenderService>();
 
 var app = builder.Build();
 
