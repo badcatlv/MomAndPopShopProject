@@ -50,6 +50,8 @@ const EditQuantity = ({ product }) => {
             <form onSubmit={handleAddToCart}>
 
                 <input type="number"
+                    min="1"
+                    max = "100"
                     name="quantity"
                     value={ qtyToAdd }
                     onChange={handleInputChange}
