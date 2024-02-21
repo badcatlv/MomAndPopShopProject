@@ -2,6 +2,7 @@
 
 const CartDisplay = ({ product }) => {
     const [qtyToAdd, setQtyToAdd] = useState(1);
+
     const defaultImageSrc = '/img/defaultPopcorn.png';
 
     const handleQtyChange = (event) => {
@@ -40,7 +41,6 @@ const CartDisplay = ({ product }) => {
             console.error("Error adding product to cart: ", error);
         }
     }
-
 
 
     return (

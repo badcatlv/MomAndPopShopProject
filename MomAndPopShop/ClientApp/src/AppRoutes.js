@@ -29,6 +29,7 @@ import CreateCustomerReview from './components/CustomerReview/Create';
 import ContactForm from './components/ContactForm/Index';
 import CreateContactForm from './components/ContactForm/Create';
 import StripeApp from './components/Stripe/StripeApp';
+import SuccessfulCheckoutPage from './components/Stripe/Successful';
 
 const AppRoutes = [
     {
@@ -153,6 +154,10 @@ const AppRoutes = [
     {
         path: '/contactForm/create',
         element: <CreateContactForm />
+    },
+    {
+        path: '/successful',
+        element: <SuccessfulCheckoutPage />
     },
     ...ApiAuthorzationRoutes
 ];

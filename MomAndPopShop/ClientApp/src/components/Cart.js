@@ -1,10 +1,11 @@
 ﻿import { useEffect, useState } from 'react';
-
+import EditQuantity from './EditQuantity';
 
 const Cart = () => {
 
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
     const [error, setError] = useState(null);
     const defaultImageSrc = '/img/defaultPopcorn.png'
 
@@ -61,7 +62,9 @@ const Cart = () => {
                         <p class="product-description">{collection.popcornItem.description}</p>
                         <p class="quantity">Qty buy: {collection.quantity}</p>
                         <p class="price">Items total: ${collection.popcornItem.popcornPrice * collection.quantity}</p>
-                       
+                        <br/>
+                        <EditQuantity product={collection.popcornItem} />
+                        <br />                     
 
 
                         <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>

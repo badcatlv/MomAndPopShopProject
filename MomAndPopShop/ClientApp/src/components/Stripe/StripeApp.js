@@ -22,7 +22,7 @@ const ProductDisplay = () => (
             </form>
             <br />
             <a href="/product-home">
-                <button className="stripeButton">Keep Shopping or Update Quantities</button>
+                <button className="stripeButton">Keep Shopping</button>
             </a>
         </div>
     </div>

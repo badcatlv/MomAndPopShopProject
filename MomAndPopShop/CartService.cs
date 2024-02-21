@@ -22,30 +22,12 @@ namespace MomAndPopShop
             return _cart;
         }
 
-        public void AddItem(Popcorn popItem, int quantity)
+        public void AddItem(int popItem, int quantity)
         {
-            var item = _cart.Items.FirstOrDefault(x => x.PopcornItem.Id == popItem.Id);
+            var item = _context.Popcorns.Find(popItem);
+            var existingItem = _cart.Items.FirstOrDefault(x => x.PopcornItem.Id == popItem);
 
-            if (item == null)
-            {
-                item = new CartItem
-                {
-                    PopcornItem = popItem,
-                    Quantity = quantity,
-                };
-                _cart.Items.Add(item);
-            }
-            else
-            {
-                item.Quantity += quantity;
-            }
-            UpdateCartInSession();
-        }
-
-        public void AddToCart(int popId, int quantity)
-        {
-            var item = _context.Popcorns.Find(popId);
-            if (item != null)
+            if (existingItem == null)
             {
                 var newItem = new CartItem
                 {
@@ -53,6 +35,33 @@ namespace MomAndPopShop
                     Quantity = quantity,
                 };
                 _cart.Items.Add(newItem);
+            }
+            else
+            {
+                existingItem.Quantity = quantity;
+                UpdateCartInSession();
+            }
+            //UpdateCartInSession();
+        }
+
+        public void AddToCart(int popId, int quantity)
+        {
+            var item = _context.Popcorns.Find(popId);
+            var existingItem = _cart.Items.FirstOrDefault(x => x.PopcornItem.Id == item.Id);
+
+            if (existingItem == null)
+            {
+                var newItem = new CartItem
+                {
+                    PopcornItem = item,
+                    Quantity = quantity,
+                };
+                _cart.Items.Add(newItem);
+            }
+            else
+            {
+                existingItem.Quantity += quantity;
+                UpdateCartInSession();
             }
         }
 

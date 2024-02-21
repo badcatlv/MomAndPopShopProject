@@ -46,7 +46,6 @@
     <Folder Include="Assets\ProductImages\" />
     <Folder Include="Microsoft\" />
     <Folder Include="ClientApp\public\img\" />
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
