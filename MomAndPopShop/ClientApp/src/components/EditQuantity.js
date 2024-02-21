@@ -3,7 +3,6 @@
 const EditQuantity = ({ product }) => {
     const [qtyToAdd, setQtyToAdd] = useState(1);
 
-    //const navigate = useNavigate();
 
 
     const handleInputChange = (event) => {
@@ -33,6 +32,7 @@ const EditQuantity = ({ product }) => {
                     alert("Product quantity updated in cart");
                 } else {
                     alert("Product quantity changed");
+
                 }
             } else {
                 alert("Failed to add product to cart");
@@ -41,6 +41,10 @@ const EditQuantity = ({ product }) => {
         catch (error) {
             console.error("Error adding product to cart: ", error);
         }
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     return (
@@ -58,7 +62,7 @@ const EditQuantity = ({ product }) => {
                 />
                 <br />
 
-                <button type="submit">Change Quantity</button>
+                <button onClick={ refreshPage } type="submit">Change Quantity</button>
                 
                 
             </form >

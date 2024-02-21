@@ -41,6 +41,9 @@ const CartDisplay = ({ product }) => {
             console.error("Error adding product to cart: ", error);
         }
     }
+    function refreshPage() {
+        window.location.reload(false);
+    }
 
 
     return (
@@ -58,7 +61,7 @@ const CartDisplay = ({ product }) => {
                             name="quantity"
                             value={qtyToAdd}
                             onChange={handleQtyChange} />
-                        <button type="submit">Add to Cart</button>
+                        <button onClick={ refreshPage }type="submit">Add to Cart</button>
                     </form>
                 </div>
             </div> <br/>

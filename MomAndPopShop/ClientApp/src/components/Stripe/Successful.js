@@ -16,7 +16,7 @@ const SuccessfulCheckoutPage = () => {
             <br />
             <div>
             <a href="/">
-                <button className="stripeButton">Keep Shopping or Update Quantities</button>
+                <button className="stripeButton">Home Page</button>
             </a>
             </div>
         </div>
