@@ -30,8 +30,10 @@ const EditQuantity = ({ product }) => {
                 const cart = await response.json();
                 if (cart.updated) {
                     alert("Product quantity updated in cart");
+                    refreshPage();
                 } else {
                     alert("Product quantity changed");
+                    refreshPage();
 
                 }
             } else {
@@ -62,7 +64,7 @@ const EditQuantity = ({ product }) => {
                 />
                 <br />
 
-                <button onClick={ refreshPage } type="submit">Change Quantity</button>
+                <button type="submit">Change Quantity</button>
                 
                 
             </form >

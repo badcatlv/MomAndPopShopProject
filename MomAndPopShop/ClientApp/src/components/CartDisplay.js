@@ -30,8 +30,10 @@ const CartDisplay = ({ product }) => {
                 const cart = await response.json();
                 if (cart.updated) {
                     alert("Product quantity updated in cart");
+                    refreshPage();
                 } else {
                     alert("Product added to cart");
+                    refreshPage();
                 }
             } else {
                 alert("Failed to add product to cart");
@@ -61,7 +63,7 @@ const CartDisplay = ({ product }) => {
                             name="quantity"
                             value={qtyToAdd}
                             onChange={handleQtyChange} />
-                        <button onClick={ refreshPage }type="submit">Add to Cart</button>
+                        <button type="submit">Add to Cart</button>
                     </form>
                 </div>
             </div> <br/>
