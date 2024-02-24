@@ -31,12 +31,13 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account
         {
             
             await _signInManager.SignOutAsync();
+            _cartService.ClearCart();
            
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
                 //Add this line to clear the cart when the user logs out
-                _cartService.ClearCart();
+                //_cartService.ClearCart();
                 return LocalRedirect(returnUrl);
             }
             else
@@ -45,6 +46,7 @@ namespace MomAndPopShop.Areas.Identity.Pages.Account
                 // request and the identity for the user gets updated.
                 return RedirectToPage();
             }
+
         }
     }
 }
