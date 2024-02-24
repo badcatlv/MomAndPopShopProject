@@ -24,6 +24,7 @@ const ProductDisplay = () => (
             <a href="/product-home">
                 <button className="stripeButton">Keep Shopping</button>
             </a>
+            <br />            
         </div>
     </div>
 );

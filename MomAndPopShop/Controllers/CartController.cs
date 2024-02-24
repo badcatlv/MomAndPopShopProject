@@ -55,25 +55,7 @@ namespace MomAndPopShop.Controllers
             }
 
             return BadRequest(ModelState);
-            /*if (ModelState.IsValid)
-            {
-                var cart = _cartService.GetCart();
-
-                var existingItem = cart.Items.FirstOrDefault(x => x.PopcornItem.Id == model.PopcornId);
-                if (existingItem != null)
-                {
-                    existingItem.Quantity = model.Quantity;
-                    _cartService.AddToCart(model.PopcornId, model.Quantity);
-                    _cartService.UpdateCart(cart);
-                    return Ok(new { updated = true });
-                }
-
-                _cartService.AddToCart(model.PopcornId, model.Quantity);
-                _cartService.UpdateCart(cart);
-                return Ok(new { updated = false });
-            }
-
-            return BadRequest(ModelState);*/
+           
         }
 
 
@@ -109,54 +91,14 @@ namespace MomAndPopShop.Controllers
             return Ok();
         }
 
-        /*[HttpGet]
-        public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
+        [HttpGet("SaveCart")]
+        public IActionResult SaveCart()
         {
-            var cartItem = await _context.CartItems.ToListAsync();
-            if (_context.CartItems == null)
-            {
-                return NotFound("No Items.");
-            }
-
-            return Ok(cartItem);
-        }*/
-
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<CartItem>> GetCartItem(int id)
-        {
-            var cartItem = await _context.CartItems.FindAsync(id);
-
-            if (cartItem == null)
-            {
-                return NotFound("Item not Found");
-            }
-            return Ok(cartItem);
-        }*/
-
-        /*[HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var cartItem = await _context.CartItems.FindAsync(id);
-
-            if (cartItem == null)
-            {
-                return NotFound("Item not found");
-            }
-
-            _context.CartItems.Remove(cartItem);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-
-        [HttpPost]
-        public async Task<ActionResult> UpdateItemQuantity(int itemId, int quantity)
-        {
-            _cartService.UpdateItemQuantity(itemId, quantity);
+            _cartService.SaveCart();
 
             return Ok();
         }
 
-        }*/
     }
 }
 
