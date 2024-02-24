@@ -50,19 +50,6 @@ const Cart = () => {
             });
     };
 
-    const handleClearCart = () => {
-        fetch('cart/clear', { method: 'POST' })
-            .then(results => {
-                if (!results) {
-                    throw new Error("Cannot clear cart.");
-                }
-                fetchCartData();
-            })
-            .catch(error => {
-                console.error("Error clearing cart: ", error);
-            });
-    }
-
 
     const cartItemDisplay = cartItems.map(collection => (
         <div>
@@ -117,9 +104,7 @@ const Cart = () => {
             <div>                
             {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}                
             </div>
-            <form onSubmit={handleClearCart}>
-                <button className="stripeButton" type="submit">Clear Cart</button>
-                </form>
+            
             </div>
 
         </div>
