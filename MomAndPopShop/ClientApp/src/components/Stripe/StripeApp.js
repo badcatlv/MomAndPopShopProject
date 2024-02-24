@@ -2,18 +2,29 @@
 import "./StripeApp.css";
 import Cart from "../Cart";
 
+const handleClearCart = () => {
+    fetch('cart/clear', { method: 'POST' })
+        .then(results => {
+            if (!results) {
+                throw new Error("Cannot clear cart.");
+            }
+            refreshPage();
+        })
+        .catch(error => {
+            console.error("Error clearing cart: ", error);
+        });
+}
+
+
+const refreshPage = () => {
+    window.location.reload(false);
+}
+
 const ProductDisplay = () => (
     <div className="center">
+
         <Cart />
-        {/*<img
-                className="stripeImage"
-                src="https://i.imgur.com/EHyR2nP.png"
-                alt="The cover of Stubborn Attachments"
-            />
-            <div className="stripeDescription">
-                <h3 className="stripeHeaders">PopCorn</h3>
-                <h5 className="stripeHeaders">$20.00</h5>
-            </div>*/}
+        
         <div className="center">
             <form action="/create-checkout-session" method="POST">
                 <button className="stripeButton" type="submit">
@@ -21,9 +32,15 @@ const ProductDisplay = () => (
                 </button>
             </form>
             <br />
+            <form onSubmit={handleClearCart}>
+                <button className="stripeButton" type="submit">Clear Cart</button>
+            </form>
+            <br />
             <a href="/product-home">
                 <button className="stripeButton">Keep Shopping</button>
             </a>
+            <br />    
+            
         </div>
     </div>
 );

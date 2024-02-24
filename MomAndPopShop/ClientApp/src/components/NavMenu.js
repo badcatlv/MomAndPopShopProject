@@ -63,7 +63,7 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/contactForm/create">Contact Us</NavLink>
                             </NavItem>
                             <LoginMenu>
-                            </LoginMenu>
+                            </LoginMenu>                            
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/stripe-app">Cart</NavLink>
                             </NavItem>

@@ -80,7 +80,15 @@ namespace MomAndPopShop
         private void SaveCartToSession(Cart cart)
         {
             var cartJson = JsonConvert.SerializeObject(cart);
+            var cartDb = _context.Carts;
             _httpContextAccessor.HttpContext.Session.SetString("Cart", cartJson);
+            cartDb.Add(cart);
+
+        }
+
+        public void SaveCart()
+        {
+            SaveCartToSession(_cart);
         }
 
         private Cart GetCartFromSession()
@@ -109,7 +117,12 @@ namespace MomAndPopShop
 
         public void ClearCart()
         {
-            _httpContextAccessor.HttpContext.Session.Remove("Cart");
+            var cart = GetCart();
+
+            cart.Items.Clear();
+            UpdateCartInSession();
+
+
         }
     }
 }
