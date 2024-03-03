@@ -74,7 +74,8 @@ namespace MomAndPopShop
         public void UpdateCart(Cart cart)
         {
             _cart = cart;
-            SaveCartToSession(_cart);
+            UpdateCartInSession();
+            //SaveCartToSession(_cart);
         }
 
         private void SaveCartToSession(Cart cart)
