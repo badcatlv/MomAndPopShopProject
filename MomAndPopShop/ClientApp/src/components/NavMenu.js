@@ -57,16 +57,17 @@ export class NavMenu extends Component {
                                 <NavLink tag={Link} className="text-dark" to="/product-home">Products</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Cart</NavLink>
+                            </NavItem>                           
+                            <LoginMenu>
+                            </LoginMenu>    
+                            <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/customerReview/create">Leave a review</NavLink>
-                             </NavItem>
+                            </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/contactForm/create">Contact Us</NavLink>
                             </NavItem>
-                            <LoginMenu>
-                            </LoginMenu>                            
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/stripe-app">Cart</NavLink>
-                            </NavItem>
+                            
                             {role && role.includes("Admin") ?
                                 <span>
                                     <NavItem>
