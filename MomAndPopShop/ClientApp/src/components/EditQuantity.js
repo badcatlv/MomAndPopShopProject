@@ -27,15 +27,8 @@ const EditQuantity = ({ product }) => {
             });
 
             if (response.ok) {
-                const cart = await response.json();
-                if (cart.updated) {
-                    alert("Product quantity updated in cart");
-                    refreshPage();
-                } else {
                     alert("Product quantity changed");
-                    refreshPage();
-
-                }
+                    refreshPage();                
             } else {
                 alert("Failed to add product to cart");
             }
