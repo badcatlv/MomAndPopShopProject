@@ -33,12 +33,14 @@ namespace MomAndPopShop
                 {
                     PopcornItem = item,
                     Quantity = quantity,
+                    Cost = item.PopcornPrice * quantity,
                 };
                 _cart.Items.Add(newItem);
             }
             else
             {
                 existingItem.Quantity = quantity;
+                existingItem.Cost = existingItem.PopcornItem.PopcornPrice * existingItem.Quantity;
                 UpdateCartInSession();
             }
             //UpdateCartInSession();
@@ -55,12 +57,14 @@ namespace MomAndPopShop
                 {
                     PopcornItem = item,
                     Quantity = quantity,
+                    Cost = item.PopcornPrice * quantity,
                 };
                 _cart.Items.Add(newItem);
             }
             else
             {
                 existingItem.Quantity += quantity;
+                existingItem.Cost = existingItem.PopcornItem.PopcornPrice * existingItem.Quantity;
                 UpdateCartInSession();
             }
         }

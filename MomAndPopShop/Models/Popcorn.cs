@@ -20,7 +20,7 @@ namespace MomAndPopShop.Models
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be 0.01 or greater.")]
         [Precision(18, 2)]
-        public decimal? PopcornPrice { get; set; }
+        public decimal PopcornPrice { get; set; }
 
         [Range(0.01, int.MaxValue, ErrorMessage = "Quantity must be 1 or greater.")]
         public int? Quantity { get; set; }
@@ -28,7 +28,7 @@ namespace MomAndPopShop.Models
         /*This is the SKU addition for stripe product connection*/
         public string? StripeSku { get; set; } = "";
 
-        public Popcorn(string name, string description, decimal? popcornPrice, string? stripeSku)
+        public Popcorn(string name, string description, decimal popcornPrice, string? stripeSku)
         {
             Name = name;
             Description = description;

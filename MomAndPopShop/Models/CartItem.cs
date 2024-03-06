@@ -10,17 +10,12 @@ namespace MomAndPopShop.Models
         public int Id { get; set; }
         [ForeignKey("Cart")]
         public int CartId { get; set; }
-        public Popcorn? PopcornItem { get; set; }
+        public Popcorn PopcornItem { get; set; }
         public int Quantity { get; set; }
         [Precision(18, 2)]
-        public decimal? Cost { get; set; }
+        public decimal Cost { get; set; }
 
-        public CartItem()
-        {
-            PopcornItem = new Popcorn();
-            Cost = PopcornItem.PopcornPrice * Quantity;
-
-        }   
+        
     }
         
 }
