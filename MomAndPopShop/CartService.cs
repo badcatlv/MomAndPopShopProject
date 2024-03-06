@@ -1,6 +1,7 @@
 ﻿using MomAndPopShop.Data;
 using MomAndPopShop.Models;
 using Newtonsoft.Json;
+using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace MomAndPopShop
 {
@@ -85,10 +86,17 @@ namespace MomAndPopShop
         public void SaveCartToDatabase(Cart cart)
         {
             //rewrite this method to save the cart to the database
-            //use a new model to save the cart to the database without identity
+            //use a new model to save the cart to the database without identity??? or boolean for identity
+            if (cart.Items.Count == 0)
+            {
+                return;
+            } else if (//user isnt signed in?)
+
+
             cart = GetCart();
             var saveCart = new Cart
             {
+                UserId = _httpContextAccessor.HttpContext.TraceIdentifier,
                 Items = cart.Items.Select(x => new CartItem
                 {
                     PopcornItem = x.PopcornItem,
@@ -97,7 +105,6 @@ namespace MomAndPopShop
                 }).ToList()
             };
             _context.Carts.Add(saveCart);
-            _context.SaveChanges();
         }
 
         private Cart GetCartFromSession()
