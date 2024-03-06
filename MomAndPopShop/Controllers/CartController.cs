@@ -92,8 +92,9 @@ namespace MomAndPopShop.Controllers
         }
 
         [HttpPost("SaveCart")]
-        public IActionResult SaveCart(Cart cart)
+        public IActionResult SaveCart()
         {
+            var cart = _cartService.GetCart();
             _cartService.SaveCartToDatabase(cart);
 
             return Ok();

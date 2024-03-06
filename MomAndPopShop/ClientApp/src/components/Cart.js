@@ -62,7 +62,7 @@ const Cart = () => {
                     <p className="product-description">{collection.popcornItem.description}</p>
                     <p className="quantity">Qty buy: {collection.quantity}</p>
                     <p className="price">Price per item: ${collection.popcornItem.popcornPrice}</p>
-                    <p className="price">Items Total: ${collection.cost}</p>
+                    <p className="price">Item Total: ${collection.cost}</p>
                     <br />
                     <EditQuantity product={collection.popcornItem} />
                     <br />
