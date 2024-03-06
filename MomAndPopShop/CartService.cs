@@ -84,10 +84,20 @@ namespace MomAndPopShop
 
         public void SaveCartToDatabase(Cart cart)
         {
-            _cart = cart;
-            _context.Carts.Add(cart);
+            //rewrite this method to save the cart to the database
+            //use a new model to save the cart to the database without identity
+            cart = GetCart();
+            var saveCart = new Cart
+            {
+                Items = cart.Items.Select(x => new CartItem
+                {
+                    PopcornItem = x.PopcornItem,
+                    Quantity = x.Quantity,
+                    Cost = x.Cost
+                }).ToList()
+            };
+            _context.Carts.Add(saveCart);
             _context.SaveChanges();
-
         }
 
         private Cart GetCartFromSession()

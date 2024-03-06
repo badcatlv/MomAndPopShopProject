@@ -16,7 +16,7 @@ namespace MomAndPopShop.Models
         public decimal? TotalCost { get; set; }
 
         public Cart()
-        {
+        {            
             Items = new List<CartItem>();
             TotalCost = Items.Sum(i => i.Cost);
         }
