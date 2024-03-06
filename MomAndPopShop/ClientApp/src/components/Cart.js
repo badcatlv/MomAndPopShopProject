@@ -6,7 +6,7 @@ const Cart = () => {
 
     const [cartItems, setCartItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
     const [error, setError] = useState(null);
     const defaultImageSrc = '/img/defaultPopcorn.png'
 
@@ -35,7 +35,7 @@ const Cart = () => {
             });
     };
 
-    
+
 
     const handleDelete = (id) => {
         fetch(`cart/${id}`, { method: 'DELETE' })
@@ -54,38 +54,39 @@ const Cart = () => {
     const cartItemDisplay = cartItems.map(collection => (
         <div>
 
-            <div>
 
-                <div class="card" key={collection.id}>
-                    <img class="product-image" src={defaultImageSrc} alt={collection.popcornItem.name} />
-                    <div class="product-info">
-                        <h2 class="product-title">{collection.popcornItem.name}</h2>
-                        <p class="product-description">{collection.popcornItem.description}</p>
-                        <p class="quantity">Qty buy: {collection.quantity}</p>
-                        <p class="price">Items total: ${collection.popcornItem.popcornPrice * collection.quantity}</p>
-                        <br/>
-                        <EditQuantity product={collection.popcornItem} />
-                        <br />                     
+            <div className="card" key={collection.id}>
+                <img className="product-image" src={defaultImageSrc} alt={collection.popcornItem.name} />
+                <div className="product-info">
+                    <h2 className="product-title">{collection.popcornItem.name}</h2>
+                    <p className="product-description">{collection.popcornItem.description}</p>
+                    <p className="quantity">Qty buy: {collection.quantity}</p>
+                    <p className="price">Price per item: ${collection.popcornItem.popcornPrice}</p>
+                    <p className="price">Items Total: ${collection.cost}</p>
+                    <br />
+                    <EditQuantity product={collection.popcornItem} />
+                    <br />
 
 
-                        <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
-                            <button type="submit">Remove</button>
-                        </form>
-                    </div>
+                    <form key={collection.id} onSubmit={() => handleDelete(collection.popcornItem.id)}>
+                        <button type="submit">Remove</button>
+                    </form>
                 </div>
-                <br />
-
-
             </div>
+            <br />
+
+
         </div>
     ));
-    
+
+    const totalCartCost = cartItems.reduce((total, item) => total + item.cost, 0);
+
     /*const totalCost = cartItems.map(collection => (
         (collection.popcornItem.popcornPrice * collection.quantity).reduce((total, item) => total + item, 0))
         );*/
 
-/*    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-*/
+    /*    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    */
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -96,18 +97,19 @@ const Cart = () => {
     }
 
     return (
-        <div >
-            <h2>Cart</h2>
+        
+            <div>
+                <h2>Cart Items</h2>
+                <hr/>
+                    {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}
 
-
-            <div className="center">
-            <div>                
-            {(cartItems.length > 0 ? cartItemDisplay : <p>Cart is currently empty</p>)}                
+                
+                
+                    <h3 className="center">Cart Total: ${totalCartCost}</h3>
+               
             </div>
-            
-            </div>
 
-        </div>
+        
     );
 }
 

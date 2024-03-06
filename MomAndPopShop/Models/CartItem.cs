@@ -13,8 +13,14 @@ namespace MomAndPopShop.Models
         public Popcorn? PopcornItem { get; set; }
         public int Quantity { get; set; }
         [Precision(18, 2)]
+        public decimal? Cost { get; set; }
 
-        public decimal? Cost { get { return PopcornItem.PopcornPrice * Quantity; } }
+        public CartItem()
+        {
+            PopcornItem = new Popcorn();
+            Cost = PopcornItem.PopcornPrice * Quantity;
+
+        }   
     }
         
 }
