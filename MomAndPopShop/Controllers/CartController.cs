@@ -91,10 +91,10 @@ namespace MomAndPopShop.Controllers
             return Ok();
         }
 
-        [HttpGet("SaveCart")]
-        public IActionResult SaveCart()
+        [HttpPost("SaveCart")]
+        public IActionResult SaveCart(Cart cart)
         {
-            _cartService.SaveCart();
+            _cartService.SaveCartToDatabase(cart);
 
             return Ok();
         }

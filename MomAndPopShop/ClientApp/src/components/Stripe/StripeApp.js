@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from "react";
 import "./StripeApp.css";
 import Cart from "../Cart";
+import SaveCartToDb from "../SaveCartToDb";
 
 const handleClearCart = () => {
     fetch('cart/clear', { method: 'POST' })
@@ -15,16 +16,29 @@ const handleClearCart = () => {
         });
 }
 
+const handleSaveCart = () => {
+    fetch('cart/savecart', { method: 'POST' })
+        .then(results => {
+            if (!results) {
+                throw new Error("Cannot save cart.");
+            }
+            refreshPage();
+        })
+        .catch(error => {
+            console.error("Error saving cart: ", error);
+        });
+}
+
 
 const refreshPage = () => {
     window.location.reload(false);
 }
 
 const ProductDisplay = () => (
-    <div className="center">
+    <>
 
         <Cart />
-        
+
         <div className="center">
             <form action="/create-checkout-session" method="POST">
                 <button className="stripeButton" type="submit">
@@ -39,10 +53,15 @@ const ProductDisplay = () => (
             <a href="/product-home">
                 <button className="stripeButton">Keep Shopping</button>
             </a>
-            <br />    
-            
+            <br />
+            <br />
+            <form onSubmit={handleSaveCart}>
+                <button className="stripeButton" type="submit">Save Cart</button>
+            </form>
+            <br/>
+            <SaveCartToDb />
         </div>
-    </div>
+    </>
 );
 
 const Message = ({ message }) => (

@@ -78,18 +78,12 @@ namespace MomAndPopShop
             //SaveCartToSession(_cart);
         }
 
-        private void SaveCartToSession(Cart cart)
+        public void SaveCartToDatabase(Cart cart)
         {
-            var cartJson = JsonConvert.SerializeObject(cart);
-            var cartDb = _context.Carts;
-            _httpContextAccessor.HttpContext.Session.SetString("Cart", cartJson);
-            cartDb.Add(cart);
+            _cart = cart;
+            _context.Carts.Add(cart);
+            _context.SaveChanges();
 
-        }
-
-        public void SaveCart()
-        {
-            SaveCartToSession(_cart);
         }
 
         private Cart GetCartFromSession()
