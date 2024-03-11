@@ -11,6 +11,7 @@ namespace MomAndPopShop.Models
         public Order()
         {
             Items = new List<CartItem>();
+            UserId = string.Empty;
         }
     }
 }

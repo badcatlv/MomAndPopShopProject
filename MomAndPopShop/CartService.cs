@@ -1,7 +1,6 @@
 ﻿using MomAndPopShop.Data;
 using MomAndPopShop.Models;
 using Newtonsoft.Json;
-using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace MomAndPopShop
 {
@@ -85,12 +84,30 @@ namespace MomAndPopShop
 
         public void SaveCartToDatabase(Cart cart)
         {
+            cart = GetCart();
+            List<CartItem> items = new List<CartItem>();
+            foreach (var item in cart.Items)
+            {
+                items.Add(new CartItem
+                {
+                    PopcornItem = item.PopcornItem,
+                    Quantity = item.Quantity,
+                    Cost = item.Cost
+                });
+            }
+            var saveCart = new Cart
+            {
+                UserId = _httpContextAccessor.HttpContext.TraceIdentifier,
+                Items = items
+            };
+            _context.Carts.Add(saveCart);
+            _context.SaveChanges();
             //rewrite this method to save the cart to the database
             //use a new model to save the cart to the database without identity??? or boolean for identity
-            if (cart.Items.Count == 0)
+           /* if (cart.Items.Count == 0)
             {
                 return;
-            } else if (//user isnt signed in?)
+            } else 
 
 
             cart = GetCart();
@@ -104,41 +121,41 @@ namespace MomAndPopShop
                     Cost = x.Cost
                 }).ToList()
             };
-            _context.Carts.Add(saveCart);
+            _context.Carts.Add(saveCart);*/
         }
 
-        private Cart GetCartFromSession()
+    private Cart GetCartFromSession()
+    {
+        var cartJson = _httpContextAccessor.HttpContext.Session.GetString("Cart");
+        if (cartJson != null)
         {
-            var cartJson = _httpContextAccessor.HttpContext.Session.GetString("Cart");
-            if (cartJson != null)
-            {
-                return JsonConvert.DeserializeObject<Cart>(cartJson);
-            }
-
-            var cart = new Cart();
-            _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
-            return new Cart();
+            return JsonConvert.DeserializeObject<Cart>(cartJson);
         }
 
-        public void RemoveItem(int id)
-        {
-            var cart = GetCart();
-            var item = cart.Items.FirstOrDefault(x => x.PopcornItem.Id == id);
-            if (item != null)
-            {
-                cart.Items.Remove(item);
-                UpdateCartInSession();
-            }
-        }
+        var cart = new Cart();
+        _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
+        return new Cart();
+    }
 
-        public void ClearCart()
+    public void RemoveItem(int id)
+    {
+        var cart = GetCart();
+        var item = cart.Items.FirstOrDefault(x => x.PopcornItem.Id == id);
+        if (item != null)
         {
-            var cart = GetCart();
-
-            cart.Items.Clear();
+            cart.Items.Remove(item);
             UpdateCartInSession();
-
-
         }
     }
+
+    public void ClearCart()
+    {
+        var cart = GetCart();
+
+        cart.Items.Clear();
+        UpdateCartInSession();
+
+
+    }
+}
 }

@@ -27,6 +27,12 @@ namespace MomAndPopShop.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
+            builder.Entity<CartItem>()
+                .HasOne(e => e.PopcornItem)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+        
             /*builder.Entity<CartItem>()
                 .HasOne(e => e.PopcornItem);
 

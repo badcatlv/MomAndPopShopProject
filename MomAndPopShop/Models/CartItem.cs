@@ -15,6 +15,13 @@ namespace MomAndPopShop.Models
         [Precision(18, 2)]
         public decimal Cost { get; set; }
 
+        public CartItem()
+        {
+            PopcornItem = new Popcorn();
+            Quantity = 0;
+            Cost = 0;
+        }
+
         
     }
         
