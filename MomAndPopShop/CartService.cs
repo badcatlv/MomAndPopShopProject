@@ -102,6 +102,8 @@ namespace MomAndPopShop
             };
             _context.Carts.Add(saveCart);
             _context.SaveChanges();
+
+
             //rewrite this method to save the cart to the database
             //use a new model to save the cart to the database without identity??? or boolean for identity
            /* if (cart.Items.Count == 0)
