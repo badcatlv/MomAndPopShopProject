@@ -109,8 +109,7 @@ namespace MomAndPopShop
             }
 
             var cart = new Cart { 
-                //UserId = Guid.NewGuid().ToString(),
-                UserId = _context.Users.FirstOrDefault().Id,
+                UserId = Guid.NewGuid().ToString(),
                 Items = new List<CartItem>() 
             };
             _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));

@@ -17,6 +17,7 @@ namespace MomAndPopShop.Models
 
         public Cart()
         {            
+            UserId = "";
             Items = new List<CartItem>();
             TotalCost = Items.Sum(i => i.Cost);
         }
