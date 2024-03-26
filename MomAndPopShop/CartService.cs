@@ -108,7 +108,10 @@ namespace MomAndPopShop
                 return JsonConvert.DeserializeObject<Cart>(cartJson);
             }
 
-            var cart = new Cart();
+            var cart = new Cart { 
+                UserId = Guid.NewGuid().ToString(),
+                Items = new List<CartItem>() 
+            };
             _httpContextAccessor.HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
             return new Cart();
         }
