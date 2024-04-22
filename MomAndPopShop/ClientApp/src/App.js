@@ -14,7 +14,8 @@ export default class App extends Component {
           <>
           <Spinner />
 
-      <Layout>
+              <Layout>
+      <Spinner />
         <Routes>
 
           {AppRoutes.map((route, index) => {
