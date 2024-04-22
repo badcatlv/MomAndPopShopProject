@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import AppRoutes from './AppRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import { Layout } from './components/Layout';
+import Spinner from './components/Spinner';
 
 
 export default class App extends Component {
@@ -11,6 +12,7 @@ export default class App extends Component {
   render() {
       return (
           <>
+          <Spinner />
 
       <Layout>
         <Routes>
