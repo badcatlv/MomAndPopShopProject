@@ -1,13 +1,16 @@
 {
+  "homepage": "https://badcatlv.github.io/MomAndPopShopProject/",
+  "dependencies": {
+    "node": "^18.20.1",
+    "react-router-dom": "^6.22.0",
+    "react-scripts": "^5.0.1",
+    "run-script": "^0.1.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "dependencies": {
-    "react-router-dom": "^6.22.0"
-  },
-  "devDependencies": {
-    "homepage": "https://badcatlv.github.io/MomAndPopShopProject/",
-    "gh-pages": "^6.1.1"
   }
 }
