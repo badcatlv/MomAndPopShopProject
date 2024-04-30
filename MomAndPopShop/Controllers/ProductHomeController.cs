@@ -27,7 +27,8 @@ namespace MomAndPopShop.Controllers
             {
                 return NotFound("No Items.");
             }
-           
+           //Remember to change the above Seasonings to Popcorns.
+
             /*var cart = _cartService.GetCart();
             foreach (var item in cart.Items)
             {
