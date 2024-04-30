@@ -31,6 +31,18 @@ namespace MomAndPopShop.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetSeasoning()
+        {
+            var seasoning = await _context.Seasonings.ToListAsync();
+            if (_context.Seasonings == null)
+            {
+                return NotFound("No Items.");
+            }
+
+            return Ok(seasoning);
+        }   
+
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Seasoning seasoning)
         {
