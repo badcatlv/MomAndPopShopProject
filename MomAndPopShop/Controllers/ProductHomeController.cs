@@ -22,11 +22,12 @@ namespace MomAndPopShop.Controllers
         [HttpGet]
         public async Task<ActionResult> GetProductHome()
         {
-            var productHome = await _context.Popcorns.ToListAsync();
-            if (_context.Popcorns == null)
+            var productHome = await _context.Seasonings.ToListAsync();
+            if (_context.Seasonings == null)
             {
                 return NotFound("No Items.");
             }
+           
             /*var cart = _cartService.GetCart();
             foreach (var item in cart.Items)
             {
