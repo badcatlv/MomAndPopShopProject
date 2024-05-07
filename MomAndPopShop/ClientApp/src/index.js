@@ -6,20 +6,33 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { Spinner } from './components/Spinner';
 /*import Catalog from './components/Catalog';
 */const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
+const Loading = () => {
+    const [loading] = React.useState(false);
+    return (
+        <>
+        {
+            loading?(
+            <Spinner />
+            ) : (
+        <App />
+    )
+            }
+</>
+    );
+};
 
 
 root.render(
     <>
         <BrowserRouter basename={baseUrl}>
 
-    
-        <App />
-    
+            <Loading />
     
         </BrowserRouter>
     </>);
