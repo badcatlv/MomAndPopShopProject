@@ -1,23 +1,29 @@
 ﻿import { useEffect, useState } from 'react';
 import CartDisplay from './CartDisplay';
+import SeasoningDisplay from './SeasoningDisplay';
 
 
 const ProductHome = () => {
 
     const [products, setProducts] = useState([]);
-    const [seasonings, setSeasonings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [seasonings, setSeasonings] = useState([]);
     const [error, setError] = useState(null);
    
 
 
+    /*useEffect(() => {
+        fetchProductData();
+    }, []);*/
+
     useEffect(() => {
         fetchProductData();
+        fetchSeasoningData();
     }, []);
  
 
     const fetchProductData = () => {
-        fetch('producthome')
+        fetch('/producthome/popcorn')
             .then((results) => {
                 if (!results.ok) {
                     throw new Error("Error fetching products.");
@@ -36,10 +42,10 @@ const ProductHome = () => {
             });
 
     };
-    
+
 
     const fetchSeasoningData = () => {
-        fetch('seasoning')
+        fetch('/producthome/seasoning')
             .then((results) => {
                 if (!results.ok) {
                     throw new Error("Error fetching seasonings.");
@@ -57,7 +63,7 @@ const ProductHome = () => {
                 console.error("Error fetching seasonings: ", error);
             });
 
-    }
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -78,7 +84,7 @@ const ProductHome = () => {
             <h2>Seasonings</h2>
             <hr />
             {(seasonings.length > 0) ? seasonings.map(seasoning => (
-                <CartDisplay seasoning={seasoning} key={seasoning.id} />
+                <SeasoningDisplay seasoning={seasoning} key={seasoning.id} />
             )) : <div className="center">No seasonings found.</div>}
 
         </div>

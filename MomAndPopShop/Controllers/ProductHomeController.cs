@@ -19,10 +19,10 @@ namespace MomAndPopShop.Controllers
             _cartService = cartService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetProductHome()
+        [HttpGet("popcorn")]
+        public async Task<ActionResult> GetPopcornHome()
         {
-            var productHome = await _context.Seasonings.ToListAsync();
+            var productHome = await _context.Popcorns.ToListAsync();
             if (_context.Seasonings == null)
             {
                 return NotFound("No Items.");
@@ -38,6 +38,18 @@ namespace MomAndPopShop.Controllers
                     popcorn.Quantity = item.Quantity;
                 }
             }*/
+
+            return Ok(productHome);
+        }
+
+        [HttpGet("seasoning")]
+        public async Task<ActionResult> GetSeasoningHome()
+        {
+            var productHome = await _context.Seasonings.ToListAsync();
+            if (_context.Seasonings == null)
+            {
+                return NotFound("No Items.");
+            }
 
             return Ok(productHome);
         }
