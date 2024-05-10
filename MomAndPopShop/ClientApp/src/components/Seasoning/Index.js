@@ -1,6 +1,7 @@
 ﻿// eslint-disable-next-line
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SeasongingDisplay from '../SeasoningDisplay';
 
 const Seasoning = () => {
 
@@ -27,6 +28,8 @@ const Seasoning = () => {
                 <h1 className="display-4">Seasoning List</h1>
 
                 {seasoning.length > 0 && (
+                    <>
+                    < SeasongingDisplay seasoning={seasoning} />
                     <table className="table">
                         <thead>
                             <tr>
@@ -51,7 +54,8 @@ const Seasoning = () => {
                                 </tr>
                             ))}
                         </tbody>
-                    </table>
+                        </table>
+                    </>
                 )}
 
                 {seasoning.length === 0 && !loading && (
